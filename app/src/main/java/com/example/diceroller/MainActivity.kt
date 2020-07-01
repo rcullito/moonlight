@@ -2,6 +2,7 @@ package com.example.diceroller
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
@@ -13,6 +14,7 @@ class MainActivity : AppCompatActivity() {
   lateinit var diceImage: ImageView
 
   override fun onCreate(savedInstanceState: Bundle?) {
+    Log.i("MainActivity", "onCreate Called yipee")
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_main)
     val rollButton: Button = findViewById(R.id.roll_button)
@@ -25,7 +27,7 @@ class MainActivity : AppCompatActivity() {
 
 
   private fun rollDice() {
-
+      Log.i("MainActivity", "rollDice called hooray")
      val randomInt = Random().nextInt(6) + 1
      val drawableResource = when (randomInt) {
        1 -> R.drawable.dice_1
