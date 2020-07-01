@@ -1,6 +1,5 @@
 package com.example.diceroller
 
-import android.hardware.SensorManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -24,7 +23,6 @@ class MainActivity : AppCompatActivity() {
     diceImage = findViewById(R.id.dice_image)
   }
 
-  private lateinit var sensorManager: SensorManager
 
   private fun rollDice() {
 
