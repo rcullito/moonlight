@@ -8,6 +8,7 @@ import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.os.Bundle
+import android.util.Log
 
 
 class SensorActivity : Activity(), SensorEventListener {
@@ -16,6 +17,7 @@ class SensorActivity : Activity(), SensorEventListener {
 
   public override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
+    Log.i("SensorActivity", "onCreate Called yipee")
     mSensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
     mOrientation = mSensorManager!!.getDefaultSensor(Sensor.TYPE_ORIENTATION)
   }
@@ -40,5 +42,6 @@ class SensorActivity : Activity(), SensorEventListener {
     val pitch_angle = event.values[1]
     val roll_angle = event.values[2]
     // Do something with these orientation angles.
+    Log.i( "SensorActivity", azimuth_angle.toString())
   }
 }
