@@ -49,8 +49,16 @@ class SensorActivity : Activity(), SensorEventListener {
 
     // degree of rotation around the x axis, range 180 to -180
     // hold your phone parallel to the floor with the bottom facing you.
-    // tilt the top towards the ground and the pitch becomes positive
+    // tilt the TOP towards the ground and the pitch becomes positive
     // tilt the top up and the pitch becomes negative
-    Log.i("SensorActivity", pitch_angle.toString())
+    // Log.i("SensorActivity", pitch_angle.toString())
+
+    // degree of rotation around the y axis. THIS IS MOST LIKELY WHAT WE WANT
+    // IF WE THINK ABOUT A DEVICE STRAPPED TO OUR ARM
+
+    // hold the device parallel to the ground with the bottom edge towards you
+    // tilt the LEFT EDGE to the ground for the roll angle to become positive
+    Log.i("SensorActivity", roll_angle.toString())
+
   }
 }
