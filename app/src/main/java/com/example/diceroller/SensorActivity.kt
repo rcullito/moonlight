@@ -42,6 +42,8 @@ class SensorActivity : Activity(), SensorEventListener {
     val pitch_angle = event.values[1]
     val roll_angle = event.values[2]
     // Do something with these orientation angles.
+
+    // azimuth NORTH will be 0, SOUTH 180 EAST 90  WEST 270
     Log.i( "SensorActivity", azimuth_angle.toString())
   }
 }
