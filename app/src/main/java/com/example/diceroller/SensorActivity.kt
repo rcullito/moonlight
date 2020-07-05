@@ -44,6 +44,13 @@ class SensorActivity : Activity(), SensorEventListener {
     // Do something with these orientation angles.
 
     // azimuth NORTH will be 0, SOUTH 180 EAST 90  WEST 270
-    Log.i( "SensorActivity", azimuth_angle.toString())
+    // range is 0 to 360
+    // Log.i( "SensorActivity", azimuth_angle.toString())
+
+    // degree of rotation around the x axis, range 180 to -180
+    // hold your phone parallel to the floor with the bottom facing you.
+    // tilt the top towards the ground and the pitch becomes positive
+    // tilt the top up and the pitch becomes negative
+    Log.i("SensorActivity", pitch_angle.toString())
   }
 }
