@@ -9,8 +9,6 @@ import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
 
-  lateinit var diceImage: ImageView
-
   override fun onCreate(savedInstanceState: Bundle?) {
     Log.i("MainActivity", "onCreate Called yipee")
     super.onCreate(savedInstanceState)
