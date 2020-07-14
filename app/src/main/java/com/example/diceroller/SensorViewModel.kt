@@ -17,7 +17,7 @@ class SensorViewModel(application: Application) : AndroidViewModel(application) 
     Log.i("SensorViewModel", "Starting the LogWorker" )
 
     val logRequest =
-      PeriodicWorkRequestBuilder<LogWorker>(1, TimeUnit.MINUTES)
+      PeriodicWorkRequestBuilder<LogWorker>(16, TimeUnit.MINUTES)
         // Additional configuration
         .build()
 
