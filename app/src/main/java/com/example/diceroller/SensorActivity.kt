@@ -20,20 +20,24 @@ class SensorActivity : AppCompatActivity(), SensorEventListener {
   val rotationMatrix = FloatArray(9)
   val orientationAngles = FloatArray(3)
 
+  private lateinit var textSensorAzimuth: TextView
+  private lateinit var textSensorPitch: TextView
+  private lateinit var textSensorRoll: TextView
+
 
   public override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_sensor)
     Log.i("SensorActivity", "onCreate Called yipee")
 
-    val textSensorAzimuth = findViewById<TextView>(R.id.value_azimuth)
-    val textSensorPitch = findViewById<TextView>(R.id.value_pitch)
-    val textSensorRoll = findViewById<TextView>(R.id.value_roll)
+    textSensorAzimuth = findViewById<TextView>(R.id.value_azimuth)
+    textSensorPitch = findViewById<TextView>(R.id.value_pitch)
+    textSensorRoll = findViewById<TextView>(R.id.value_roll)
 
     sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
 
-    val model: SensorViewModel by viewModels()
-    model.startLogWorker()
+    // val model: SensorViewModel by viewModels()
+    // model.startLogWorker()
 
 
   }
@@ -68,7 +72,7 @@ class SensorActivity : AppCompatActivity(), SensorEventListener {
 
 
   override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
-    TODO("Not yet implemented")
+
   }
 
   override fun onSensorChanged(event: SensorEvent) {
@@ -79,6 +83,7 @@ class SensorActivity : AppCompatActivity(), SensorEventListener {
       System.arraycopy(event.values, 0, magnetometerReading, 0, magnetometerReading.size)
     }
 
+    updateOrientationAngles()
   }
 
   fun updateOrientationAngles() {
@@ -87,6 +92,10 @@ class SensorActivity : AppCompatActivity(), SensorEventListener {
     val azimuth = orientationAngles.get(0)
     val pitch = orientationAngles.get(1)
     val roll = orientationAngles.get(2)
+
+    textSensorAzimuth.setText(azimuth.toString())
+    textSensorPitch.setText(pitch.toString())
+    textSensorRoll.setText(roll.toString())
   }
 
 
