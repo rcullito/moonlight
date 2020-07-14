@@ -78,6 +78,9 @@ class SensorActivity : AppCompatActivity(), SensorEventListener {
   fun updateOrientationAngles() {
     SensorManager.getRotationMatrix(rotationMatrix, null, accelerometerReading, magnetometerReading)
     SensorManager.getOrientation(rotationMatrix, orientationAngles)
+    val azimuth = orientationAngles.get(0)
+    val pitch = orientationAngles.get(1)
+    val roll = orientationAngles.get(2)
   }
 
 
