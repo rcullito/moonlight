@@ -7,6 +7,7 @@ import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.os.Bundle
 import android.util.Log
+import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 
@@ -22,7 +23,12 @@ class SensorActivity : AppCompatActivity(), SensorEventListener {
 
   public override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
+    setContentView(R.layout.activity_sensor)
     Log.i("SensorActivity", "onCreate Called yipee")
+
+    val textSensorAzimuth = findViewById<TextView>(R.id.value_azimuth)
+    val textSensorPitch = findViewById<TextView>(R.id.value_pitch)
+    val textSensorRoll = findViewById<TextView>(R.id.value_roll)
 
     sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
 
