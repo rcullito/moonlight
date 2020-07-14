@@ -1,5 +1,6 @@
 package com.example.diceroller
 
+import android.content.Context
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
@@ -13,12 +14,17 @@ import androidx.appcompat.app.AppCompatActivity
 class SensorActivity : AppCompatActivity(), SensorEventListener {
 
   private lateinit var sensorManager: SensorManager
-  private var sensor: Sensor? = null
+  private val accelerometerReading = FloatArray(3)
+  private val magnetometerReading = FloatArray(3)
+  val rotationMatrix = FloatArray(9)
+  val orientationAngles = FloatArray(3)
 
 
   public override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     Log.i("SensorActivity", "onCreate Called yipee")
+
+    sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
 
     val model: SensorViewModel by viewModels()
     model.startLogWorker()
@@ -26,12 +32,52 @@ class SensorActivity : AppCompatActivity(), SensorEventListener {
 
   }
 
+  override fun onResume() {
+    super.onResume()
+    sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)?.also { accelerometer ->
+      sensorManager.registerListener(
+        this,
+        accelerometer,
+        // TODO think more about delays here
+        SensorManager.SENSOR_DELAY_NORMAL,
+        SensorManager.SENSOR_DELAY_UI
+      )
+    }
+    sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD)?.also { magneticField ->
+      sensorManager.registerListener(
+        this,
+        magneticField,
+        // TODO think more about delays here
+        SensorManager.SENSOR_DELAY_NORMAL,
+        SensorManager.SENSOR_DELAY_UI
+      )
+    }
+  }
+
+  override fun onPause() {
+    super.onPause()
+    sensorManager.unregisterListener(this)
+  }
+
+
+
   override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
     TODO("Not yet implemented")
   }
 
-  override fun onSensorChanged(event: SensorEvent?) {
-    TODO("Not yet implemented")
+  override fun onSensorChanged(event: SensorEvent) {
+
+    if (event.sensor.type == Sensor.TYPE_ACCELEROMETER) {
+      System.arraycopy(event.values, 0, accelerometerReading, 0, accelerometerReading.size)
+    } else if (event.sensor.type == Sensor.TYPE_MAGNETIC_FIELD) {
+      System.arraycopy(event.values, 0, magnetometerReading, 0, magnetometerReading.size)
+    }
+
+  }
+
+  fun updateOrientationAngles() {
+    SensorManager.getRotationMatrix(rotationMatrix, null, accelerometerReading, magnetometerReading)
+    SensorManager.getOrientation(rotationMatrix, orientationAngles)
   }
 
 
