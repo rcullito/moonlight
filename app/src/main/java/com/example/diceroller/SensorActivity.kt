@@ -10,6 +10,7 @@ import android.util.Log
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import kotlin.math.abs
 
 
 class SensorActivity : AppCompatActivity(), SensorEventListener {
@@ -19,6 +20,7 @@ class SensorActivity : AppCompatActivity(), SensorEventListener {
   private val magnetometerReading = FloatArray(3)
   val rotationMatrix = FloatArray(9)
   val orientationAngles = FloatArray(3)
+  private val VALUE_DRIFT: Float = 0.1F;
 
   private lateinit var textSensorAzimuth: TextView
   private lateinit var textSensorPitch: TextView
@@ -90,8 +92,15 @@ class SensorActivity : AppCompatActivity(), SensorEventListener {
     SensorManager.getRotationMatrix(rotationMatrix, null, accelerometerReading, magnetometerReading)
     SensorManager.getOrientation(rotationMatrix, orientationAngles)
     val azimuth = orientationAngles.get(0)
-    val pitch = orientationAngles.get(1)
-    val roll = orientationAngles.get(2)
+    var pitch = orientationAngles.get(1)
+    var roll = orientationAngles.get(2)
+
+    if (abs(pitch) < VALUE_DRIFT) {
+      pitch = 0.0F
+    }
+    if (abs(roll) < VALUE_DRIFT) {
+      roll = 0.0F
+    }
 
     textSensorAzimuth.setText(azimuth.toString())
     textSensorPitch.setText(pitch.toString())
