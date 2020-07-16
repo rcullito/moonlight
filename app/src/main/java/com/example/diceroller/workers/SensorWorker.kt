@@ -6,11 +6,12 @@ import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.util.Log
+import androidx.work.CoroutineWorker
 import androidx.work.Worker
 import androidx.work.WorkerParameters
 import kotlin.math.abs
 
-class SensorWorker(ctx: Context, params: WorkerParameters) : Worker(ctx, params), SensorEventListener {
+class SensorWorker(ctx: Context, params: WorkerParameters) : CoroutineWorker(ctx, params), SensorEventListener {
 
   private lateinit var sensorManager: SensorManager
   private val accelerometerReading = FloatArray(3)
@@ -18,7 +19,7 @@ class SensorWorker(ctx: Context, params: WorkerParameters) : Worker(ctx, params)
   val rotationMatrix = FloatArray(9)
   val orientationAngles = FloatArray(3)
 
-  override fun doWork(): Result {
+  override suspend fun doWork(): Result {
 
     sensorManager = this.applicationContext.getSystemService(Context.SENSOR_SERVICE) as SensorManager
 
@@ -26,20 +27,21 @@ class SensorWorker(ctx: Context, params: WorkerParameters) : Worker(ctx, params)
       sensorManager.registerListener(
         this,
         accelerometer,
-        SensorManager.SENSOR_DELAY_NORMAL,
-        SensorManager.SENSOR_DELAY_NORMAL
+        SensorManager.SENSOR_DELAY_FASTEST,
+        SensorManager.SENSOR_DELAY_FASTEST
       )
     }
     sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD)?.also { magneticField ->
       sensorManager.registerListener(
         this,
         magneticField,
-        SensorManager.SENSOR_DELAY_NORMAL,
-        SensorManager.SENSOR_DELAY_NORMAL
+        SensorManager.SENSOR_DELAY_FASTEST,
+        SensorManager.SENSOR_DELAY_FASTEST
       )
     }
     // TODO run this once, and if it doesn't work
     // the name of the game is async and a listenable worker
+    // ideally we would return when we get 3 values that are not 0
     return Result.success()
   }
 
@@ -69,7 +71,11 @@ class SensorWorker(ctx: Context, params: WorkerParameters) : Worker(ctx, params)
     Log.i("SensorWorker", roll.toString())
 
     // cross yourself
-    // sensorManager.unregisterListener(this)
+
+    if (azimuth.toDouble() != 0.0) {
+      sensorManager.unregisterListener(this)
+    }
+
 
   }
 }
