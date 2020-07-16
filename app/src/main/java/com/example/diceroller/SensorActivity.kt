@@ -50,18 +50,16 @@ class SensorActivity : AppCompatActivity(), SensorEventListener {
       sensorManager.registerListener(
         this,
         accelerometer,
-        // TODO think more about delays here
         SensorManager.SENSOR_DELAY_NORMAL,
-        SensorManager.SENSOR_DELAY_UI
+        SensorManager.SENSOR_DELAY_NORMAL
       )
     }
     sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD)?.also { magneticField ->
       sensorManager.registerListener(
         this,
         magneticField,
-        // TODO think more about delays here
         SensorManager.SENSOR_DELAY_NORMAL,
-        SensorManager.SENSOR_DELAY_UI
+        SensorManager.SENSOR_DELAY_NORMAL
       )
     }
   }
