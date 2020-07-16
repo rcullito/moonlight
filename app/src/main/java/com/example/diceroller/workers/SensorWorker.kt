@@ -27,16 +27,16 @@ class SensorWorker(ctx: Context, params: WorkerParameters) : CoroutineWorker(ctx
       sensorManager.registerListener(
         this,
         accelerometer,
-        SensorManager.SENSOR_DELAY_FASTEST,
-        SensorManager.SENSOR_DELAY_FASTEST
+        SensorManager.SENSOR_DELAY_NORMAL,
+        SensorManager.SENSOR_DELAY_NORMAL
       )
     }
     sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD)?.also { magneticField ->
       sensorManager.registerListener(
         this,
         magneticField,
-        SensorManager.SENSOR_DELAY_FASTEST,
-        SensorManager.SENSOR_DELAY_FASTEST
+        SensorManager.SENSOR_DELAY_NORMAL,
+        SensorManager.SENSOR_DELAY_NORMAL
       )
     }
     // TODO run this once, and if it doesn't work
@@ -71,7 +71,6 @@ class SensorWorker(ctx: Context, params: WorkerParameters) : CoroutineWorker(ctx
     Log.i("SensorWorker", roll.toString())
 
     // cross yourself
-
     if (azimuth.toDouble() != 0.0) {
       sensorManager.unregisterListener(this)
     }
