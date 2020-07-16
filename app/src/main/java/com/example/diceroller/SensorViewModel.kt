@@ -6,6 +6,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
 import com.example.diceroller.workers.LogWorker
+import com.example.diceroller.workers.SensorWorker
 import java.util.concurrent.TimeUnit
 
 class SensorViewModel(application: Application) : AndroidViewModel(application) {
@@ -17,7 +18,7 @@ class SensorViewModel(application: Application) : AndroidViewModel(application) 
     Log.i("SensorViewModel", "Starting the LogWorker" )
 
     val logRequest =
-      PeriodicWorkRequestBuilder<LogWorker>(16, TimeUnit.MINUTES)
+      PeriodicWorkRequestBuilder<SensorWorker>(16, TimeUnit.MINUTES)
         // Additional configuration
         .build()
 
