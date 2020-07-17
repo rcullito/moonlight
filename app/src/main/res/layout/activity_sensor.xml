@@ -8,34 +8,10 @@
   android:orientation="vertical"
   tools:context=".MainActivity">
 
-  <!-- Values -->
-  <TextView
-    android:id="@+id/value_azimuth"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginLeft="8dp"
-    android:layout_marginStart="8dp"
-    android:text="@string/value_format"
-    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-    app:layout_constraintRight_toRightOf="parent"
-    app:layout_constraintTop_toTopOf="@+id/label_group"/>
 
-  <TextView
-    android:id="@+id/value_pitch"
-    android:layout_width="wrap_content"
+  <Button
+    android:id="@+id/button"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:text="@string/value_format"
-    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-    app:layout_constraintRight_toRightOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/value_azimuth"/>
-
-  <TextView
-    android:id="@+id/value_roll"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="@string/value_format"
-    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-    app:layout_constraintRight_toRightOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/value_pitch"/>
-
+    android:text="Cancel Work" />
 </LinearLayout>
