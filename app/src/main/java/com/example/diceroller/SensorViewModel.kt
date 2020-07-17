@@ -24,4 +24,5 @@ class SensorViewModel(application: Application) : AndroidViewModel(application) 
 
     workManager.enqueue(logRequest)
   }
+
 }

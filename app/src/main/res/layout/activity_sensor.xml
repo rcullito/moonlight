@@ -6,12 +6,13 @@
   android:layout_height="wrap_content"
   android:layout_gravity="center_vertical"
   android:orientation="vertical"
-  tools:context=".MainActivity">
+  tools:context=".SensorActivity">
 
 
   <Button
     android:id="@+id/button"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:onClick="cancelWork"
     android:text="Cancel Work" />
 </LinearLayout>
