@@ -37,9 +37,6 @@ class SensorViewModel(application: Application) : AndroidViewModel(application) 
   fun cancelWork() {
     Log.i("SensorViewModel", "cancelWork function called")
     workManager.cancelAllWorkByTag(sixteenTag)
-    // nice! now let it run for 2 cycles
-    // then hit cancel and see if that does it
-    // alternatively we could also display clearly what running jobs there are
   }
 
 }

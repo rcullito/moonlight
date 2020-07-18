@@ -46,9 +46,9 @@ class SensorActivity : AppCompatActivity() {
         return@Observer
       }
 
-      // We only care about the one output status.
-      // Every continuation has only one worker tagged TAG_OUTPUT
       val workInfo = listOfWorkInfo[0]
+      Log.i("SensorActivity", "Observer for workInfo being called")
+      Log.i("SensorActivity", workInfo.state.toString())
 
       if (workInfo.state.isFinished) {
         mTextWorkStatus?.setText("Work Finished")
