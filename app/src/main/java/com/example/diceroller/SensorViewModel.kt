@@ -30,12 +30,16 @@ class SensorViewModel(application: Application) : AndroidViewModel(application) 
         // Additional configuration
         .addTag(sixteenTag)
         .build()
+    Log.i("SensorViewModel", "getting the potentially unique workRequest Id")
+    Log.i("SensorViewModel", sensorRequest.id.toString())
 
     workManager.enqueue(sensorRequest)
   }
 
   fun cancelWork() {
     Log.i("SensorViewModel", "cancelWork function called")
+    // TODO we know that this is what we will need
+    // workManager.getWorkInfoByIdLiveData()
     workManager.cancelAllWorkByTag(sixteenTag)
   }
 
