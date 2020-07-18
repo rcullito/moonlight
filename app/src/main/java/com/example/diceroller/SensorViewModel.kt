@@ -9,17 +9,18 @@ import androidx.work.WorkInfo
 import androidx.work.WorkManager
 import com.example.diceroller.workers.LogWorker
 import com.example.diceroller.workers.SensorWorker
+import java.util.*
 import java.util.concurrent.TimeUnit
 
 class SensorViewModel(application: Application) : AndroidViewModel(application) {
 
 
   private val workManager = WorkManager.getInstance(application)
-  internal val sensorWorkInfos: LiveData<List<WorkInfo>>
-  val sixteenTag: String = "16MinuteSensor"
+  // internal val sensorWorkInfo: LiveData<WorkInfo>
+  private lateinit var singleWorkRequestId: UUID
 
   init {
-   sensorWorkInfos = workManager.getWorkInfosByTagLiveData(sixteenTag)
+    // sensorWorkInfo = workManager.getWorkInfoByIdLiveData(singleWorkRequestId)
   }
 
   internal fun startLogWorker() {
@@ -28,19 +29,17 @@ class SensorViewModel(application: Application) : AndroidViewModel(application) 
     val sensorRequest =
       PeriodicWorkRequestBuilder<SensorWorker>(16, TimeUnit.MINUTES)
         // Additional configuration
-        .addTag(sixteenTag)
         .build()
     Log.i("SensorViewModel", "getting the potentially unique workRequest Id")
     Log.i("SensorViewModel", sensorRequest.id.toString())
+    singleWorkRequestId = sensorRequest.id
 
     workManager.enqueue(sensorRequest)
   }
 
   fun cancelWork() {
     Log.i("SensorViewModel", "cancelWork function called")
-    // TODO we know that this is what we will need
-    // workManager.getWorkInfoByIdLiveData()
-    workManager.cancelAllWorkByTag(sixteenTag)
+    workManager.cancelWorkById(singleWorkRequestId)
   }
 
 }

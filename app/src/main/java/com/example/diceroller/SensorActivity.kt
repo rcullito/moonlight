@@ -24,7 +24,7 @@ class SensorActivity : AppCompatActivity() {
 
     model.startLogWorker()
 
-    model.sensorWorkInfos.observe(this, workInfosObserver())
+    // model.sensorWorkInfo.observe(this, workInfosObserver())
 
   }
 
@@ -34,19 +34,18 @@ class SensorActivity : AppCompatActivity() {
   }
 
   // Add this functions
-  private fun workInfosObserver(): Observer<List<WorkInfo>> {
-    return Observer { listOfWorkInfo ->
+  private fun workInfosObserver(): Observer<WorkInfo> {
+    return Observer { workInfo ->
 
       // Note that these next few lines grab a single WorkInfo if it exists
       // This code could be in a Transformation in the ViewModel; they are included here
       // so that the entire process of displaying a WorkInfo is in one location.
 
       // If there are no matching work info, do nothing
-      if (listOfWorkInfo.isNullOrEmpty()) {
+      if (workInfo == null) {
         return@Observer
       }
 
-      val workInfo = listOfWorkInfo[0]
       Log.i("SensorActivity", "Observer for workInfo being called")
       Log.i("SensorActivity", workInfo.state.toString())
 
