@@ -3,6 +3,7 @@ package com.example.diceroller
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -10,10 +11,14 @@ import androidx.work.WorkInfo
 
 class SensorActivity : AppCompatActivity() {
 
+  private var mTextWorkStatus: TextView? = null
+
   public override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_sensor)
     Log.i("SensorActivity", "onCreate Called yipee")
+
+    mTextWorkStatus= findViewById(R.id.workStatus) as TextView
 
     val model: SensorViewModel by viewModels()
 
@@ -46,10 +51,12 @@ class SensorActivity : AppCompatActivity() {
       val workInfo = listOfWorkInfo[0]
 
       if (workInfo.state.isFinished) {
-        showWorkFinished()
+        mTextWorkStatus?.setText("Work Finished")
+        // awesome!!! now hide CANCEL button, or at least give a back button via the nav.
       } else {
-        showWorkInProgress()
+        mTextWorkStatus?.setText("Work In Progress")
       }
     }
   }
+
 }
