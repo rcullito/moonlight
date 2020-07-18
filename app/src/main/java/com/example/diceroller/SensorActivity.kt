@@ -24,7 +24,7 @@ class SensorActivity : AppCompatActivity() {
 
     model.startLogWorker()
 
-    model.sensorWorkInfo.observe(this, workInfosObserver())
+    model.sensorWorkInfo.observe(this, workInfoObserver())
 
   }
 
@@ -34,7 +34,7 @@ class SensorActivity : AppCompatActivity() {
   }
 
   // Add this functions
-  private fun workInfosObserver(): Observer<WorkInfo> {
+  private fun workInfoObserver(): Observer<WorkInfo> {
     return Observer { workInfo ->
 
       // Note that these next few lines grab a single WorkInfo if it exists
