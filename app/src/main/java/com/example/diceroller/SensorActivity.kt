@@ -24,7 +24,7 @@ class SensorActivity : AppCompatActivity() {
 
     model.startLogWorker()
 
-    // model.sensorWorkInfo.observe(this, workInfosObserver())
+    model.sensorWorkInfo.observe(this, workInfosObserver())
 
   }
 

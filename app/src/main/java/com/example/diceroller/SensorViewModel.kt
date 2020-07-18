@@ -14,14 +14,9 @@ import java.util.concurrent.TimeUnit
 
 class SensorViewModel(application: Application) : AndroidViewModel(application) {
 
-
   private val workManager = WorkManager.getInstance(application)
-  // internal val sensorWorkInfo: LiveData<WorkInfo>
+  lateinit var sensorWorkInfo: LiveData<WorkInfo>
   private lateinit var singleWorkRequestId: UUID
-
-  init {
-    // sensorWorkInfo = workManager.getWorkInfoByIdLiveData(singleWorkRequestId)
-  }
 
   internal fun startLogWorker() {
     Log.i("SensorViewModel", "Starting the LogWorker" )
@@ -35,6 +30,7 @@ class SensorViewModel(application: Application) : AndroidViewModel(application) 
     singleWorkRequestId = sensorRequest.id
 
     workManager.enqueue(sensorRequest)
+    sensorWorkInfo = workManager.getWorkInfoByIdLiveData(singleWorkRequestId)
   }
 
   fun cancelWork() {
