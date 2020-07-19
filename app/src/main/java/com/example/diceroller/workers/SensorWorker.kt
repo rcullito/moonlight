@@ -72,6 +72,7 @@ class SensorWorker(ctx: Context, params: WorkerParameters) : CoroutineWorker(ctx
 
     // cross yourself
     if (azimuth.toDouble() != 0.0) {
+      Log.i("SensorWorker", "unregistering sensor listener")
       sensorManager.unregisterListener(this)
     }
 
