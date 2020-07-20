@@ -14,6 +14,6 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center_horizontal"
     android:onClick="startSensor"
-    android:text="@string/roll" />
+    android:text="Start Background Work" />
 
 </LinearLayout>
