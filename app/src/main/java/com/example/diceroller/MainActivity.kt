@@ -17,14 +17,7 @@ class MainActivity : AppCompatActivity() {
     Log.i("MainActivity", "onCreate Called yipee")
     super.onCreate(savedInstanceState)
     binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-    binding.startWorkButton.setOnClickListener {
-      startSensor(it)
-    }
 
-  }
 
-  fun startSensor(view: View) {
-    val intent = Intent(this, SensorActivity::class.java)
-    startActivity(intent)
   }
 }

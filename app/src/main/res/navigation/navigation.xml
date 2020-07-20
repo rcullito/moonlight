@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/navigation"
-  >
+  app:startDestination="@id/titleFragment3">
 
+  <fragment
+    android:id="@+id/titleFragment3"
+    android:name="com.example.diceroller.TitleFragment"
+    android:label="TitleFragment" >
+    <action
+      android:id="@+id/action_titleFragment3_to_sensorActivity2"
+      app:destination="@id/sensorActivity2" />
+  </fragment>
+  <activity
+    android:id="@+id/sensorActivity2"
+    android:name="com.example.diceroller.SensorActivity"
+    android:label="SensorActivity" />
 </navigation>
