@@ -34,5 +34,12 @@
       android:text="Sleep Well, Rob!"
       tools:text="Sleep well" />
 
+    <Button
+      android:id="@+id/start_work_button"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center_horizontal"
+      android:text="Start Background Work" />
+
   </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
