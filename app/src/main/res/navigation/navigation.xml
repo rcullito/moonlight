@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/navigation"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/navigation"
   app:startDestination="@id/titleFragment3">
 
   <fragment
@@ -15,4 +17,9 @@
     android:id="@+id/sensorActivity2"
     android:name="com.example.diceroller.SensorActivity"
     android:label="SensorActivity" />
+  <fragment
+    android:id="@+id/resultsFragment2"
+    android:name="com.example.diceroller.ResultsFragment"
+    android:label="fragment_results"
+    tools:layout="@layout/fragment_results" />
 </navigation>
