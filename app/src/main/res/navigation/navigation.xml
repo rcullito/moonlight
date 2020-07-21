@@ -10,16 +10,16 @@
     android:name="com.example.diceroller.TitleFragment"
     android:label="TitleFragment" >
     <action
-      android:id="@+id/action_titleFragment3_to_sensorActivity2"
-      app:destination="@id/sensorActivity2" />
+      android:id="@+id/action_titleFragment3_to_sensorFragment"
+      app:destination="@id/sensorFragment" />
   </fragment>
-  <activity
-    android:id="@+id/sensorActivity2"
-    android:name="com.example.diceroller.SensorActivity"
-    android:label="SensorActivity" />
   <fragment
     android:id="@+id/resultsFragment2"
     android:name="com.example.diceroller.ResultsFragment"
     android:label="fragment_results"
     tools:layout="@layout/fragment_results" />
+  <fragment
+    android:id="@+id/sensorFragment"
+    android:name="com.example.diceroller.SensorFragment"
+    android:label="SensorFragment" />
 </navigation>

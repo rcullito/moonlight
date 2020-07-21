@@ -29,17 +29,17 @@ class SensorFragment : Fragment() {
 
   }
 
-  fun cancelWork(view: View) {
-    val model: SensorViewModel by activityViewModels()
-    model.cancelWork()
-  }
-
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
     savedInstanceState: Bundle?
   ): View? {
 
     binding = DataBindingUtil.inflate<FragmentSensorBinding>(inflater, R.layout.fragment_sensor, container, false)
+
+    binding.cancelWorkButton.setOnClickListener {
+      val model: SensorViewModel by activityViewModels()
+      model.cancelWork()
+    }
     // Inflate the layout for this fragment
     return binding.root
   }
@@ -47,20 +47,15 @@ class SensorFragment : Fragment() {
   private fun workInfoObserver(): Observer<WorkInfo> {
     return Observer { workInfo ->
 
-      // Note that these next few lines grab a single WorkInfo if it exists
-      // This code could be in a Transformation in the ViewModel; they are included here
-      // so that the entire process of displaying a WorkInfo is in one location.
-
-      // If there are no matching work info, do nothing
       if (workInfo == null) {
         return@Observer
       }
 
-      Log.i("SensorActivity", "Observer for workInfo being called")
-      Log.i("SensorActivity", workInfo.state.toString())
+      Log.i("SensorFragment", "Observer for workInfo being called")
+      Log.i("SensorFragment", workInfo.state.toString())
 
       if (workInfo.state.isFinished) {
-        binding.status = "Work Finished Yo"
+        binding.status = "Work Finished"
         // awesome!!! now hide CANCEL button, or at least give a back button via the nav.
       } else {
         binding.status = "Work In Progress"

@@ -23,7 +23,7 @@ class TitleFragment : Fragment() {
     val binding = DataBindingUtil.inflate<FragmentTitleBinding>(inflater, R.layout.fragment_title, container, false)
 
     binding.startWorkButton.setOnClickListener {
-      Navigation.findNavController(it).navigate(R.id.action_titleFragment3_to_sensorActivity2)
+      Navigation.findNavController(it).navigate(R.id.action_titleFragment3_to_sensorFragment)
     }
     setHasOptionsMenu(true)
     return binding.root

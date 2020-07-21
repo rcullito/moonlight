@@ -43,10 +43,9 @@
       tools:text="Work Status" />
 
     <Button
-      android:id="@+id/button"
+      android:id="@+id/cancel_work_button"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:onClick="cancelWork"
       android:text="Cancel Work"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
