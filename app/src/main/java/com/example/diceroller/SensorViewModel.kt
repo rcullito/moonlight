@@ -7,7 +7,6 @@ import androidx.lifecycle.LiveData
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkInfo
 import androidx.work.WorkManager
-import com.example.diceroller.workers.LogWorker
 import com.example.diceroller.workers.SensorWorker
 import java.util.*
 import java.util.concurrent.TimeUnit
