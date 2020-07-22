@@ -19,20 +19,19 @@ class SensorViewModel(application: Application) : AndroidViewModel(application) 
   private lateinit var singleWorkRequestId: UUID
 
   internal fun startSensorWorker() {
-    Log.i("SensorViewModel", "Starting the SensorWorker" )
 
     val sensorRequest =
       PeriodicWorkRequestBuilder<SensorWorker>(16, TimeUnit.MINUTES)
         // Additional configuration
         .build()
-    Log.i("SensorViewModel", "getting the potentially unique workRequest Id")
+    Log.i("SensorViewModel", "upcoming workRequest Id: ")
     Log.i("SensorViewModel", sensorRequest.id.toString())
     singleWorkRequestId = sensorRequest.id
 
     // this trial did block repeat work from being enqueued. but the job never actually ran
     // try fiddling with the workpolicy?
-    // workManager.enqueueUniquePeriodicWork("ravenclaw", ExistingPeriodicWorkPolicy.KEEP, sensorRequest)
-    workManager.enqueue(sensorRequest)
+    workManager.enqueueUniquePeriodicWork("ravenclaw", ExistingPeriodicWorkPolicy.KEEP, sensorRequest)
+    //workManager.enqueue(sensorRequest)
 
     sensorWorkInfo = workManager.getWorkInfoByIdLiveData(singleWorkRequestId)
   }

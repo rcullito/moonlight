@@ -20,6 +20,7 @@ class SensorWorker(ctx: Context, params: WorkerParameters) : CoroutineWorker(ctx
   val orientationAngles = FloatArray(3)
 
   override suspend fun doWork(): Result {
+    Log.i("SensorWorker", "in the doWork() function")
 
     sensorManager = this.applicationContext.getSystemService(Context.SENSOR_SERVICE) as SensorManager
 
@@ -71,7 +72,7 @@ class SensorWorker(ctx: Context, params: WorkerParameters) : CoroutineWorker(ctx
     Log.i("SensorWorker", roll.toString())
 
     // cross yourself
-    if (azimuth.toDouble() != 0.0) {
+    if (azimuth.toDouble() != 0.0 || pitch.toDouble() != 0.0 || roll.toDouble() != 0.0) {
       Log.i("SensorWorker", "unregistering sensor listener")
       sensorManager.unregisterListener(this)
     }
