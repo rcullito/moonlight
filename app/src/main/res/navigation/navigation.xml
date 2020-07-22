@@ -8,11 +8,7 @@
   <fragment
     android:id="@+id/titleFragment3"
     android:name="com.example.diceroller.TitleFragment"
-    android:label="TitleFragment" >
-    <action
-      android:id="@+id/action_titleFragment3_to_sensorFragment"
-      app:destination="@id/sensorFragment" />
-  </fragment>
+    android:label="TitleFragment" />
   <fragment
     android:id="@+id/resultsFragment2"
     android:name="com.example.diceroller.ResultsFragment"

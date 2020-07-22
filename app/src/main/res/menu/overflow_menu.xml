@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
+  <item
+    android:id="@+id/sensorFragment"
+    android:title="Record Sleep" />
   <item
     android:id="@+id/resultsFragment2"
-    android:title="Recorded Positions" />
+    android:title="Past Sleep Data" />
 </menu>
