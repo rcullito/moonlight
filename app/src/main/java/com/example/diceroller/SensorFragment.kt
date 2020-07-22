@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -34,7 +33,7 @@ class SensorFragment : Fragment() {
       val model: SensorViewModel by activityViewModels()
 
       // starting work will have to be the default
-      model.startLogWorker()
+      model.startSensorWorker()
       model.sensorWorkInfo.observe(viewLifecycleOwner, workInfoObserver())
     }
     // Inflate the layout for this fragment
