@@ -63,13 +63,13 @@ class SensorWorker(ctx: Context, params: WorkerParameters) : CoroutineWorker(ctx
   fun updateOrientationAngles() {
     SensorManager.getRotationMatrix(rotationMatrix, null, accelerometerReading, magnetometerReading)
     SensorManager.getOrientation(rotationMatrix, orientationAngles)
-    val azimuth = orientationAngles.get(0)
+    var azimuth = orientationAngles.get(0)
     var pitch = orientationAngles.get(1)
     var roll = orientationAngles.get(2)
 
-    Log.i("SensorWorker", azimuth.toString())
-    Log.i("SensorWorker", pitch.toString())
-    Log.i("SensorWorker", roll.toString())
+    Log.i("SensorWorker/azimuth", azimuth.toString())
+    Log.i("SensorWorker/pitch", pitch.toString())
+    Log.i("SensorWorker/roll", roll.toString())
 
     // cross yourself
     if (azimuth.toDouble() != 0.0 || pitch.toDouble() != 0.0 || roll.toDouble() != 0.0) {
