@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit
 class SensorViewModel(application: Application) : AndroidViewModel(application) {
 
   private val workManager = WorkManager.getInstance(application)
-  lateinit var sensorWorkInfo: LiveData<WorkInfo>
+  lateinit var sensorWorkInfo: LiveData<List<WorkInfo>>
   private lateinit var singleWorkRequestId: UUID
 
   internal fun startSensorWorker() {
@@ -31,7 +31,7 @@ class SensorViewModel(application: Application) : AndroidViewModel(application) 
     // this trial did block repeat work from being enqueued
     workManager.enqueueUniquePeriodicWork("ravenclaw", ExistingPeriodicWorkPolicy.KEEP, sensorRequest)
 
-    sensorWorkInfo = workManager.getWorkInfoByIdLiveData(singleWorkRequestId)
+    sensorWorkInfo = workManager.getWorkInfosForUniqueWorkLiveData("ravenclaw")
   }
 
   fun cancelWork() {

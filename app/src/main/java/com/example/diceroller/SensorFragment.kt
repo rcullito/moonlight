@@ -40,12 +40,14 @@ class SensorFragment : Fragment() {
     return binding.root
   }
 
-  private fun workInfoObserver(): Observer<WorkInfo> {
-    return Observer { workInfo ->
+  private fun workInfoObserver(): Observer<List<WorkInfo>> {
+    return Observer { listOfWorkInfo ->
 
-      if (workInfo == null) {
+      if (listOfWorkInfo.isNullOrEmpty()) {
         return@Observer
       }
+
+      val workInfo = listOfWorkInfo[0]
 
       Log.i("SensorFragment", "Observer for workInfo being called")
       Log.i("SensorFragment", workInfo.state.toString())
