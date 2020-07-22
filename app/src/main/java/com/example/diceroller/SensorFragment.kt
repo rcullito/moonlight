@@ -30,6 +30,7 @@ class SensorFragment : Fragment() {
     binding = DataBindingUtil.inflate<FragmentSensorBinding>(inflater, R.layout.fragment_sensor, container, false)
     // TODO split this into its own fn
     binding.startWorkButton.setOnClickListener {
+      Log.i("SensorFragment", "onclickListener Being Called")
       val model: SensorViewModel by activityViewModels()
 
       // starting work will have to be the default
@@ -56,6 +57,7 @@ class SensorFragment : Fragment() {
         //      model.cancelWork()
       } else {
         binding.status = "Work In Progress"
+        binding.startWorkButton.visibility = View.GONE
       }
     }
   }
