@@ -20,13 +20,6 @@ class SensorFragment : Fragment() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-
-    val model: SensorViewModel by activityViewModels()
-
-    model.startLogWorker()
-
-    model.sensorWorkInfo.observe(this, workInfoObserver())
-
   }
 
   override fun onCreateView(
@@ -35,10 +28,13 @@ class SensorFragment : Fragment() {
   ): View? {
 
     binding = DataBindingUtil.inflate<FragmentSensorBinding>(inflater, R.layout.fragment_sensor, container, false)
-
-    binding.cancelWorkButton.setOnClickListener {
+    // TODO split this into its own fn
+    binding.startWorkButton.setOnClickListener {
       val model: SensorViewModel by activityViewModels()
-      model.cancelWork()
+
+      // starting work will have to be the default
+      model.startLogWorker()
+      model.sensorWorkInfo.observe(viewLifecycleOwner, workInfoObserver())
     }
     // Inflate the layout for this fragment
     return binding.root
@@ -57,6 +53,7 @@ class SensorFragment : Fragment() {
       if (workInfo.state.isFinished) {
         binding.status = "Work Finished"
         // awesome!!! now hide CANCEL button, or at least give a back button via the nav.
+        //      model.cancelWork()
       } else {
         binding.status = "Work In Progress"
       }
