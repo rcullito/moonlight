@@ -39,4 +39,8 @@ class SensorViewModel(application: Application) : AndroidViewModel(application) 
     workManager.cancelWorkById(singleWorkRequestId)
   }
 
+  fun isSensorWorkInfoInitialised(): Boolean {
+    return ::sensorWorkInfo.isInitialized
+  }
+
 }

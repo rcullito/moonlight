@@ -27,13 +27,28 @@ class SensorFragment : Fragment() {
   ): View? {
 
     binding = DataBindingUtil.inflate<FragmentSensorBinding>(inflater, R.layout.fragment_sensor, container, false)
-    // TODO split this into its own fn
+
+    val model: SensorViewModel by activityViewModels()
+
+    // if the sensor has already been initialized
+    // then let the current state of the job determine the button state
+    // otherwise set start to visible assuming this is the
+    // first interaction with the app
+    if (model.isSensorWorkInfoInitialised()) {
+      model.sensorWorkInfo.observe(viewLifecycleOwner, workInfoObserver())
+    } else {
+      binding.startWorkButton.visibility = View.VISIBLE
+    }
+
+
     binding.startWorkButton.setOnClickListener {
       Log.i("SensorFragment", "start work onclickListener Being Called")
       val model: SensorViewModel by activityViewModels()
-
-      // starting work will have to be the default
       model.startSensorWorker()
+
+      // just double checking. but it looks like by the time we add an observer here
+      // it will always be the first of its kind :)
+      Log.i("RightBeforeObserver", model.sensorWorkInfo.hasObservers().toString())
       model.sensorWorkInfo.observe(viewLifecycleOwner, workInfoObserver())
     }
 
