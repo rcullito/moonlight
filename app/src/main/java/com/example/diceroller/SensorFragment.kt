@@ -29,16 +29,23 @@ class SensorFragment : Fragment() {
     binding = DataBindingUtil.inflate<FragmentSensorBinding>(inflater, R.layout.fragment_sensor, container, false)
     // TODO split this into its own fn
     binding.startWorkButton.setOnClickListener {
-      Log.i("SensorFragment", "onclickListener Being Called")
+      Log.i("SensorFragment", "start work onclickListener Being Called")
       val model: SensorViewModel by activityViewModels()
 
       // starting work will have to be the default
       model.startSensorWorker()
       model.sensorWorkInfo.observe(viewLifecycleOwner, workInfoObserver())
     }
+
+    binding.cancelWorkButton.setOnClickListener {
+      Log.i("SensorFragment", "cancel work onClickListener Being Called")
+      val model: SensorViewModel by activityViewModels()
+      model.cancelWork()
+    }
     // Inflate the layout for this fragment
     return binding.root
   }
+
 
   private fun workInfoObserver(): Observer<List<WorkInfo>> {
     return Observer { listOfWorkInfo ->
@@ -54,8 +61,7 @@ class SensorFragment : Fragment() {
 
       if (workInfo.state.isFinished) {
         binding.status = "Work Finished"
-        // awesome!!! now hide CANCEL button, or at least give a back button via the nav.
-        //      model.cancelWork()
+
       } else {
         binding.status = "Work In Progress"
         binding.startWorkButton.visibility = View.GONE
