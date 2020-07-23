@@ -61,6 +61,8 @@ class SensorFragment : Fragment() {
 
       if (workInfo.state.isFinished) {
         binding.status = "Work Finished"
+        binding.cancelWorkButton.visibility = View.GONE
+        binding.startWorkButton.visibility = View.VISIBLE
 
       } else {
         binding.status = "Work In Progress"
