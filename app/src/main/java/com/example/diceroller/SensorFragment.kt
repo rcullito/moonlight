@@ -59,6 +59,7 @@ class SensorFragment : Fragment() {
       } else {
         binding.status = "Work In Progress"
         binding.startWorkButton.visibility = View.GONE
+        binding.cancelWorkButton.visibility = View.VISIBLE
       }
     }
   }
