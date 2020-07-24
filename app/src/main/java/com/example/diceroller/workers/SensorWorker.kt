@@ -12,6 +12,7 @@ import androidx.work.WorkerParameters
 import com.example.diceroller.database.SleepDatabase
 import com.example.diceroller.database.SleepPosition
 import com.example.diceroller.database.SleepPositionDao
+import kotlinx.coroutines.*
 import java.util.*
 import kotlin.math.abs
 
@@ -24,6 +25,9 @@ class SensorWorker(ctx: Context, params: WorkerParameters) : CoroutineWorker(ctx
   val orientationAngles = FloatArray(3)
 
   val database = SleepDatabase.getInstance(applicationContext)
+
+  private var workerJob = Job()
+  private val workerScope = CoroutineScope(Dispatchers.Default + workerJob)
 
   override suspend fun doWork(): Result {
     Log.i("SensorWorker", "in the doWork() function")
@@ -82,13 +86,21 @@ class SensorWorker(ctx: Context, params: WorkerParameters) : CoroutineWorker(ctx
 
       // write to database
       val position = SleepPosition(pitch = pitch, roll = roll)
-      database.sleepPositionDao.insert(position)
 
+      workerScope.launch {
+
+        withContext(Dispatchers.IO) {
+          updatePositionInDb(position)
+        }
+      }
 
       Log.i("SensorWorker", "unregistering sensor listener")
       sensorManager.unregisterListener(this)
     }
 
+  }
 
+  private suspend fun updatePositionInDb(position:SleepPosition) {
+    database.sleepPositionDao.insert(position)
   }
 }
