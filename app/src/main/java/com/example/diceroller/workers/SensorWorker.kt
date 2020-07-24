@@ -9,6 +9,10 @@ import android.util.Log
 import androidx.work.CoroutineWorker
 import androidx.work.Worker
 import androidx.work.WorkerParameters
+import com.example.diceroller.database.SleepDatabase
+import com.example.diceroller.database.SleepPosition
+import com.example.diceroller.database.SleepPositionDao
+import java.util.*
 import kotlin.math.abs
 
 class SensorWorker(ctx: Context, params: WorkerParameters) : CoroutineWorker(ctx, params), SensorEventListener {
@@ -18,6 +22,8 @@ class SensorWorker(ctx: Context, params: WorkerParameters) : CoroutineWorker(ctx
   private val magnetometerReading = FloatArray(3)
   val rotationMatrix = FloatArray(9)
   val orientationAngles = FloatArray(3)
+
+  val database = SleepDatabase.getInstance(applicationContext)
 
   override suspend fun doWork(): Result {
     Log.i("SensorWorker", "in the doWork() function")
@@ -74,8 +80,9 @@ class SensorWorker(ctx: Context, params: WorkerParameters) : CoroutineWorker(ctx
     // cross yourself
     if (azimuth.toDouble() != 0.0 || pitch.toDouble() != 0.0 || roll.toDouble() != 0.0) {
 
-
-      // TODO ideally write to the database here
+      // write to database
+      val position = SleepPosition(pitch = pitch, roll = roll)
+      database.sleepPositionDao.insert(position)
 
 
       Log.i("SensorWorker", "unregistering sensor listener")
