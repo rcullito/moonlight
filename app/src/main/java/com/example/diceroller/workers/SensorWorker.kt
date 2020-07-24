@@ -73,6 +73,11 @@ class SensorWorker(ctx: Context, params: WorkerParameters) : CoroutineWorker(ctx
 
     // cross yourself
     if (azimuth.toDouble() != 0.0 || pitch.toDouble() != 0.0 || roll.toDouble() != 0.0) {
+
+
+      // TODO ideally write to the database here
+
+
       Log.i("SensorWorker", "unregistering sensor listener")
       sensorManager.unregisterListener(this)
     }
