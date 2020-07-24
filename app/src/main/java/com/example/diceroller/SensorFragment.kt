@@ -9,7 +9,9 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.work.WorkInfo
+import com.example.diceroller.database.SleepDatabase
 import com.example.diceroller.databinding.FragmentSensorBinding
 
 
@@ -27,8 +29,11 @@ class SensorFragment : Fragment() {
   ): View? {
 
     binding = DataBindingUtil.inflate<FragmentSensorBinding>(inflater, R.layout.fragment_sensor, container, false)
-
-    val model: SensorViewModel by activityViewModels()
+    val application = requireNotNull(this.activity).application
+    val dataSource = SleepDatabase.getInstance(application).sleepPositionDao
+    val viewModelFactory = SensorViewModelFactory(dataSource, application)
+    val model: SensorViewModel by activityViewModels({ viewModelFactory })
+    binding.setLifecycleOwner(this)
 
     // if the sensor has already been initialized
     // then let the current state of the job determine the button state
