@@ -8,11 +8,12 @@ import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkInfo
 import androidx.work.WorkManager
+import com.example.diceroller.database.SleepPositionDao
 import com.example.diceroller.workers.SensorWorker
 import java.util.*
 import java.util.concurrent.TimeUnit
 
-class SensorViewModel(application: Application) : AndroidViewModel(application) {
+class SensorViewModel(val database: SleepPositionDao, application: Application) : AndroidViewModel(application) {
 
   private val workManager = WorkManager.getInstance(application)
   lateinit var sensorWorkInfo: LiveData<List<WorkInfo>>
