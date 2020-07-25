@@ -10,7 +10,8 @@ import java.text.SimpleDateFormat
 // TODO mapping function with when to convert radians to  "directly on side, side towards stomach, stomach"
 
 fun convertLongToDateString(systemTime: Long): String {
-  return SimpleDateFormat("EEEE MMM-dd-yyyy' 'HH:mm")
+  // return SimpleDateFormat("EEEE MMM-dd-yyyy' 'HH:mm")
+  return SimpleDateFormat("MMM-dd' 'HH:mm")
     .format(systemTime).toString()
 }
 
@@ -22,8 +23,12 @@ fun formatPosition(positions: List<SleepPosition>): Spanned {
       append("<br>")
       append("<b>Time:</b>")
       append("\t${convertLongToDateString(it.sleepPositionTime)}")
-      append("<b>Pitch:</b>")
-      append(it.pitch.toString())
+      append(" ")
+      append("<b>Pitch: </b>")
+      append("%.2f".format(it.pitch))
+      append(" ")
+      append("<b>Roll: </b>")
+      append("%.2f".format(it.roll))
       append("<br>")
     }
   }
