@@ -1,7 +1,12 @@
 package com.example.diceroller
 
 import android.app.Application
+import android.os.Build
+import android.text.Html
+import android.text.Spanned
+import androidx.core.text.HtmlCompat
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.Transformations
 import com.example.diceroller.database.SleepPosition
 import com.example.diceroller.database.SleepPositionDao
 import kotlinx.coroutines.*
@@ -16,22 +21,30 @@ class ResultsViewModel(val database: SleepPositionDao, application: Application)
     viewModelJob.cancel()
   }
 
+  private val positions = database.getAllPositions()
 
-  // TODO these functions are for inserting records, but we want to make sure that we are retrieving records for this page
+  val positionsString = Transformations.map(positions) {
+    formatPosition(it)
+  }
 
-  /*
-  fun savePosition(sleepPosition: SleepPosition) {
-    uiScope.launch {
-      insert(sleepPosition)
+  fun formatPosition(positions: List<SleepPosition>): Spanned {
+    val sb = StringBuilder()
+    sb.apply {
+      append("<h3>Here are your recent recorded positions</h3>")
+      positions.forEach {
+        append("<br>")
+        append("<b>Pitch:</b>")
+        append(it.pitch.toString())
+      }
+    }
+
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+      return Html.fromHtml(sb.toString(), Html.FROM_HTML_MODE_LEGACY)
+    } else {
+      return HtmlCompat.fromHtml(sb.toString(), HtmlCompat.FROM_HTML_MODE_LEGACY)
     }
   }
 
-  private suspend fun insert(sleepPosition: SleepPosition) {
-    withContext(Dispatchers.IO) {
-      database.insert(sleepPosition)
-    }
-  }
 
-  */
 
 }
