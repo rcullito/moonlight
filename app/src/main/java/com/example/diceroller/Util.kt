@@ -14,10 +14,14 @@ fun convertNumericQualityToString(roll: Float): String {
   val absolute_double = abs(roll.toDouble())
 
   return when (absolute_double) {
-    in 0.0..0.86 -> "back"
-    in 0.86..1.37 -> "side back"
-    in 1.37..2.2 -> "side stomach"
-    in 2.2..3.14 -> "stomach"
+    in 0.0..0.86 -> "left back"
+    in 0.86..1.37 -> "left side back"
+    in 1.37..2.2 -> "left side stomach"
+    in 2.2..3.14 -> "left stomach"
+    in 0.0..-0.86 -> "right back"
+    in -0.86..-1.37 -> "right side back"
+    in -1.37..-2.2 -> "right side stomach"
+    in -2.2..-3.14 -> "right stomach"
     else -> "toast"
   }
 }
@@ -37,12 +41,14 @@ fun formatPosition(positions: List<SleepPosition>): Spanned {
       append("<b>Time:</b>")
       append("\t${convertLongToDateString(it.sleepPositionTime)}")
       append(" ")
-      append("<b>Pitch: </b>")
-      append("%.2f".format(it.pitch))
-      append(" ")
+      //append("<b>Pitch: </b>")
+      //append("%.2f".format(it.pitch))
+      //append(" ")
       append("<b>Roll: </b>")
       append("%.2f".format(it.roll))
-      append("<br>")
+      append(" ")
+      append("<b>Position<b>")
+      append("\t${convertNumericQualityToString(it.roll)}<br>")
     }
   }
 
