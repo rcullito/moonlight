@@ -1,13 +1,26 @@
 package com.example.diceroller
 
+import android.content.res.Resources
 import android.os.Build
 import android.text.Html
 import android.text.Spanned
 import androidx.core.text.HtmlCompat
 import com.example.diceroller.database.SleepPosition
 import java.text.SimpleDateFormat
+import kotlin.math.abs
 
-// TODO mapping function with when to convert radians to  "directly on side, side towards stomach, stomach"
+fun convertNumericQualityToString(roll: Float): String {
+
+  val absolute_double = abs(roll.toDouble())
+
+  return when (absolute_double) {
+    in 0.0..0.86 -> "back"
+    in 0.86..1.37 -> "side back"
+    in 1.37..2.2 -> "side stomach"
+    in 2.2..3.14 -> "stomach"
+    else -> "toast"
+  }
+}
 
 fun convertLongToDateString(systemTime: Long): String {
   // return SimpleDateFormat("EEEE MMM-dd-yyyy' 'HH:mm")
