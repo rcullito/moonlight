@@ -29,11 +29,9 @@ class SensorFragment : Fragment() {
   ): View? {
 
     binding = DataBindingUtil.inflate<FragmentSensorBinding>(inflater, R.layout.fragment_sensor, container, false)
-    val application = requireNotNull(this.activity).application
-    val dataSource = SleepDatabase.getInstance(application).sleepPositionDao
-    val viewModelFactory = SensorViewModelFactory(dataSource, application)
-    val model: SensorViewModel by activityViewModels({ viewModelFactory })
-    binding.setLifecycleOwner(this)
+
+
+    val model: SensorViewModel by activityViewModels()
 
     // if the sensor has already been initialized
     // then let the current state of the job determine the button state
