@@ -50,9 +50,7 @@ class SensorWorker(ctx: Context, params: WorkerParameters) : CoroutineWorker(ctx
         SensorManager.SENSOR_DELAY_NORMAL
       )
     }
-    // TODO run this once, and if it doesn't work
-    // the name of the game is async and a listenable worker
-    // ideally we would return when we get 3 values that are not 0
+
     return Result.success()
   }
 
@@ -60,6 +58,7 @@ class SensorWorker(ctx: Context, params: WorkerParameters) : CoroutineWorker(ctx
   }
 
   override fun onSensorChanged(event: SensorEvent) {
+    Log.i("SensorWorker", "onSensorChange fired")
     if (event.sensor.type == Sensor.TYPE_ACCELEROMETER) {
       System.arraycopy(event.values, 0, accelerometerReading, 0, accelerometerReading.size)
     } else if (event.sensor.type == Sensor.TYPE_MAGNETIC_FIELD) {
