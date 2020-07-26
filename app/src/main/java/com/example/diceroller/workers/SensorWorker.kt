@@ -27,12 +27,14 @@ class SensorWorker(ctx: Context, params: WorkerParameters) : CoroutineWorker(ctx
   private var workerJob = Job()
   private val workerScope = CoroutineScope(Dispatchers.Default + workerJob)
 
+  private lateinit var wakeLock: PowerManager.WakeLock
+
 
 
   override suspend fun doWork(): Result {
     Log.i("SensorWorker", "in the doWork() function")
 
-    val wakeLock: PowerManager.WakeLock = (Context.POWER_SERVICE as PowerManager).run {
+    wakeLock = (Context.POWER_SERVICE as PowerManager).run {
       newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "Lupin::sensorWorkerWakeLock").apply {
         acquire()
       }
@@ -101,6 +103,7 @@ class SensorWorker(ctx: Context, params: WorkerParameters) : CoroutineWorker(ctx
 
       Log.i("SensorWorker", "unregistering sensor listener")
       sensorManager.unregisterListener(this)
+      wakeLock.release()
     }
 
   }
