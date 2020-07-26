@@ -7,7 +7,6 @@ import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.os.PowerManager
 import android.util.Log
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import com.example.diceroller.database.SleepDatabase
@@ -21,24 +20,21 @@ class SensorWorker(ctx: Context, params: WorkerParameters) : CoroutineWorker(ctx
   private val magnetometerReading = FloatArray(3)
   val rotationMatrix = FloatArray(9)
   val orientationAngles = FloatArray(3)
-
   val database = SleepDatabase.getInstance(applicationContext)
-
   private var workerJob = Job()
   private val workerScope = CoroutineScope(Dispatchers.Default + workerJob)
-
   private lateinit var wakeLock: PowerManager.WakeLock
-
 
 
   override suspend fun doWork(): Result {
     Log.i("SensorWorker", "in the doWork() function")
 
-    wakeLock = (Context.POWER_SERVICE as PowerManager).run {
-      newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "Lupin::sensorWorkerWakeLock").apply {
-        acquire()
+   wakeLock =
+      (applicationContext.getSystemService(Context.POWER_SERVICE) as PowerManager).run {
+          newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "Lupin::sensorWorkerWakeLock").apply {
+          acquire()
+        }
       }
-    }
 
     sensorManager = this.applicationContext.getSystemService(Context.SENSOR_SERVICE) as SensorManager
 
