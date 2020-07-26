@@ -9,21 +9,40 @@ import com.example.diceroller.database.SleepPosition
 import java.text.SimpleDateFormat
 import kotlin.math.abs
 
-fun convertNumericQualityToString(roll: Float): String {
+val zero = 0.0
+val sideBack = 0.86
+val side = 1.37
+val sideStomach = 2.2
+val stomach = 3.14
 
-  val absolute_double = abs(roll.toDouble())
+fun convertNumericQualityToString(roll: Float, pitch: Float): String {
 
-  return when (absolute_double) {
-    in 0.0..0.86 -> "left back"
-    in 0.86..1.37 -> "left side back"
-    in 1.37..2.2 -> "left side stomach"
-    in 2.2..3.14 -> "left stomach"
-    in 0.0..-0.86 -> "right back"
-    in -0.86..-1.37 -> "right side back"
-    in -1.37..-2.2 -> "right side stomach"
-    in -2.2..-3.14 -> "right stomach"
-    else -> "toast"
+  val pitch_absolute_double = abs(pitch.toDouble())
+
+  if (pitch_absolute_double > 0.45) {
+    return "upright"
   }
+
+  if (roll > 0.0) {
+    return when (roll) {
+      in 0.0..0.86 -> "left back"
+      in 0.86..1.37 -> "left side back"
+      in 1.37..2.2 -> "left side stomach"
+      in 2.2..3.14 -> "left stomach"
+      else -> "toast"
+    }
+  } else {
+    val roll_absolute_double = abs(roll.toDouble())
+    return when (roll_absolute_double) {
+      in 0.0..0.86 -> "right back"
+      in 0.86..1.37 -> "right side back"
+      in 1.37..2.2 -> "right side stomach"
+      in 2.2..3.14 -> "right stomach"
+      else -> "toast"
+    }
+  }
+
+
 }
 
 fun convertLongToDateString(systemTime: Long): String {
@@ -41,14 +60,14 @@ fun formatPosition(positions: List<SleepPosition>): Spanned {
       append("<b>Time:</b>")
       append("\t${convertLongToDateString(it.sleepPositionTime)}")
       append(" ")
-      //append("<b>Pitch: </b>")
-      //append("%.2f".format(it.pitch))
-      //append(" ")
+      append("<b>Pitch: </b>")
+      append("%.2f".format(it.pitch))
+      append(" ")
       append("<b>Roll: </b>")
       append("%.2f".format(it.roll))
       append(" ")
-      append("<b>Position<b>")
-      append("\t${convertNumericQualityToString(it.roll)}<br>")
+      append("<b>Position: <b>")
+      append("\t${convertNumericQualityToString(it.roll, it.pitch)}<br>")
     }
   }
 
