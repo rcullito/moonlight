@@ -5,16 +5,14 @@ import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
+import android.os.PowerManager
 import android.util.Log
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.work.CoroutineWorker
-import androidx.work.Worker
 import androidx.work.WorkerParameters
 import com.example.diceroller.database.SleepDatabase
 import com.example.diceroller.database.SleepPosition
-import com.example.diceroller.database.SleepPositionDao
 import kotlinx.coroutines.*
-import java.util.*
-import kotlin.math.abs
 
 class SensorWorker(ctx: Context, params: WorkerParameters) : CoroutineWorker(ctx, params), SensorEventListener {
 
@@ -29,8 +27,16 @@ class SensorWorker(ctx: Context, params: WorkerParameters) : CoroutineWorker(ctx
   private var workerJob = Job()
   private val workerScope = CoroutineScope(Dispatchers.Default + workerJob)
 
+
+
   override suspend fun doWork(): Result {
     Log.i("SensorWorker", "in the doWork() function")
+
+    val wakeLock: PowerManager.WakeLock = (Context.POWER_SERVICE as PowerManager).run {
+      newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "Lupin::sensorWorkerWakeLock").apply {
+        acquire()
+      }
+    }
 
     sensorManager = this.applicationContext.getSystemService(Context.SENSOR_SERVICE) as SensorManager
 
