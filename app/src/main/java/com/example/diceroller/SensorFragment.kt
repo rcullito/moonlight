@@ -45,14 +45,14 @@ class SensorFragment : Fragment() {
 
 
     binding.startWorkButton.setOnClickListener {
-      Log.i("SensorFragment", "start work onclickListener Being Called")
+      Log.i("SensorFragment", "first click listener called")
       val model: SensorViewModel by activityViewModels()
-      model.startSensorWorker()
+      model.startTiltSensor()
 
       // just double checking. but it looks like by the time we add an observer here
       // it will always be the first of its kind :)
-      Log.i("RightBeforeObserver", model.sensorWorkInfo.hasObservers().toString())
-      model.sensorWorkInfo.observe(viewLifecycleOwner, workInfoObserver())
+      // Log.i("RightBeforeObserver", model.sensorWorkInfo.hasObservers().toString())
+      // model.sensorWorkInfo.observe(viewLifecycleOwner, workInfoObserver())
     }
 
     binding.cancelWorkButton.setOnClickListener {
