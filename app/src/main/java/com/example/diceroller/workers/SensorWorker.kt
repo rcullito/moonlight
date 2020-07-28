@@ -16,10 +16,7 @@ import kotlinx.coroutines.*
 class SensorWorker(ctx: Context, params: WorkerParameters) : CoroutineWorker(ctx, params), SensorEventListener {
 
   private lateinit var sensorManager: SensorManager
-  private val accelerometerReading = FloatArray(3)
-  private val magnetometerReading = FloatArray(3)
-  val rotationMatrix = FloatArray(9)
-  val orientationAngles = FloatArray(3)
+  private val geoMagneticReading = FloatArray(4)
   val database = SleepDatabase.getInstance(applicationContext)
   private var workerJob = Job()
   private val workerScope = CoroutineScope(Dispatchers.Default + workerJob)
@@ -38,18 +35,10 @@ class SensorWorker(ctx: Context, params: WorkerParameters) : CoroutineWorker(ctx
 
     sensorManager = this.applicationContext.getSystemService(Context.SENSOR_SERVICE) as SensorManager
 
-    sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)?.also { accelerometer ->
+    sensorManager.getDefaultSensor(Sensor.TYPE_GEOMAGNETIC_ROTATION_VECTOR)?.also { geoMagnetic ->
       sensorManager.registerListener(
         this,
-        accelerometer,
-        SensorManager.SENSOR_DELAY_NORMAL,
-        SensorManager.SENSOR_DELAY_NORMAL
-      )
-    }
-    sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD)?.also { magneticField ->
-      sensorManager.registerListener(
-        this,
-        magneticField,
+        geoMagnetic,
         SensorManager.SENSOR_DELAY_NORMAL,
         SensorManager.SENSOR_DELAY_NORMAL
       )
@@ -63,22 +52,19 @@ class SensorWorker(ctx: Context, params: WorkerParameters) : CoroutineWorker(ctx
 
   override fun onSensorChanged(event: SensorEvent) {
     Log.i("SensorWorker", "onSensorChange fired")
-    if (event.sensor.type == Sensor.TYPE_ACCELEROMETER) {
-      System.arraycopy(event.values, 0, accelerometerReading, 0, accelerometerReading.size)
-    } else if (event.sensor.type == Sensor.TYPE_MAGNETIC_FIELD) {
-      System.arraycopy(event.values, 0, magnetometerReading, 0, magnetometerReading.size)
+    if (event.sensor.type == Sensor.TYPE_GEOMAGNETIC_ROTATION_VECTOR) {
+      System.arraycopy(event.values, 0, geoMagneticReading, 0, geoMagneticReading.size)
     }
 
-    updateOrientationAngles()
+    updateWithGeomagenticValues()
 
   }
 
-  fun updateOrientationAngles() {
-    SensorManager.getRotationMatrix(rotationMatrix, null, accelerometerReading, magnetometerReading)
-    SensorManager.getOrientation(rotationMatrix, orientationAngles)
-    var azimuth = orientationAngles.get(0)
-    var pitch = orientationAngles.get(1)
-    var roll = orientationAngles.get(2)
+  fun updateWithGeomagenticValues() {
+
+    var azimuth = geoMagneticReading.get(0)
+    var pitch = geoMagneticReading.get(1)
+    var roll = geoMagneticReading.get(2)
 
     Log.i("SensorWorker/azimuth", azimuth.toString())
     Log.i("SensorWorker/pitch", pitch.toString())
