@@ -6,13 +6,24 @@ import android.app.PendingIntent
 import android.app.Service
 import android.content.Context
 import android.content.Intent
+import android.hardware.Sensor
+import android.hardware.SensorEvent
+import android.hardware.SensorEventListener
+import android.hardware.SensorManager
 import android.os.Build
 import android.os.IBinder
+import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
 
-class SensorService : Service() {
+class SensorService : Service(), SensorEventListener {
   private val CHANNEL_ID = "ForegroundService Kotlin"
+  private lateinit var sensorManager: SensorManager
+  private val accelerometerReading = FloatArray(3)
+  private val magnetometerReading = FloatArray(3)
+  val rotationMatrix = FloatArray(9)
+  val orientationAngles = FloatArray(3)
+
   companion object {
     fun startService(context: Context, message: String) {
       val startIntent = Intent(context, SensorService::class.java)
@@ -40,8 +51,38 @@ class SensorService : Service() {
       .build()
     startForeground(1, notification)
     //stopSelf();
+
     return START_NOT_STICKY
   }
+
+
+  override fun onCreate() {
+    super.onCreate()
+
+    Log.i("SensorService", "oncreate that we just put in place")
+    sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
+
+
+    sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER).also { accelerometer ->
+      sensorManager.registerListener(
+        this,
+        accelerometer,
+        SensorManager.SENSOR_DELAY_NORMAL,
+        SensorManager.SENSOR_DELAY_NORMAL
+      )
+    }
+    sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD).also { magneticField ->
+      sensorManager.registerListener(
+        this,
+        magneticField,
+        SensorManager.SENSOR_DELAY_NORMAL,
+        SensorManager.SENSOR_DELAY_NORMAL
+      )
+    }
+
+
+  }
+
   override fun onBind(intent: Intent): IBinder? {
     return null
   }
@@ -52,5 +93,33 @@ class SensorService : Service() {
       val manager = getSystemService(NotificationManager::class.java)
       manager!!.createNotificationChannel(serviceChannel)
     }
+  }
+
+  override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
+  }
+
+  override fun onSensorChanged(event: SensorEvent) {
+    Log.i("SensorWorker", "onSensorChange fired")
+    if (event.sensor.type == Sensor.TYPE_ACCELEROMETER) {
+      System.arraycopy(event.values, 0, accelerometerReading, 0, accelerometerReading.size)
+    } else if (event.sensor.type == Sensor.TYPE_MAGNETIC_FIELD) {
+      System.arraycopy(event.values, 0, magnetometerReading, 0, magnetometerReading.size)
+    }
+
+    updateOrientationAngles()
+
+  }
+
+  fun updateOrientationAngles() {
+    SensorManager.getRotationMatrix(rotationMatrix, null, accelerometerReading, magnetometerReading)
+    SensorManager.getOrientation(rotationMatrix, orientationAngles)
+    var azimuth = orientationAngles.get(0)
+    var pitch = orientationAngles.get(1)
+    var roll = orientationAngles.get(2)
+
+    Log.i("SensorWorker/azimuth", azimuth.toString())
+    Log.i("SensorWorker/pitch", pitch.toString())
+    Log.i("SensorWorker/roll", roll.toString())
+
   }
 }
