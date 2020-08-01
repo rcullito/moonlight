@@ -123,25 +123,25 @@ class SensorService : Service(), SensorEventListener {
       } else if (event.sensor.type == Sensor.TYPE_MAGNETIC_FIELD) {
         System.arraycopy(event.values, 0, magnetometerReading, 0, magnetometerReading.size)
       }
+      updateOrientationAngles(accelerometerReading, magnetometerReading)
       lastUpdate = currentTime
-      updateOrientationAngles()
     }
 
   }
 
-  fun updateOrientationAngles() {
-    SensorManager.getRotationMatrix(rotationMatrix, null, accelerometerReading, magnetometerReading)
+  fun updateOrientationAngles(bananas: FloatArray, coconuts: FloatArray) {
+    SensorManager.getRotationMatrix(rotationMatrix, null, bananas, coconuts)
     SensorManager.getOrientation(rotationMatrix, orientationAngles)
     var azimuth = orientationAngles.get(0)
     var pitch = orientationAngles.get(1)
     var roll = orientationAngles.get(2)
 
-    Log.i("SensorWorker/azimuth", azimuth.toString())
-    Log.i("SensorWorker/pitch", pitch.toString())
-    Log.i("SensorWorker/roll", roll.toString())
-
     // cross yourself
     if (azimuth.toDouble() != 0.0 || pitch.toDouble() != 0.0 || roll.toDouble() != 0.0) {
+
+      Log.i("SensorWorker/azimuth", azimuth.toString())
+      Log.i("SensorWorker/pitch", pitch.toString())
+      Log.i("SensorWorker/roll", roll.toString())
 
       // write to database
       val position = SleepPosition(pitch = pitch, roll = roll)
