@@ -24,23 +24,7 @@ class SensorViewModel(application: Application) : AndroidViewModel(application),
   lateinit var sensorWorkInfo: LiveData<List<WorkInfo>>
   private lateinit var singleWorkRequestId: UUID
 
-  internal fun startSensorWorker() {
-
-    val sensorRequest =
-      PeriodicWorkRequestBuilder<SensorWorker>(16, TimeUnit.MINUTES)
-        // Additional configuration
-        .build()
-    Log.i("SensorViewModel", "upcoming workRequest Id: ")
-    Log.i("SensorViewModel", sensorRequest.id.toString())
-    singleWorkRequestId = sensorRequest.id
-
-    // this trial did block repeat work from being enqueued
-    workManager.enqueueUniquePeriodicWork("ravenclaw", ExistingPeriodicWorkPolicy.KEEP, sensorRequest)
-
-    sensorWorkInfo = workManager.getWorkInfosForUniqueWorkLiveData("ravenclaw")
-  }
-
-  internal fun startTiltSensor() {
+  internal fun startService() {
     Log.i("SensorViewModel", "startTiltSensor() called")
     val sensorManager =  getApplication<Application>().getSystemService(Context.SENSOR_SERVICE) as SensorManager
     sensorManager.getDefaultSensor(22)?.also { tiltSensor ->
@@ -51,6 +35,10 @@ class SensorViewModel(application: Application) : AndroidViewModel(application),
         SensorManager.SENSOR_DELAY_NORMAL
       )
     }
+
+  }
+
+  internal fun cancelService() {
 
   }
 

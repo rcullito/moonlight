@@ -40,14 +40,14 @@ class SensorFragment : Fragment() {
     if (model.isSensorWorkInfoInitialised()) {
       model.sensorWorkInfo.observe(viewLifecycleOwner, workInfoObserver())
     } else {
-      binding.startWorkButton.visibility = View.VISIBLE
+      binding.startServiceButton.visibility = View.VISIBLE
     }
 
 
-    binding.startWorkButton.setOnClickListener {
+    binding.startServiceButton.setOnClickListener {
       Log.i("SensorFragment", "first click listener called")
       val model: SensorViewModel by activityViewModels()
-      model.startTiltSensor()
+      model.startService()
 
       // just double checking. but it looks like by the time we add an observer here
       // it will always be the first of its kind :)
@@ -55,10 +55,10 @@ class SensorFragment : Fragment() {
       // model.sensorWorkInfo.observe(viewLifecycleOwner, workInfoObserver())
     }
 
-    binding.cancelWorkButton.setOnClickListener {
+    binding.cancelServiceButton.setOnClickListener {
       Log.i("SensorFragment", "cancel work onClickListener Being Called")
       val model: SensorViewModel by activityViewModels()
-      model.cancelWork()
+      model.cancelService()
     }
     // Inflate the layout for this fragment
     return binding.root
@@ -79,13 +79,13 @@ class SensorFragment : Fragment() {
 
       if (workInfo.state.isFinished) {
         binding.status = "Work Finished"
-        binding.cancelWorkButton.visibility = View.GONE
-        binding.startWorkButton.visibility = View.VISIBLE
+        binding.cancelServiceButton.visibility = View.GONE
+        binding.startServiceButton.visibility = View.VISIBLE
 
       } else {
         binding.status = "Work In Progress"
-        binding.startWorkButton.visibility = View.GONE
-        binding.cancelWorkButton.visibility = View.VISIBLE
+        binding.startServiceButton.visibility = View.GONE
+        binding.cancelServiceButton.visibility = View.VISIBLE
       }
     }
   }

@@ -31,22 +31,22 @@
     android:layout_height="match_parent">
 
     <TextView
-      android:id="@+id/workStatus"
+      android:id="@+id/serviceStatus"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_marginTop="242dp"
       android:layout_marginBottom="81dp"
       android:text="@{status}"
-      app:layout_constraintBottom_toTopOf="@+id/start_work_button"
+      app:layout_constraintBottom_toTopOf="@+id/start_service_button"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
       tools:text="Work Status" />
 
     <Button
-      android:id="@+id/start_work_button"
+      android:id="@+id/start_service_button"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:text="Start Work"
+      android:text="Start Service"
       android:visibility="invisible"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
@@ -54,10 +54,10 @@
       app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-      android:id="@+id/cancel_work_button"
+      android:id="@+id/cancel_service_button"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:text="Cancel Work"
+      android:text="Cancel Service"
       android:visibility="invisible"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
