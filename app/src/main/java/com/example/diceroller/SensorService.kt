@@ -15,6 +15,9 @@ import android.os.IBinder
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
+import com.example.diceroller.database.SleepDatabase
+import com.example.diceroller.database.SleepPosition
+import kotlinx.coroutines.*
 
 class SensorService : Service(), SensorEventListener {
   private val CHANNEL_ID = "ForegroundService Kotlin"
@@ -23,6 +26,10 @@ class SensorService : Service(), SensorEventListener {
   private val magnetometerReading = FloatArray(3)
   val rotationMatrix = FloatArray(9)
   val orientationAngles = FloatArray(3)
+  private var lastUpdate: Long = 0
+  private var workerJob = Job()
+  private val workerScope = CoroutineScope(Dispatchers.Default + workerJob)
+  private lateinit var database: SleepDatabase
 
   companion object {
     fun startService(context: Context, message: String) {
@@ -51,13 +58,20 @@ class SensorService : Service(), SensorEventListener {
       .build()
     startForeground(1, notification)
     //stopSelf();
-
+    // TODO revisit what should go here
     return START_NOT_STICKY
   }
 
+  override fun onDestroy() {
+    super.onDestroy()
+    Log.i("SensorService", "unregistering sensor listener")
+    sensorManager.unregisterListener(this)
+  }
 
   override fun onCreate() {
     super.onCreate()
+
+    database = SleepDatabase.getInstance(applicationContext)
 
     Log.i("SensorService", "oncreate that we just put in place")
     sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
@@ -99,14 +113,19 @@ class SensorService : Service(), SensorEventListener {
   }
 
   override fun onSensorChanged(event: SensorEvent) {
-    Log.i("SensorWorker", "onSensorChange fired")
-    if (event.sensor.type == Sensor.TYPE_ACCELEROMETER) {
-      System.arraycopy(event.values, 0, accelerometerReading, 0, accelerometerReading.size)
-    } else if (event.sensor.type == Sensor.TYPE_MAGNETIC_FIELD) {
-      System.arraycopy(event.values, 0, magnetometerReading, 0, magnetometerReading.size)
-    }
 
-    updateOrientationAngles()
+    var currentTime = System.currentTimeMillis()
+
+    if ((currentTime - lastUpdate) > 60000) {
+      Log.i("SensorWorker", "onSensorChange fired")
+      if (event.sensor.type == Sensor.TYPE_ACCELEROMETER) {
+        System.arraycopy(event.values, 0, accelerometerReading, 0, accelerometerReading.size)
+      } else if (event.sensor.type == Sensor.TYPE_MAGNETIC_FIELD) {
+        System.arraycopy(event.values, 0, magnetometerReading, 0, magnetometerReading.size)
+      }
+      lastUpdate = currentTime
+      updateOrientationAngles()
+    }
 
   }
 
@@ -121,5 +140,22 @@ class SensorService : Service(), SensorEventListener {
     Log.i("SensorWorker/pitch", pitch.toString())
     Log.i("SensorWorker/roll", roll.toString())
 
+    // cross yourself
+    if (azimuth.toDouble() != 0.0 || pitch.toDouble() != 0.0 || roll.toDouble() != 0.0) {
+
+      // write to database
+      val position = SleepPosition(pitch = pitch, roll = roll)
+
+      workerScope.launch {
+
+        withContext(Dispatchers.IO) {
+          updatePositionInDb(position)
+        }
+      }
+    }
+  }
+
+  private suspend fun updatePositionInDb(position:SleepPosition) {
+    database.sleepPositionDao.insert(position)
   }
 }
