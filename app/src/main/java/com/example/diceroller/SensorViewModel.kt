@@ -2,6 +2,7 @@ package com.example.diceroller
 
 import android.app.Application
 import android.content.Context
+import android.content.Intent
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
@@ -25,16 +26,7 @@ class SensorViewModel(application: Application) : AndroidViewModel(application),
   private lateinit var singleWorkRequestId: UUID
 
   internal fun startService() {
-    Log.i("SensorViewModel", "startTiltSensor() called")
-    val sensorManager =  getApplication<Application>().getSystemService(Context.SENSOR_SERVICE) as SensorManager
-    sensorManager.getDefaultSensor(22)?.also { tiltSensor ->
-      sensorManager.registerListener(
-        this,
-        tiltSensor,
-        SensorManager.SENSOR_DELAY_NORMAL,
-        SensorManager.SENSOR_DELAY_NORMAL
-      )
-    }
+    Log.i("SensorViewModel", "startService() called")
 
   }
 
