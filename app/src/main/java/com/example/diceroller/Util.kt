@@ -28,7 +28,7 @@ fun convertNumericQualityToString(roll: Float, pitch: Float): String {
       in 0.0..0.70 -> "left back"
       in 0.70..1.37 -> "left side back"
       in 1.37..2.2 -> "left side stomach"
-      in 2.2..3.14 -> "left stomach"
+      in 2.2..3.15 -> "left stomach"
       else -> "toast"
     }
   } else {
@@ -37,7 +37,7 @@ fun convertNumericQualityToString(roll: Float, pitch: Float): String {
       in 0.0..0.70 -> "right back"
       in 0.70..1.37 -> "right side back"
       in 1.37..2.2 -> "right side stomach"
-      in 2.2..3.14 -> "right stomach"
+      in 2.2..3.15 -> "right stomach"
       else -> "toast"
     }
   }
