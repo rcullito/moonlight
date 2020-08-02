@@ -59,7 +59,7 @@ class SensorService : Service(), SensorEventListener {
     startForeground(1, notification)
     //stopSelf();
     // TODO revisit what should go here
-    return START_NOT_STICKY
+    return START_STICKY
   }
 
   override fun onDestroy() {

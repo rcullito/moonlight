@@ -25,8 +25,8 @@ fun convertNumericQualityToString(roll: Float, pitch: Float): String {
 
   if (roll > 0.0) {
     return when (roll) {
-      in 0.0..0.86 -> "left back"
-      in 0.86..1.37 -> "left side back"
+      in 0.0..0.70 -> "left back"
+      in 0.70..1.37 -> "left side back"
       in 1.37..2.2 -> "left side stomach"
       in 2.2..3.14 -> "left stomach"
       else -> "toast"
@@ -34,8 +34,8 @@ fun convertNumericQualityToString(roll: Float, pitch: Float): String {
   } else {
     val roll_absolute_double = abs(roll.toDouble())
     return when (roll_absolute_double) {
-      in 0.0..0.86 -> "right back"
-      in 0.86..1.37 -> "right side back"
+      in 0.0..0.70 -> "right back"
+      in 0.70..1.37 -> "right side back"
       in 1.37..2.2 -> "right side stomach"
       in 2.2..3.14 -> "right stomach"
       else -> "toast"
