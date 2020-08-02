@@ -113,20 +113,12 @@ class SensorService : Service(), SensorEventListener {
   }
 
   override fun onSensorChanged(event: SensorEvent) {
-
-    var currentTime = System.currentTimeMillis()
-
-    if ((currentTime - lastUpdate) > 60000) {
-      Log.i("SensorWorker", "onSensorChange fired")
       if (event.sensor.type == Sensor.TYPE_ACCELEROMETER) {
         System.arraycopy(event.values, 0, accelerometerReading, 0, accelerometerReading.size)
       } else if (event.sensor.type == Sensor.TYPE_MAGNETIC_FIELD) {
         System.arraycopy(event.values, 0, magnetometerReading, 0, magnetometerReading.size)
       }
       updateOrientationAngles(accelerometerReading, magnetometerReading)
-      lastUpdate = currentTime
-    }
-
   }
 
   fun updateOrientationAngles(bananas: FloatArray, coconuts: FloatArray) {
@@ -138,19 +130,24 @@ class SensorService : Service(), SensorEventListener {
 
     // cross yourself
     if (azimuth.toDouble() != 0.0 || pitch.toDouble() != 0.0 || roll.toDouble() != 0.0) {
+      var currentTime = System.currentTimeMillis()
 
-      Log.i("SensorWorker/azimuth", azimuth.toString())
-      Log.i("SensorWorker/pitch", pitch.toString())
-      Log.i("SensorWorker/roll", roll.toString())
+      if ((currentTime - lastUpdate) > 60000) {
 
-      // write to database
-      val position = SleepPosition(pitch = pitch, roll = roll)
+        Log.i("SensorWorker/azimuth", azimuth.toString())
+        Log.i("SensorWorker/pitch", pitch.toString())
+        Log.i("SensorWorker/roll", roll.toString())
 
-      workerScope.launch {
+        // write to database
+        val position = SleepPosition(pitch = pitch, roll = roll)
 
-        withContext(Dispatchers.IO) {
-          updatePositionInDb(position)
+        workerScope.launch {
+
+          withContext(Dispatchers.IO) {
+            updatePositionInDb(position)
+          }
         }
+        lastUpdate = currentTime
       }
     }
   }
