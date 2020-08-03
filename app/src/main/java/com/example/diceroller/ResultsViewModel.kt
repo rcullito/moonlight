@@ -10,12 +10,8 @@ import kotlinx.coroutines.Job
 
 class ResultsViewModel(val database: SleepPositionDao, application: Application): AndroidViewModel(application) {
 
-  private var viewModelJob = Job()
-  private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
-
   override fun onCleared() {
     super.onCleared()
-    viewModelJob.cancel()
   }
 
   private val positions = database.getAllPositions()
