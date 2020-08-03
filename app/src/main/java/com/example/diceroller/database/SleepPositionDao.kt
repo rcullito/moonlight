@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import java.sql.Date
 
 @Dao
 interface SleepPositionDao {
@@ -16,4 +17,8 @@ interface SleepPositionDao {
 
   @Query("SELECT * FROM sleep_position_table ORDER BY sleepPositionId DESC LIMIT 1")
   fun getMostRecentPosition(): SleepPosition?
+
+  @Query("SELECT DISTINCT date(round(sleep_position_timestamp / 1000), 'unixepoch')  FROM sleep_position_table")
+  fun getUniqueDates(): List<Date>
+
 }
