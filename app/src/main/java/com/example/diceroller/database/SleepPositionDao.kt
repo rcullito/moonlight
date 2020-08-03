@@ -19,6 +19,6 @@ interface SleepPositionDao {
   fun getMostRecentPosition(): SleepPosition?
 
   @Query("SELECT DISTINCT date(round(sleep_position_timestamp / 1000), 'unixepoch')  FROM sleep_position_table")
-  fun getUniqueDates(): List<Date>
+  fun getUniqueDates(): List<String>
 
 }
