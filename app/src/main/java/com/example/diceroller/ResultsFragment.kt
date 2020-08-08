@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import com.example.diceroller.database.SleepDatabase
 import com.example.diceroller.databinding.FragmentResultsBinding
 
@@ -35,6 +36,14 @@ class ResultsFragment : Fragment() {
     binding.resultsViewModel = resultsViewModel
 
     val adapter = SleepDateAdapter()
+    binding.sleepList.adapter = adapter
+    resultsViewModel.nights.observe(viewLifecycleOwner, Observer {
+      it?.let {
+        adapter.data = it
+      }
+    })
+
+
 
     return binding.root
   }
