@@ -11,13 +11,7 @@ class ResultsViewModel(val database: SleepPositionDao, application: Application)
     super.onCleared()
   }
 
-  private val positions = database.getAllPositions()
-
   val nights = database.getUniqueDates()
-
-  val positionsString = Transformations.map(positions) {
-    formatPosition(it)
-  }
 
 
 }

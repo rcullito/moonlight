@@ -1,6 +1,7 @@
 package com.example.diceroller
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -38,6 +39,7 @@ class ResultsFragment : Fragment() {
     val adapter = SleepDateAdapter()
     binding.sleepList.adapter = adapter
     resultsViewModel.nights.observe(viewLifecycleOwner, Observer {
+      Log.i("ResultsFragment", "in the results fragment observer")
       it?.let {
         adapter.data = it
       }
