@@ -34,6 +34,8 @@ class ResultsFragment : Fragment() {
     binding.setLifecycleOwner(this)
     binding.resultsViewModel = resultsViewModel
 
+    val adapter = SleepDateAdapter()
+
     return binding.root
   }
 
