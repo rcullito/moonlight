@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.diceroller.database.SleepDate
 import com.example.diceroller.databinding.ListItemSleepNightBinding
 
 /**
@@ -14,12 +15,13 @@ import com.example.diceroller.databinding.ListItemSleepNightBinding
  * to the RecyclerView such as where on the screen it was last drawn during scrolling.
  */
 
-class SleepNightListener(val clickListener: () -> Unit) {
-  fun onClick() = clickListener()
+
+class SleepNightListener(val clickListener: (date: String) -> Unit) {
+  fun onClick(date: SleepDate) = clickListener(date.date)
 }
 
 class SleepDateAdapter(val clickListener: SleepNightListener): RecyclerView.Adapter<SleepDateAdapter.ViewHolder>() {
-  var data = listOf<String>()
+  var data = listOf<SleepDate>()
       set(value) {
         field = value
         notifyDataSetChanged()
@@ -39,8 +41,8 @@ class SleepDateAdapter(val clickListener: SleepNightListener): RecyclerView.Adap
   }
 
   class ViewHolder private constructor(val binding: ListItemSleepNightBinding): RecyclerView.ViewHolder(binding.root) {
-    fun bind(clickListener: SleepNightListener, item: String) {
-      binding.sleepDate.text = item
+    fun bind(clickListener: SleepNightListener, item: SleepDate) {
+      binding.date = item
       binding.clickListener = clickListener
       binding.executePendingBindings()
     }
