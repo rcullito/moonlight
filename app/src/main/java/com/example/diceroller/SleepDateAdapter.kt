@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.diceroller.databinding.ListItemSleepNightBinding
 
 /**
  * ViewHolder that holds a single [TextView].
@@ -29,18 +30,27 @@ class SleepDateAdapter: RecyclerView.Adapter<SleepDateAdapter.ViewHolder>() {
   }
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-    val layoutInflater = LayoutInflater.from(parent.context)
-    val view = layoutInflater.inflate(R.layout.list_item_sleep_night, parent, false)
-    return ViewHolder(view)
+    return ViewHolder.from(parent)
   }
 
   override fun onBindViewHolder(holder: ViewHolder, position: Int) {
     val item = data[position]
-    holder.sleepDate.text = item.toString()
+    holder.bind(item)
   }
 
-  class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
-    val sleepDate: TextView = itemView.findViewById(R.id.sleep_date)
+  class ViewHolder private constructor(val binding: ListItemSleepNightBinding): RecyclerView.ViewHolder(binding.root) {
+    fun bind(item: String) {
+      binding.sleepDate.text = item
+    }
+
+    companion object {
+      fun from(parent: ViewGroup): ViewHolder {
+        val layoutInflater = LayoutInflater.from(parent.context)
+        val binding = ListItemSleepNightBinding.inflate(layoutInflater, parent, false)
+
+        return ViewHolder(binding)
+      }
+    }
   }
 }
 
