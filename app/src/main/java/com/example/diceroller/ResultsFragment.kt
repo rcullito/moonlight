@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -36,7 +37,12 @@ class ResultsFragment : Fragment() {
     binding.setLifecycleOwner(this)
     binding.resultsViewModel = resultsViewModel
 
-    val adapter = SleepDateAdapter()
+    val adapter = SleepDateAdapter(SleepNightListener { ->
+      Toast.makeText(context, "sure", Toast.LENGTH_LONG).show()
+    })
+
+
+
     binding.sleepList.adapter = adapter
     resultsViewModel.nights.observe(viewLifecycleOwner, Observer {
       Log.i("ResultsFragment", "in the results fragment observer")
