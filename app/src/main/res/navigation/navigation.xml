@@ -8,14 +8,14 @@
   <fragment
     android:id="@+id/titleFragment3"
     android:name="com.example.diceroller.TitleFragment"
-    android:label="TitleFragment" />
+    android:label="Sleep Position Tracker" />
   <fragment
     android:id="@+id/resultsFragment2"
     android:name="com.example.diceroller.ResultsFragment"
-    android:label="fragment_results"
+    android:label="Past Sleep Nights"
     tools:layout="@layout/fragment_results" />
   <fragment
     android:id="@+id/sensorFragment"
     android:name="com.example.diceroller.SensorFragment"
-    android:label="SensorFragment" />
+    android:label="Track" />
 </navigation>
