@@ -37,14 +37,12 @@ class ResultsFragment : Fragment() {
     binding.setLifecycleOwner(this)
     binding.resultsViewModel = resultsViewModel
 
-    val adapter = SleepDateAdapter(SleepNightListener { ->
-      Toast.makeText(context, "sure", Toast.LENGTH_LONG).show()
+    val adapter = SleepDateAdapter(SleepNightListener {date ->
+      Toast.makeText(context, "${date}", Toast.LENGTH_LONG).show()
     })
 
-
-
     binding.sleepList.adapter = adapter
-    resultsViewModel.nights.observe(viewLifecycleOwner, Observer {
+    resultsViewModel.dates.observe(viewLifecycleOwner, Observer {
       Log.i("ResultsFragment", "in the results fragment observer")
       it?.let {
         adapter.data = it
