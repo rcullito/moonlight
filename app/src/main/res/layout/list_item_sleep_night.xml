@@ -4,11 +4,8 @@
 
   <data>
     <variable
-      name="resultsViewModel"
-      type="com.example.diceroller.ResultsViewModel" />
-    <variable
-      name="sleep"
-      type="com.example.diceroller.database.SleepPosition" />
+      name="date"
+      type="com.example.diceroller.database.SleepDate" />
     <variable
       name="clickListener" type="com.example.diceroller.SleepNightListener"/>
   </data>
@@ -16,7 +13,8 @@
   <androidx.constraintlayout.widget.ConstraintLayout
     android:id="@+id/layout"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:onClick="@{() -> clickListener.onClick(date)}">
 
     <TextView
       android:id="@+id/sleep_date"
@@ -28,7 +26,6 @@
       android:text="TextView"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent"
-      android:onClick="@{() -> clickListener.onClick()}"/>
+      app:layout_constraintTop_toTopOf="parent" />
   </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -11,7 +11,7 @@ class ResultsViewModel(val database: SleepPositionDao, application: Application)
     super.onCleared()
   }
 
-  val nights = database.getUniqueDates()
+  val dates = database.getUniqueDates()
 
 
 }
