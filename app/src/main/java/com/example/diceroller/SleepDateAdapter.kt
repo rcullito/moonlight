@@ -13,6 +13,10 @@ import androidx.recyclerview.widget.RecyclerView
  * to the RecyclerView such as where on the screen it was last drawn during scrolling.
  */
 
+class SleepNightListener(val clickListener: (night: String) -> Unit) {
+  fun onClick(night: String) = clickListener(night)
+}
+
 class SleepDateAdapter: RecyclerView.Adapter<SleepDateAdapter.ViewHolder>() {
   var data = listOf<String>()
       set(value) {
