@@ -1,6 +1,7 @@
 package com.example.diceroller
 
 import android.os.Bundle
+import android.text.Spanned
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +9,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Transformations
 import com.example.diceroller.database.SleepDatabase
 import com.example.diceroller.databinding.FragmentIndividualBinding
 
@@ -33,9 +35,7 @@ class IndividualFragment : Fragment() {
     val arguments = IndividualFragmentArgs.fromBundle(requireArguments())
     val date = arguments.date
 
-    Log.i("IndividualFragment", date)
-
-    val viewModelFactory = IndividualViewModelFactory(dataSource, application)
+    val viewModelFactory = IndividualViewModelFactory(dataSource, application, date)
     val individualViewModel: IndividualViewModel by activityViewModels({ viewModelFactory })
     binding.setLifecycleOwner(this)
     binding.individualViewModel = individualViewModel
