@@ -38,7 +38,8 @@ class ResultsFragment : Fragment() {
     binding.resultsViewModel = resultsViewModel
 
     val adapter = SleepDateAdapter(SleepNightListener {date ->
-      Toast.makeText(context, "${date}", Toast.LENGTH_LONG).show()
+      // Toast.makeText(context, "${date}", Toast.LENGTH_LONG).show()
+      resultsViewModel.onSleepDateClicked(date)
     })
 
     binding.sleepList.adapter = adapter
