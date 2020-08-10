@@ -11,7 +11,7 @@ class IndividualViewModel(val database: SleepPositionDao, application: Applicati
     super.onCleared()
   }
 
-  val positions = database.getSpecificDate("2020-08-06", "2020-08-08")
+  val positions = database.getSpecificDate("2020-08-09", "2020-08-09")
 
   val positionsString = Transformations.map(positions) {
     formatPosition(it)
