@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.example.diceroller.database.SleepDatabase
 import com.example.diceroller.databinding.FragmentResultsBinding
 
@@ -39,7 +40,7 @@ class ResultsFragment : Fragment() {
 
     val adapter = SleepDateAdapter(SleepNightListener {date ->
       // Toast.makeText(context, "${date}", Toast.LENGTH_LONG).show()
-      resultsViewModel.onSleepDateClicked(date)
+      this.findNavController().navigate(R.id.action_resultsFragment2_to_individualFragment)
     })
 
     binding.sleepList.adapter = adapter

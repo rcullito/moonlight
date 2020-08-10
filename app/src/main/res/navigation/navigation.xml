@@ -13,9 +13,18 @@
     android:id="@+id/resultsFragment2"
     android:name="com.example.diceroller.ResultsFragment"
     android:label="Past Sleep Nights"
-    tools:layout="@layout/fragment_results" />
+    tools:layout="@layout/fragment_results" >
+    <action
+      android:id="@+id/action_resultsFragment2_to_individualFragment"
+      app:destination="@id/individualFragment" />
+  </fragment>
   <fragment
     android:id="@+id/sensorFragment"
     android:name="com.example.diceroller.SensorFragment"
     android:label="Track" />
+  <fragment
+    android:id="@+id/individualFragment"
+    android:name="com.example.diceroller.IndividualFragment"
+    android:label="fragment_individual"
+    tools:layout="@layout/fragment_individual" />
 </navigation>
