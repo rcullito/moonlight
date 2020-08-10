@@ -26,5 +26,9 @@
     android:id="@+id/individualFragment"
     android:name="com.example.diceroller.IndividualFragment"
     android:label="fragment_individual"
-    tools:layout="@layout/fragment_individual" />
+    tools:layout="@layout/fragment_individual" >
+    <argument
+      android:name="date"
+      app:argType="string" />
+  </fragment>
 </navigation>
