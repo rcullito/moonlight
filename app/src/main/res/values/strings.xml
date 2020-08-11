@@ -1,8 +1,5 @@
 <resources>
-    <string name="app_name">Dice Roller</string>
+    <string name="app_name">Moonlight</string>
     <string name="roll">Roll</string>
     <string name="value_format">%1$.2f</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
