@@ -14,7 +14,19 @@ class IndividualViewModel(val database: SleepPositionDao, application: Applicati
     super.onCleared()
   }
 
-  val positionsString = "bob"
+  lateinit var positionsString: LiveData<Spanned>
+
+  fun getSpecificDate(date: String): LiveData<Spanned> {
+    var positions = database.getSpecificDate(date, date)
+
+    positionsString = Transformations.map(positions) {
+      formatPosition(it)
+    }
+
+    return positionsString
+  }
+
+
 
 }
 

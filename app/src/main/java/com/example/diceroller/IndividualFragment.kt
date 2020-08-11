@@ -38,6 +38,9 @@ class IndividualFragment : Fragment() {
     val viewModelFactory = IndividualViewModelFactory(dataSource, application)
     val individualViewModel: IndividualViewModel by activityViewModels({ viewModelFactory })
     binding.setLifecycleOwner(this)
+
+    individualViewModel.getSpecificDate(date)
+
     binding.individualViewModel = individualViewModel
 
     return binding.root
