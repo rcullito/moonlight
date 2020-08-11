@@ -8,17 +8,13 @@ import androidx.lifecycle.Transformations
 import com.example.diceroller.database.SleepPosition
 import com.example.diceroller.database.SleepPositionDao
 
-class IndividualViewModel(val database: SleepPositionDao, application: Application, date:String): AndroidViewModel(application) {
+class IndividualViewModel(val database: SleepPositionDao, application: Application): AndroidViewModel(application) {
 
   override fun onCleared() {
     super.onCleared()
   }
 
-  val positions = database.getSpecificDate(date, date)
-
-  val positionsString = Transformations.map(positions) {
-    formatPosition(it)
-  }
+  val positionsString = "bob"
 
 }
 

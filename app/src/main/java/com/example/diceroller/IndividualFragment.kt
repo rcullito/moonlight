@@ -35,7 +35,7 @@ class IndividualFragment : Fragment() {
     val arguments = IndividualFragmentArgs.fromBundle(requireArguments())
     val date = arguments.date
 
-    val viewModelFactory = IndividualViewModelFactory(dataSource, application, date)
+    val viewModelFactory = IndividualViewModelFactory(dataSource, application)
     val individualViewModel: IndividualViewModel by activityViewModels({ viewModelFactory })
     binding.setLifecycleOwner(this)
     binding.individualViewModel = individualViewModel
