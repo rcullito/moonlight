@@ -30,39 +30,27 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-      android:id="@+id/workStatus"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_marginTop="242dp"
-      android:layout_marginBottom="81dp"
-      android:text="@{status}"
-      app:layout_constraintBottom_toTopOf="@+id/start_work_button"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent"
-      tools:text="Work Status" />
 
     <Button
-      android:id="@+id/start_work_button"
+      android:id="@+id/start_service_button"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:text="Start Work"
-      android:visibility="invisible"
+      android:text="Start Tracking"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-      android:id="@+id/cancel_work_button"
+      android:id="@+id/cancel_service_button"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:text="Cancel Work"
-      android:visibility="invisible"
-      app:layout_constraintBottom_toBottomOf="parent"
+      android:layout_marginTop="56dp"
+      android:text="Stop Tracking"
       app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.0"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent" />
+      app:layout_constraintTop_toBottomOf="@id/start_service_button" />
 
 
   </androidx.constraintlayout.widget.ConstraintLayout>

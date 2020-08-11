@@ -7,15 +7,28 @@
 
   <fragment
     android:id="@+id/titleFragment3"
-    android:name="com.example.diceroller.TitleFragment"
-    android:label="TitleFragment" />
+    android:name="com.example.moonlight.TitleFragment"
+    android:label="Sleep Position Tracker" />
   <fragment
     android:id="@+id/resultsFragment2"
-    android:name="com.example.diceroller.ResultsFragment"
-    android:label="fragment_results"
-    tools:layout="@layout/fragment_results" />
+    android:name="com.example.moonlight.ResultsFragment"
+    android:label="Past Sleep Nights"
+    tools:layout="@layout/fragment_results" >
+    <action
+      android:id="@+id/action_resultsFragment2_to_individualFragment"
+      app:destination="@id/individualFragment" />
+  </fragment>
   <fragment
     android:id="@+id/sensorFragment"
-    android:name="com.example.diceroller.SensorFragment"
-    android:label="SensorFragment" />
+    android:name="com.example.moonlight.SensorFragment"
+    android:label="Track" />
+  <fragment
+    android:id="@+id/individualFragment"
+    android:name="com.example.moonlight.IndividualFragment"
+    android:label="Individual Recordings"
+    tools:layout="@layout/fragment_individual">
+    <argument
+      android:name="date"
+      app:argType="string" />
+  </fragment>
 </navigation>

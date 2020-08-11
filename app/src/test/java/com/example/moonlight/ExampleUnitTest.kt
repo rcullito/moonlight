@@ -1,4 +1,4 @@
-package com.example.diceroller
+package com.example.moonlight
 
 import org.junit.Test
 
