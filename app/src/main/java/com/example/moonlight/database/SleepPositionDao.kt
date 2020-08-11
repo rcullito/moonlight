@@ -1,10 +1,9 @@
-package com.example.diceroller.database
+package com.example.moonlight.database
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
-import java.sql.Date
 
 @Dao
 interface SleepPositionDao {

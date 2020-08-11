@@ -5,9 +5,9 @@
   <data>
     <variable
       name="date"
-      type="com.example.diceroller.database.SleepDate" />
+      type="com.example.moonlight.database.SleepDate" />
     <variable
-      name="clickListener" type="com.example.diceroller.SleepNightListener"/>
+      name="clickListener" type="com.example.moonlight.SleepNightListener"/>
   </data>
 
   <androidx.constraintlayout.widget.ConstraintLayout

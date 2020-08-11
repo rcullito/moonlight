@@ -1,4 +1,4 @@
-package com.example.diceroller
+package com.example.moonlight
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -15,8 +15,8 @@ import android.os.IBinder
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
-import com.example.diceroller.database.SleepDatabase
-import com.example.diceroller.database.SleepPosition
+import com.example.moonlight.database.SleepDatabase
+import com.example.moonlight.database.SleepPosition
 import kotlinx.coroutines.*
 
 class SensorService : Service(), SensorEventListener {

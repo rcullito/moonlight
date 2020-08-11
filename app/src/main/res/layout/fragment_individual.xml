@@ -7,7 +7,7 @@
   <data>
     <variable
       name="individualViewModel"
-      type="com.example.diceroller.IndividualViewModel" />
+      type="com.example.moonlight.IndividualViewModel" />
   </data>
 
   <androidx.constraintlayout.widget.ConstraintLayout

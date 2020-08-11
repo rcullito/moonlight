@@ -1,4 +1,4 @@
-package com.example.diceroller.database
+package com.example.moonlight.database
 
 import android.content.Context
 import androidx.room.Database

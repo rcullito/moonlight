@@ -1,11 +1,10 @@
-package com.example.diceroller
+package com.example.moonlight
 
-import android.content.res.Resources
 import android.os.Build
 import android.text.Html
 import android.text.Spanned
 import androidx.core.text.HtmlCompat
-import com.example.diceroller.database.SleepPosition
+import com.example.moonlight.database.SleepPosition
 import java.text.SimpleDateFormat
 import kotlin.math.abs
 

@@ -1,16 +1,13 @@
-package com.example.diceroller
+package com.example.moonlight
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.View
-import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
-import com.example.diceroller.databinding.ActivityMainBinding
+import com.example.moonlight.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 

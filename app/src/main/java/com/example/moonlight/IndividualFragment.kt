@@ -1,17 +1,14 @@
-package com.example.diceroller
+package com.example.moonlight
 
 import android.os.Bundle
-import android.text.Spanned
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Transformations
-import com.example.diceroller.database.SleepDatabase
-import com.example.diceroller.databinding.FragmentIndividualBinding
+import com.example.moonlight.database.SleepDatabase
+import com.example.moonlight.databinding.FragmentIndividualBinding
 
 
 class IndividualFragment : Fragment() {

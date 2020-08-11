@@ -1,23 +1,15 @@
-package com.example.diceroller
+package com.example.moonlight
 
 import android.app.Application
-import android.content.Context
-import android.content.Intent
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
-import android.hardware.SensorManager
 import android.util.Log
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import androidx.work.ExistingPeriodicWorkPolicy
-import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkInfo
 import androidx.work.WorkManager
-import com.example.diceroller.workers.SensorWorker
 import java.util.*
-import java.util.concurrent.TimeUnit
 
 class SensorViewModel(application: Application) : AndroidViewModel(application), SensorEventListener {
 

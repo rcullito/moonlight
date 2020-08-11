@@ -1,4 +1,4 @@
-package com.example.diceroller.workers
+package com.example.moonlight.workers
 
 import android.content.Context
 import android.hardware.Sensor
@@ -9,8 +9,8 @@ import android.os.PowerManager
 import android.util.Log
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
-import com.example.diceroller.database.SleepDatabase
-import com.example.diceroller.database.SleepPosition
+import com.example.moonlight.database.SleepDatabase
+import com.example.moonlight.database.SleepPosition
 import kotlinx.coroutines.*
 
 class SensorWorker(ctx: Context, params: WorkerParameters) : CoroutineWorker(ctx, params), SensorEventListener {

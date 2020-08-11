@@ -1,4 +1,4 @@
-package com.example.diceroller.database
+package com.example.moonlight.database
 
 data class SleepDate(
   var date: String

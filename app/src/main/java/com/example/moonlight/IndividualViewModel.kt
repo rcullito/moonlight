@@ -1,12 +1,11 @@
-package com.example.diceroller
+package com.example.moonlight
 
 import android.app.Application
 import android.text.Spanned
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
-import com.example.diceroller.database.SleepPosition
-import com.example.diceroller.database.SleepPositionDao
+import com.example.moonlight.database.SleepPositionDao
 
 class IndividualViewModel(val database: SleepPositionDao, application: Application): AndroidViewModel(application) {
 

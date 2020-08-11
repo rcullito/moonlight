@@ -1,9 +1,9 @@
-package com.example.diceroller
+package com.example.moonlight
 
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.diceroller.database.SleepPositionDao
+import com.example.moonlight.database.SleepPositionDao
 
 class IndividualViewModelFactory(private val dataSource: SleepPositionDao,
                               private val application: Application): ViewModelProvider.Factory {

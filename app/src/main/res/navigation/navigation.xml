@@ -7,11 +7,11 @@
 
   <fragment
     android:id="@+id/titleFragment3"
-    android:name="com.example.diceroller.TitleFragment"
+    android:name="com.example.moonlight.TitleFragment"
     android:label="Sleep Position Tracker" />
   <fragment
     android:id="@+id/resultsFragment2"
-    android:name="com.example.diceroller.ResultsFragment"
+    android:name="com.example.moonlight.ResultsFragment"
     android:label="Past Sleep Nights"
     tools:layout="@layout/fragment_results" >
     <action
@@ -20,11 +20,11 @@
   </fragment>
   <fragment
     android:id="@+id/sensorFragment"
-    android:name="com.example.diceroller.SensorFragment"
+    android:name="com.example.moonlight.SensorFragment"
     android:label="Track" />
   <fragment
     android:id="@+id/individualFragment"
-    android:name="com.example.diceroller.IndividualFragment"
+    android:name="com.example.moonlight.IndividualFragment"
     android:label="Individual Recordings"
     tools:layout="@layout/fragment_individual">
     <argument

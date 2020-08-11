@@ -1,9 +1,8 @@
-package com.example.diceroller
+package com.example.moonlight
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
-import androidx.navigation.Navigation
-import com.example.diceroller.database.SleepPositionDao
+import com.example.moonlight.database.SleepPositionDao
 
 class ResultsViewModel(val database: SleepPositionDao, application: Application): AndroidViewModel(application) {
 

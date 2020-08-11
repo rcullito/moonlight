@@ -1,12 +1,11 @@
-package com.example.diceroller
+package com.example.moonlight
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.diceroller.database.SleepDate
-import com.example.diceroller.databinding.ListItemSleepNightBinding
+import com.example.moonlight.database.SleepDate
+import com.example.moonlight.databinding.ListItemSleepNightBinding
 
 /**
  * ViewHolder that holds a single [TextView].
