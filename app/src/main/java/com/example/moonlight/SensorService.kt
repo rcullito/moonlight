@@ -18,6 +18,7 @@ import androidx.core.content.ContextCompat
 import com.example.moonlight.database.SleepDatabase
 import com.example.moonlight.database.SleepPosition
 import kotlinx.coroutines.*
+import java.util.concurrent.TimeUnit
 
 class SensorService : Service(), SensorEventListener {
   private val CHANNEL_ID = "ForegroundService Kotlin"
@@ -118,10 +119,12 @@ class SensorService : Service(), SensorEventListener {
       } else if (event.sensor.type == Sensor.TYPE_MAGNETIC_FIELD) {
         System.arraycopy(event.values, 0, magnetometerReading, 0, magnetometerReading.size)
       }
-      updateOrientationAngles(accelerometerReading, magnetometerReading)
+
+      var timeInMillis = TimeUnit.NANOSECONDS.toMillis(event.timestamp)
+      updateOrientationAngles(accelerometerReading, magnetometerReading, timeInMillis)
   }
 
-  fun updateOrientationAngles(bananas: FloatArray, coconuts: FloatArray) {
+  fun updateOrientationAngles(bananas: FloatArray, coconuts: FloatArray, eventTimestamp: Long) {
     SensorManager.getRotationMatrix(rotationMatrix, null, bananas, coconuts)
     SensorManager.getOrientation(rotationMatrix, orientationAngles)
     var azimuth = orientationAngles.get(0)
@@ -130,16 +133,16 @@ class SensorService : Service(), SensorEventListener {
 
     // cross yourself
     if (azimuth.toDouble() != 0.0 || pitch.toDouble() != 0.0 || roll.toDouble() != 0.0) {
-      var currentTime = System.currentTimeMillis()
+      var currentEventTime = eventTimestamp
 
-      if ((currentTime - lastUpdate) > (30000 * 1)) {
+      if ((currentEventTime - lastUpdate) > (30000 * 1)) {
 
         Log.i("SensorWorker/azimuth", azimuth.toString())
         Log.i("SensorWorker/pitch", pitch.toString())
         Log.i("SensorWorker/roll", roll.toString())
 
         // write to database
-        val position = SleepPosition(pitch = pitch, roll = roll)
+        val position = SleepPosition(pitch = pitch, roll = roll, sleepPositionTime = eventTimestamp)
 
         workerScope.launch {
 
@@ -147,7 +150,7 @@ class SensorService : Service(), SensorEventListener {
             updatePositionInDb(position)
           }
         }
-        lastUpdate = currentTime
+        lastUpdate = currentEventTime
       }
     }
   }

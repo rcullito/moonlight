@@ -74,7 +74,7 @@ class SensorWorker(ctx: Context, params: WorkerParameters) : CoroutineWorker(ctx
     if (azimuth.toDouble() != 0.0 || pitch.toDouble() != 0.0 || roll.toDouble() != 0.0) {
 
       // write to database
-      val position = SleepPosition(pitch = pitch, roll = roll)
+      val position = SleepPosition(pitch = pitch, roll = roll, sleepPositionTime = System.currentTimeMillis())
 
       workerScope.launch {
 

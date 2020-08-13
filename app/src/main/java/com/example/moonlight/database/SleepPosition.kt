@@ -11,7 +11,7 @@ data class SleepPosition(
   var sleepPositionId: Long = 0L,
 
   @ColumnInfo(name = "sleep_position_timestamp")
-  val sleepPositionTime: Long = System.currentTimeMillis(),
+  val sleepPositionTime: Long,
 
   @ColumnInfo(name = "pitch")
   var pitch: Float,
