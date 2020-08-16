@@ -4,8 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.moonlight.database.SleepDate
-import com.example.moonlight.databinding.ListItemSleepNightBinding
+import com.example.moonlight.database.SleepPosition
+import com.example.moonlight.databinding.ListItemSleepPositionBinding
 
 /**
  * ViewHolder that holds a single [TextView].
@@ -15,7 +15,7 @@ import com.example.moonlight.databinding.ListItemSleepNightBinding
  */
 
 class IndividualPositionAdapter(): RecyclerView.Adapter<IndividualPositionAdapter.ViewHolder>() {
-  var data = listOf<SleepDate>()
+  var data = listOf<SleepPosition>()
     set(value) {
       field = value
       notifyDataSetChanged()
@@ -34,16 +34,16 @@ class IndividualPositionAdapter(): RecyclerView.Adapter<IndividualPositionAdapte
     holder.bind(item)
   }
 
-  class ViewHolder private constructor(val binding: ListItemSleepNightBinding): RecyclerView.ViewHolder(binding.root) {
-    fun bind(item: SleepDate) {
-      binding.date = item
+  class ViewHolder private constructor(val binding: ListItemSleepPositionBinding): RecyclerView.ViewHolder(binding.root) {
+    fun bind(item: SleepPosition) {
+      binding.position = item
       binding.executePendingBindings()
     }
 
     companion object {
       fun from(parent: ViewGroup): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val binding = ListItemSleepNightBinding.inflate(layoutInflater, parent, false)
+        val binding = ListItemSleepPositionBinding.inflate(layoutInflater, parent, false)
 
         return ViewHolder(binding)
       }
