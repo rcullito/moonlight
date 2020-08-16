@@ -123,7 +123,6 @@ class SensorService : Service(), SensorEventListener {
 
       // log different time capabilities here
       var elapsedRealTimeMillis = SystemClock.elapsedRealtime() // Returns milliseconds since boot, including time spent in sleep.
-      Log.i("elapsedRealTime", elapsedRealTimeMillis.toString())
 
       var eventElapsedRealTimeMillis = TimeUnit.NANOSECONDS.toMillis(event.timestamp) // event.timestamp will return nanoseconds since boot, including time spent in sleep.
 
