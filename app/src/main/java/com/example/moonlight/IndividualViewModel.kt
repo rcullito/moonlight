@@ -4,7 +4,7 @@ import android.app.Application
 import android.text.Spanned
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.Transformations
+import com.example.moonlight.database.SleepPosition
 import com.example.moonlight.database.SleepPositionDao
 
 class IndividualViewModel(val database: SleepPositionDao, application: Application): AndroidViewModel(application) {
@@ -13,16 +13,11 @@ class IndividualViewModel(val database: SleepPositionDao, application: Applicati
     super.onCleared()
   }
 
-  lateinit var positionsString: LiveData<Spanned>
+  lateinit var positions: LiveData<List<SleepPosition>>
 
-  fun getSpecificDate(date: String): LiveData<Spanned> {
-    var positions = database.getSpecificDate(date, date)
-
-    positionsString = Transformations.map(positions) {
-      formatPosition(it)
-    }
-
-    return positionsString
+  fun getSpecificDate(date: String): LiveData<List<SleepPosition>> {
+    positions = database.getSpecificDate(date, date)
+    return positions
   }
 
 

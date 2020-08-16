@@ -128,7 +128,7 @@ class SensorService : Service(), SensorEventListener {
 
       //  evaluate the difference between now() and the event with the shared backdrop of milliseconds since boot, including sleep
       var timeSinceEventMillis = elapsedRealTimeMillis - eventElapsedRealTimeMillis
-      Log.i("timeSinceEvent", timeSinceEventMillis.toString())
+      // Log.i("timeSinceEvent", timeSinceEventMillis.toString())
 
       var currentClockTime = System.currentTimeMillis()
 
