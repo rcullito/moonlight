@@ -122,11 +122,20 @@ class SensorService : Service(), SensorEventListener {
       }
 
       // log different time capabilities here
-      var elapsedRealTime = SystemClock.elapsedRealtime() // Returns milliseconds since boot, including time spent in sleep.
-      Log.i("elapsedRealTime", elapsedRealTime.toString())
+      var elapsedRealTimeMillis = SystemClock.elapsedRealtime() // Returns milliseconds since boot, including time spent in sleep.
+      Log.i("elapsedRealTime", elapsedRealTimeMillis.toString())
 
-      var timeInMillis = TimeUnit.NANOSECONDS.toMillis(event.timestamp)
-      updateOrientationAngles(accelerometerReading, magnetometerReading, timeInMillis)
+      var eventElapsedRealTimeMillis = TimeUnit.NANOSECONDS.toMillis(event.timestamp) // event.timestamp will return nanoseconds since boot, including time spent in sleep.
+
+
+      var timeSinceEventMillis = elapsedRealTimeMillis - eventElapsedRealTimeMillis
+      Log.i("timeSinceEvent", timeSinceEventMillis.toString())
+
+      var currentClockTime = System.currentTimeMillis()
+
+      var eventClockTime = currentClockTime - timeSinceEventMillis
+
+      updateOrientationAngles(accelerometerReading, magnetometerReading, eventClockTime)
   }
 
   fun updateOrientationAngles(bananas: FloatArray, coconuts: FloatArray, eventTimestamp: Long) {
