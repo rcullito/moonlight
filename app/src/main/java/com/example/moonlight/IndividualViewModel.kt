@@ -16,8 +16,7 @@ class IndividualViewModel(val database: SleepPositionDao, application: Applicati
   lateinit var positions: LiveData<List<SleepPosition>>
 
   fun getSpecificDate(date: String): LiveData<List<SleepPosition>> {
-    var positions = database.getSpecificDate(date, date)
-
+    positions = database.getSpecificDate(date, date)
     return positions
   }
 
