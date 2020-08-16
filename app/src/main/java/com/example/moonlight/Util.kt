@@ -50,29 +50,26 @@ fun convertLongToDateString(systemTime: Long): String {
     .format(systemTime).toString()
 }
 
-fun formatPosition(positions: List<SleepPosition>): Spanned {
-  val sb = StringBuilder()
+fun formatPosition(position: SleepPosition): Spanned {
+  val sb = java.lang.StringBuilder()
   sb.apply {
-    append("<h3>Here are your recent recorded positions</h3>")
-    positions.forEach {
-      append("<br>")
-      append("<b>Time:</b>")
-      append("\t${convertLongToDateString(it.sleepPositionTime)}")
-      append(" ")
+    append("<b>Time:</b>")
+    append("\t${convertLongToDateString(position.sleepPositionTime)}")
+    append(" ")
     //  append("<b>Pitch: </b>")
     //  append("%.2f".format(it.pitch))
-     // append(" ")
-      append("<b>Roll: </b>")
-      append("%.2f".format(it.roll))
-      append(" ")
-      append("<b>Position: <b>")
-      append("\t${convertNumericQualityToString(it.roll, it.pitch)}<br>")
-    }
-  }
+    // append(" ")
+    append("<b>Roll: </b>")
+    append("%.2f".format(position.roll))
+    append(" ")
+    append("<b>Position: <b>")
+    append("\t${convertNumericQualityToString(position.roll, position.pitch)}<br>")
 
-  if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-    return Html.fromHtml(sb.toString(), Html.FROM_HTML_MODE_LEGACY)
-  } else {
-    return HtmlCompat.fromHtml(sb.toString(), HtmlCompat.FROM_HTML_MODE_LEGACY)
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+      return Html.fromHtml(sb.toString(), Html.FROM_HTML_MODE_LEGACY)
+    } else {
+      return HtmlCompat.fromHtml(sb.toString(), HtmlCompat.FROM_HTML_MODE_LEGACY)
+    }
+
   }
 }

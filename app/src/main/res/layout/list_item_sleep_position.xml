@@ -4,8 +4,8 @@
 
   <data>
     <variable
-      name="position"
-      type="com.example.moonlight.database.SleepPosition" />
+      name="positionString"
+      type="android.text.Spanned" />
   </data>
 
   <androidx.constraintlayout.widget.ConstraintLayout
@@ -20,7 +20,7 @@
       android:layout_marginStart="16dp"
       android:layout_marginTop="8dp"
       android:layout_marginBottom="8dp"
-      android:text="placeholder"
+      android:text="@{positionString}"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent" />
