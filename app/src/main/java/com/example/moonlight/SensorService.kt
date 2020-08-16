@@ -12,6 +12,7 @@ import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.os.Build
 import android.os.IBinder
+import android.os.SystemClock
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
@@ -119,6 +120,10 @@ class SensorService : Service(), SensorEventListener {
       } else if (event.sensor.type == Sensor.TYPE_MAGNETIC_FIELD) {
         System.arraycopy(event.values, 0, magnetometerReading, 0, magnetometerReading.size)
       }
+
+      // log different time capabilities here
+      var elapsedRealTime = SystemClock.elapsedRealtime() // Returns milliseconds since boot, including time spent in sleep.
+      Log.i("elapsedRealTime", elapsedRealTime.toString())
 
       var timeInMillis = TimeUnit.NANOSECONDS.toMillis(event.timestamp)
       updateOrientationAngles(accelerometerReading, magnetometerReading, timeInMillis)
