@@ -127,7 +127,7 @@ class SensorService : Service(), SensorEventListener {
 
       var eventElapsedRealTimeMillis = TimeUnit.NANOSECONDS.toMillis(event.timestamp) // event.timestamp will return nanoseconds since boot, including time spent in sleep.
 
-
+      //  evaluate the difference between now() and the event with the shared backdrop of milliseconds since boot, including sleep
       var timeSinceEventMillis = elapsedRealTimeMillis - eventElapsedRealTimeMillis
       Log.i("timeSinceEvent", timeSinceEventMillis.toString())
 
