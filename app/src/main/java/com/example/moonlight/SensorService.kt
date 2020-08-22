@@ -148,7 +148,7 @@ class SensorService : Service(), SensorEventListener {
     if (azimuth.toDouble() != 0.0 || pitch.toDouble() != 0.0 || roll.toDouble() != 0.0) {
       var currentEventTime = eventTimestamp
 
-      if ((currentEventTime - lastUpdate) > (30000 * 1)) {
+      if ((currentEventTime - lastUpdate) > (1000)) {
 
         Log.i("SensorWorker/azimuth", azimuth.toString())
         Log.i("SensorWorker/pitch", pitch.toString())

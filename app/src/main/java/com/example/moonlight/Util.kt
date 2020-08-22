@@ -46,7 +46,7 @@ fun convertNumericQualityToString(roll: Float, pitch: Float): String {
 
 fun convertLongToDateString(systemTime: Long): String {
   // return SimpleDateFormat("EEEE MMM-dd-yyyy' 'HH:mm")
-  return SimpleDateFormat("MMM-dd' 'HH:mm")
+  return SimpleDateFormat("MMM-dd' 'HH:mm:ss")
     .format(systemTime).toString()
 }
 
