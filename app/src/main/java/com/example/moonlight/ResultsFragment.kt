@@ -50,6 +50,8 @@ class ResultsFragment : Fragment() {
       }
     })
 
+    resultsViewModel.getMarsRealEstateProperties()
+
 
 
     return binding.root

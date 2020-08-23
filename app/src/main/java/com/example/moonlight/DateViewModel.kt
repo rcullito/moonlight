@@ -13,17 +13,4 @@ class DateViewModel(val database: SleepPositionDao, application: Application): A
 
   private val dates = database.getUniqueDates()
 
-  private fun getMarsRealEstateProperties() {
-    DaphneApi.retrofitService.getProperties().enqueue(object : Callback<String> {
-      override fun onFailure(call: Call<String>, t: Throwable) {
-        val marsError = "Failure: " + t.message
-        Log.i("Mars", marsError)
-      }
-
-      override fun onResponse(call: Call<String>, response: Response<String>) {
-        Log.i("Mars", response.body())
-      }
-    })
-  }
-
 }
