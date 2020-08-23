@@ -1,4 +1,4 @@
-package com.example.moonlight
+package com.example.moonlight.individual
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,6 +6,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moonlight.database.SleepPosition
 import com.example.moonlight.databinding.ListItemSleepPositionBinding
+import com.example.moonlight.formatPosition
 
 /**
  * ViewHolder that holds a single [TextView].
@@ -26,7 +27,9 @@ class IndividualPositionAdapter(): RecyclerView.Adapter<IndividualPositionAdapte
   }
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-    return ViewHolder.from(parent)
+    return ViewHolder.from(
+      parent
+    )
   }
 
   override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -46,7 +49,9 @@ class IndividualPositionAdapter(): RecyclerView.Adapter<IndividualPositionAdapte
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding = ListItemSleepPositionBinding.inflate(layoutInflater, parent, false)
 
-        return ViewHolder(binding)
+        return ViewHolder(
+          binding
+        )
       }
     }
   }

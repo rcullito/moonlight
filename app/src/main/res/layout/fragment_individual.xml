@@ -7,7 +7,7 @@
   <data>
     <variable
       name="individualViewModel"
-      type="com.example.moonlight.IndividualViewModel" />
+      type="com.example.moonlight.individual.IndividualViewModel" />
   </data>
 
   <androidx.constraintlayout.widget.ConstraintLayout

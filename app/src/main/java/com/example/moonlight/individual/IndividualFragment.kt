@@ -1,4 +1,4 @@
-package com.example.moonlight
+package com.example.moonlight.individual
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,6 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import com.example.moonlight.*
 import com.example.moonlight.database.SleepDatabase
 import com.example.moonlight.databinding.FragmentIndividualBinding
 
@@ -26,14 +27,22 @@ class IndividualFragment : Fragment() {
     savedInstanceState: Bundle?
   ): View? {
 
-    binding = DataBindingUtil.inflate<FragmentIndividualBinding>(inflater, R.layout.fragment_individual, container, false)
+    binding = DataBindingUtil.inflate<FragmentIndividualBinding>(inflater,
+      R.layout.fragment_individual, container, false)
     val application = requireNotNull(this.activity).application
     val dataSource = SleepDatabase.getInstance(application).sleepPositionDao
 
-    val arguments = IndividualFragmentArgs.fromBundle(requireArguments())
+    val arguments =
+      IndividualFragmentArgs.fromBundle(
+        requireArguments()
+      )
     val date = arguments.date
 
-    val viewModelFactory = IndividualViewModelFactory(dataSource, application)
+    val viewModelFactory =
+      IndividualViewModelFactory(
+        dataSource,
+        application
+      )
     val individualViewModel: IndividualViewModel by activityViewModels({ viewModelFactory })
     binding.setLifecycleOwner(this)
 

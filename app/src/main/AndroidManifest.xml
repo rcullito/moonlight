@@ -20,7 +20,7 @@
       </intent-filter>
     </activity>
 
-    <service android:name="com.example.moonlight.SensorService">
+    <service android:name="com.example.moonlight.sensor.SensorService">
     </service>
   </application>
 </manifest>

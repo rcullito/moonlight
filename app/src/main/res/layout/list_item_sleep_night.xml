@@ -7,7 +7,7 @@
       name="date"
       type="com.example.moonlight.database.SleepDate" />
     <variable
-      name="clickListener" type="com.example.moonlight.SleepNightListener"/>
+      name="clickListener" type="com.example.moonlight.dates.SleepNightListener"/>
   </data>
 
   <androidx.constraintlayout.widget.ConstraintLayout

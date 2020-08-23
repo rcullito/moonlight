@@ -1,4 +1,4 @@
-package com.example.moonlight
+package com.example.moonlight.sensor
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -16,6 +16,7 @@ import android.os.SystemClock
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
+import com.example.moonlight.MainActivity
 import com.example.moonlight.database.SleepDatabase
 import com.example.moonlight.database.SleepPosition
 import kotlinx.coroutines.*

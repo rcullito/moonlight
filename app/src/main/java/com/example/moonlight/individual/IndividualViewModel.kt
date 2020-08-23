@@ -1,4 +1,4 @@
-package com.example.moonlight
+package com.example.moonlight.individual
 
 import android.app.Application
 import android.text.Spanned

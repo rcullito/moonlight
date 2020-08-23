@@ -1,4 +1,4 @@
-package com.example.moonlight
+package com.example.moonlight.dates
 
 import android.app.Application
 import androidx.lifecycle.ViewModel
@@ -10,7 +10,10 @@ class ResultsViewModelFactory(private val dataSource: SleepPositionDao,
   @Suppress("unchecked_cast")
   override fun <T : ViewModel?> create(modelClass: Class<T>): T {
     if (modelClass.isAssignableFrom(ResultsViewModel::class.java)) {
-      return ResultsViewModel(dataSource, application) as T
+      return ResultsViewModel(
+          dataSource,
+          application
+      ) as T
     }
     throw IllegalArgumentException("Unknown ViewModel class")
   }

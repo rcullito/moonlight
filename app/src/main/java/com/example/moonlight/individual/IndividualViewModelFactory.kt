@@ -1,4 +1,4 @@
-package com.example.moonlight
+package com.example.moonlight.individual
 
 import android.app.Application
 import androidx.lifecycle.ViewModel
@@ -10,7 +10,10 @@ class IndividualViewModelFactory(private val dataSource: SleepPositionDao,
   @Suppress("unchecked_cast")
   override fun <T : ViewModel?> create(modelClass: Class<T>): T {
     if (modelClass.isAssignableFrom(IndividualViewModel::class.java)) {
-      return IndividualViewModel(dataSource, application) as T
+      return IndividualViewModel(
+          dataSource,
+          application
+      ) as T
     }
     throw IllegalArgumentException("Unknown ViewModel class")
   }
