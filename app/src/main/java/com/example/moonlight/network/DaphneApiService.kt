@@ -1,6 +1,6 @@
 package com.example.moonlight.network
 
-/*
+
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.scalars.ScalarsConverterFactory
@@ -18,10 +18,8 @@ interface DaphneApiService {
   fun getProperties(): Call<String>
 }
 
-object MarsApi {
+object DaphneApi {
   val retrofitService: DaphneApiService by lazy {
     retrofit.create(DaphneApiService::class.java)
   }
 }
-
- */
