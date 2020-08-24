@@ -10,10 +10,9 @@ import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
-import android.os.Build
-import android.os.IBinder
-import android.os.SystemClock
+import android.os.*
 import android.util.Log
+import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
 import com.example.moonlight.MainActivity
@@ -21,6 +20,7 @@ import com.example.moonlight.database.SleepDatabase
 import com.example.moonlight.database.SleepPosition
 import kotlinx.coroutines.*
 import java.util.concurrent.TimeUnit
+import kotlin.math.abs
 
 class SensorService : Service(), SensorEventListener {
   private val CHANNEL_ID = "ForegroundService Kotlin"
@@ -138,6 +138,7 @@ class SensorService : Service(), SensorEventListener {
       updateOrientationAngles(accelerometerReading, magnetometerReading, eventClockTime)
   }
 
+  @RequiresApi(Build.VERSION_CODES.O)
   fun updateOrientationAngles(bananas: FloatArray, coconuts: FloatArray, eventTimestamp: Long) {
     SensorManager.getRotationMatrix(rotationMatrix, null, bananas, coconuts)
     SensorManager.getOrientation(rotationMatrix, orientationAngles)
@@ -154,6 +155,12 @@ class SensorService : Service(), SensorEventListener {
         Log.i("SensorWorker/azimuth", azimuth.toString())
         Log.i("SensorWorker/pitch", pitch.toString())
         Log.i("SensorWorker/roll", roll.toString())
+
+        if (abs(roll.toDouble()) < 2.34 || abs(roll.toDouble()) > 2.75) {
+          val vibrator = this.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+          val effect: VibrationEffect = VibrationEffect.createOneShot(1000, VibrationEffect.DEFAULT_AMPLITUDE)
+          vibrator.vibrate(effect)
+        }
 
         // write to database
         val position = SleepPosition(pitch = pitch, roll = roll, sleepPositionTime = eventTimestamp)
