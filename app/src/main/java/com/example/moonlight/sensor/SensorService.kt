@@ -33,6 +33,7 @@ class SensorService : Service(), SensorEventListener {
   private var workerJob = Job()
   private val workerScope = CoroutineScope(Dispatchers.Default + workerJob)
   private lateinit var database: SleepDatabase
+  lateinit var wakelock: PowerManager.WakeLock
 
   companion object {
     fun startService(context: Context, message: String) {
@@ -69,6 +70,8 @@ class SensorService : Service(), SensorEventListener {
     super.onDestroy()
     Log.i("SensorService", "unregistering sensor listener")
     sensorManager.unregisterListener(this)
+
+    wakelock.release()
   }
 
   override fun onCreate() {
@@ -97,6 +100,13 @@ class SensorService : Service(), SensorEventListener {
         0
       )
     }
+
+    wakelock =
+      (getSystemService(Context.POWER_SERVICE) as PowerManager).run {
+        newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "MyApp::MyWakelockTag").apply {
+          acquire()
+        }
+      }
 
 
   }
