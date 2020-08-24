@@ -85,7 +85,8 @@ class SensorService : Service(), SensorEventListener {
         this,
         accelerometer,
         SensorManager.SENSOR_DELAY_NORMAL,
-        SensorManager.SENSOR_DELAY_NORMAL
+        // When maxReportLatencyUs is 0 it requires the events to be delivered as soon as possible
+        0
       )
     }
     sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD).also { magneticField ->
@@ -93,7 +94,7 @@ class SensorService : Service(), SensorEventListener {
         this,
         magneticField,
         SensorManager.SENSOR_DELAY_NORMAL,
-        SensorManager.SENSOR_DELAY_NORMAL
+        0
       )
     }
 
@@ -146,6 +147,12 @@ class SensorService : Service(), SensorEventListener {
     var pitch = orientationAngles.get(1)
     var roll = orientationAngles.get(2)
 
+    if (abs(roll.toDouble()) < 2.34 || abs(roll.toDouble()) > 2.75) {
+      val vibrator = this.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+      val effect: VibrationEffect = VibrationEffect.createOneShot(1000, VibrationEffect.DEFAULT_AMPLITUDE)
+      vibrator.vibrate(effect)
+    }
+
     // cross yourself
     if (azimuth.toDouble() != 0.0 || pitch.toDouble() != 0.0 || roll.toDouble() != 0.0) {
       var currentEventTime = eventTimestamp
@@ -155,12 +162,6 @@ class SensorService : Service(), SensorEventListener {
         Log.i("SensorWorker/azimuth", azimuth.toString())
         Log.i("SensorWorker/pitch", pitch.toString())
         Log.i("SensorWorker/roll", roll.toString())
-
-        if (abs(roll.toDouble()) < 2.34 || abs(roll.toDouble()) > 2.75) {
-          val vibrator = this.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
-          val effect: VibrationEffect = VibrationEffect.createOneShot(1000, VibrationEffect.DEFAULT_AMPLITUDE)
-          vibrator.vibrate(effect)
-        }
 
         // write to database
         val position = SleepPosition(pitch = pitch, roll = roll, sleepPositionTime = eventTimestamp)
