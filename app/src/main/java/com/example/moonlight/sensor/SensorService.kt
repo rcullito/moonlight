@@ -157,7 +157,7 @@ class SensorService : Service(), SensorEventListener {
     var pitch = orientationAngles.get(1)
     var roll = orientationAngles.get(2)
 
-    if (abs(roll.toDouble()) < 2.34 || abs(roll.toDouble()) > 2.75) {
+    if (abs(roll.toDouble()) < 2.34) {
       val vibrator = this.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
       val effect: VibrationEffect = VibrationEffect.createOneShot(1000, VibrationEffect.DEFAULT_AMPLITUDE)
       vibrator.vibrate(effect)
