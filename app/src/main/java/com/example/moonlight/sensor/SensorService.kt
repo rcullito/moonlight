@@ -1,9 +1,6 @@
 package com.example.moonlight.sensor
 
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.app.PendingIntent
-import android.app.Service
+import android.app.*
 import android.content.Context
 import android.content.Intent
 import android.hardware.Sensor
@@ -16,6 +13,7 @@ import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
 import com.example.moonlight.MainActivity
+import com.example.moonlight.R
 import com.example.moonlight.database.SleepDatabase
 import com.example.moonlight.database.SleepPosition
 import kotlinx.coroutines.*
@@ -46,6 +44,7 @@ class SensorService : Service(), SensorEventListener {
       context.stopService(stopIntent)
     }
   }
+  @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
   override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
     //do heavy work on a background thread
     val input = intent?.getStringExtra("inputExtra")
@@ -55,11 +54,22 @@ class SensorService : Service(), SensorEventListener {
       this,
       0, notificationIntent, 0
     )
+
+
+
     val notification = NotificationCompat.Builder(this, CHANNEL_ID)
       .setContentTitle("Foreground Service Kotlin Example")
+      .setSmallIcon(R.drawable.ic_stat_player)
+      // Add media control buttons that invoke intents in your media service
+      // TODO need to make an intent for stopping the service
+      // .addAction(R.drawable.ic_pause, "Pause", pausePendingIntent) // #1
+      .addAction(R.drawable.ic_pause_black_24dp, "Pause", pendingIntent) // #1
+      // Apply the media style template
       .setContentText(input)
-      .setContentIntent(pendingIntent)
+      .setStyle(androidx.media.app.NotificationCompat.MediaStyle())
       .build()
+
+
     startForeground(1, notification)
     //stopSelf();
     // TODO revisit what should go here
