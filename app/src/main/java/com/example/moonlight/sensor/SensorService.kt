@@ -58,15 +58,13 @@ class SensorService : Service(), SensorEventListener {
 
 
     val notification = NotificationCompat.Builder(this, CHANNEL_ID)
+      .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
       .setContentTitle("Foreground Service Kotlin Example")
-      .setSmallIcon(R.drawable.ic_stat_player)
-      // Add media control buttons that invoke intents in your media service
-      // TODO need to make an intent for stopping the service
-      // .addAction(R.drawable.ic_pause, "Pause", pausePendingIntent) // #1
-      .addAction(R.drawable.ic_pause_black_24dp, "Pause", pendingIntent) // #1
-      // Apply the media style template
       .setContentText(input)
-      .setStyle(androidx.media.app.NotificationCompat.MediaStyle())
+      .setSmallIcon(R.drawable.ic_stat_player)
+      .addAction(R.drawable.ic_pause_black_24dp, "Pause", pendingIntent) // #0
+      .setStyle(androidx.media.app.NotificationCompat.MediaStyle()
+        .setShowActionsInCompactView(0))
       .build()
 
 
