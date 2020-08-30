@@ -187,7 +187,7 @@ class SensorService : Service(), SensorEventListener {
     }
   }
 
-  private suspend fun updatePositionInDb(position:SleepPosition) {
+  private fun updatePositionInDb(position:SleepPosition) {
     database.sleepPositionDao.insert(position)
   }
 }
