@@ -54,7 +54,10 @@ class SensorService : Service(), SensorEventListener {
       // we now need to decouple these 2 things as we'd like to have the foreground service running
       // without the phone vibrating
       if(intent.action.equals("STOP"))
-        stopSelf();
+        tearDownListenerAndAssoc();
+
+      if(intent.action.equals("START"))
+        fireUpAndAssoc();
     }
 
 
@@ -66,14 +69,21 @@ class SensorService : Service(), SensorEventListener {
       0, notificationIntent, PendingIntent.FLAG_CANCEL_CURRENT
     )
 
+    val notification2Intent = Intent(this, SensorService::class.java).setAction("START")
+    val playPendingIntent = PendingIntent.getService(
+      this,
+      0, notification2Intent, PendingIntent.FLAG_CANCEL_CURRENT
+    )
+
 
 
     val notification = NotificationCompat.Builder(this, CHANNEL_ID)
       .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
-      .setContentTitle("Foreground Service Kotlin Example")
+      .setContentTitle("Vibrate When Outside of Desired Range")
       .setContentText(input)
       .setSmallIcon(R.drawable.ic_stat_player)
-      .addAction(R.drawable.ic_pause_black_24dp, "Pause", pendingIntent) // #0
+      .addAction(R.drawable.ic_play_arrow_black_24dp, "Play", playPendingIntent) // #0
+      .addAction(R.drawable.ic_pause_black_24dp, "Pause", pendingIntent) // #1
       .setStyle(androidx.media.app.NotificationCompat.MediaStyle()
         .setShowActionsInCompactView(0))
       .build()
@@ -85,17 +95,24 @@ class SensorService : Service(), SensorEventListener {
     return START_STICKY
   }
 
-  override fun onDestroy() {
-    super.onDestroy()
+  fun tearDownListenerAndAssoc() {
     Log.i("SensorService", "unregistering sensor listener")
     sensorManager.unregisterListener(this)
 
     wakelock.release()
   }
 
+  override fun onDestroy() {
+    super.onDestroy()
+    tearDownListenerAndAssoc()
+  }
+
   override fun onCreate() {
     super.onCreate()
+    fireUpAndAssoc()
+  }
 
+  fun fireUpAndAssoc() {
     database = SleepDatabase.getInstance(applicationContext)
 
     Log.i("SensorService", "oncreate that we just put in place")
@@ -126,8 +143,6 @@ class SensorService : Service(), SensorEventListener {
           acquire()
         }
       }
-
-
   }
 
   override fun onBind(intent: Intent): IBinder? {
