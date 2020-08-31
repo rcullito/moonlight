@@ -50,6 +50,9 @@ class SensorService : Service(), SensorEventListener {
 
 
     if (intent != null) {
+      // TODO keep the service running but remove the listener
+      // we now need to decouple these 2 things as we'd like to have the foreground service running
+      // without the phone vibrating
       if(intent.action.equals("STOP"))
         stopSelf();
     }
