@@ -53,29 +53,39 @@ class SensorService : Service(), SensorEventListener {
       // TODO keep the service running but remove the listener
       // we now need to decouple these 2 things as we'd like to have the foreground service running
       // without the phone vibrating
-      if(intent.action.equals("STOP"))
+      if(intent.action.equals("PAUSE"))
         tearDownListenerAndAssoc();
 
       if(intent.action.equals("START"))
         fireUpAndAssoc();
+
+      if(intent.action.equals("STOP"))
+        stopSelf();
     }
 
 
     val input = intent?.getStringExtra("inputExtra")
     createNotificationChannel()
-    val notificationIntent = Intent(this, SensorService::class.java).setAction("STOP")
-    val pendingIntent = PendingIntent.getService(
+
+    val pauseNotificationIntent = Intent(this, SensorService::class.java).setAction("PAUSE")
+    // TODO ripe for HO function to enclose over everything that is not the individual notificationIntent
+    val pausePendingIntent = PendingIntent.getService(
       this,
-      0, notificationIntent, PendingIntent.FLAG_CANCEL_CURRENT
+      0, pauseNotificationIntent, PendingIntent.FLAG_CANCEL_CURRENT
     )
 
-    val notification2Intent = Intent(this, SensorService::class.java).setAction("START")
+    val startNotificationIntent = Intent(this, SensorService::class.java).setAction("START")
     val playPendingIntent = PendingIntent.getService(
       this,
-      0, notification2Intent, PendingIntent.FLAG_CANCEL_CURRENT
+      0, startNotificationIntent, PendingIntent.FLAG_CANCEL_CURRENT
     )
 
-
+    val stopNotificationIntent = Intent(this, SensorService::class.java).setAction("STOP")
+    val stopPendingIntent = PendingIntent.getService(
+      this,
+      0,
+      stopNotificationIntent, PendingIntent.FLAG_CANCEL_CURRENT
+    )
 
     val notification = NotificationCompat.Builder(this, CHANNEL_ID)
       .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
@@ -83,7 +93,8 @@ class SensorService : Service(), SensorEventListener {
       .setContentText(input)
       .setSmallIcon(R.drawable.ic_stat_player)
       .addAction(R.drawable.ic_play_arrow_black_24dp, "Play", playPendingIntent) // #0
-      .addAction(R.drawable.ic_pause_black_24dp, "Pause", pendingIntent) // #1
+      .addAction(R.drawable.ic_pause_black_24dp, "Pause", pausePendingIntent) // #1
+      .addAction(R.drawable.ic_album_black_24dp, "Pause", stopPendingIntent) // #2
       .setStyle(androidx.media.app.NotificationCompat.MediaStyle()
         .setShowActionsInCompactView(0))
       .build()
