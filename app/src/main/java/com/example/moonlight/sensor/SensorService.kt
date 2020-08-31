@@ -69,25 +69,25 @@ class SensorService : Service(), SensorEventListener {
 
 
 
-    var lambda = {action: String ->
+    var buildPendingIntent = {action: String ->
       var scopedIntent = Intent(this, SensorService::class.java).setAction(action)
       PendingIntent.getService(this, 0, scopedIntent, PendingIntent.FLAG_CANCEL_CURRENT)
     }
     // todo make pause, start, and stop consts
-    val pausePendingIntent = lambda("PAUSE")
-    val playPendingIntent = lambda("START")
-    val stopPendingIntent = lambda("STOP")
+    val pausePendingIntent = buildPendingIntent("PAUSE")
+    val playPendingIntent = buildPendingIntent("START")
+    val stopPendingIntent = buildPendingIntent("STOP")
 
     val notification = NotificationCompat.Builder(this, CHANNEL_ID)
       .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
-      .setContentTitle("Vibrate When Outside of Desired Range")
+      .setContentTitle("Vibrate")
       .setContentText(input)
       .setSmallIcon(R.drawable.ic_stat_player)
       .addAction(R.drawable.ic_play_arrow_black_24dp, "Play", playPendingIntent) // #0
       .addAction(R.drawable.ic_pause_black_24dp, "Pause", pausePendingIntent) // #1
       .addAction(R.drawable.ic_album_black_24dp, "Pause", stopPendingIntent) // #2
       .setStyle(androidx.media.app.NotificationCompat.MediaStyle()
-        .setShowActionsInCompactView(0))
+        .setShowActionsInCompactView(0, 1, 2))
       .build()
 
 
