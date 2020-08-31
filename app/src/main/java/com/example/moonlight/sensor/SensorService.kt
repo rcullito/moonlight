@@ -47,12 +47,20 @@ class SensorService : Service(), SensorEventListener {
   @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
   override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
     //do heavy work on a background thread
+
+
+    if (intent != null) {
+      if(intent.action.equals("STOP"))
+        stopSelf();
+    }
+
+
     val input = intent?.getStringExtra("inputExtra")
     createNotificationChannel()
-    val notificationIntent = Intent(this, MainActivity::class.java)
-    val pendingIntent = PendingIntent.getActivity(
+    val notificationIntent = Intent(this, SensorService::class.java).setAction("STOP")
+    val pendingIntent = PendingIntent.getService(
       this,
-      0, notificationIntent, 0
+      0, notificationIntent, PendingIntent.FLAG_CANCEL_CURRENT
     )
 
 
