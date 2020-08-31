@@ -12,8 +12,7 @@ import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
-import com.example.moonlight.MainActivity
-import com.example.moonlight.R
+import com.example.moonlight.*
 import com.example.moonlight.database.SleepDatabase
 import com.example.moonlight.database.SleepPosition
 import kotlinx.coroutines.*
@@ -50,16 +49,14 @@ class SensorService : Service(), SensorEventListener {
 
 
     if (intent != null) {
-      // TODO keep the service running but remove the listener
-      // we now need to decouple these 2 things as we'd like to have the foreground service running
-      // without the phone vibrating
-      if(intent.action.equals("PAUSE"))
+      if(intent.action.equals(pauseAction))
         tearDownListenerAndAssoc();
 
-      if(intent.action.equals("START"))
+      if(intent.action.equals(startAction))
         fireUpAndAssoc();
 
-      if(intent.action.equals("STOP"))
+      if(intent.action.equals(stopAction))
+        // TODO having issues here with the wakelock
         stopSelf();
     }
 
@@ -73,10 +70,10 @@ class SensorService : Service(), SensorEventListener {
       var scopedIntent = Intent(this, SensorService::class.java).setAction(action)
       PendingIntent.getService(this, 0, scopedIntent, PendingIntent.FLAG_CANCEL_CURRENT)
     }
-    // todo make pause, start, and stop consts
-    val pausePendingIntent = buildPendingIntent("PAUSE")
-    val playPendingIntent = buildPendingIntent("START")
-    val stopPendingIntent = buildPendingIntent("STOP")
+
+    val pausePendingIntent = buildPendingIntent(pauseAction)
+    val playPendingIntent = buildPendingIntent(startAction)
+    val stopPendingIntent = buildPendingIntent(stopAction)
 
     val notification = NotificationCompat.Builder(this, CHANNEL_ID)
       .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
@@ -92,8 +89,6 @@ class SensorService : Service(), SensorEventListener {
 
 
     startForeground(1, notification)
-    //stopSelf();
-    // TODO revisit what should go here
     return START_STICKY
   }
 
