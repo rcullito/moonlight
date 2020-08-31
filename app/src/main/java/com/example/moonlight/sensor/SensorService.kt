@@ -67,25 +67,16 @@ class SensorService : Service(), SensorEventListener {
     val input = intent?.getStringExtra("inputExtra")
     createNotificationChannel()
 
-    val pauseNotificationIntent = Intent(this, SensorService::class.java).setAction("PAUSE")
-    // TODO ripe for HO function to enclose over everything that is not the individual notificationIntent
-    val pausePendingIntent = PendingIntent.getService(
-      this,
-      0, pauseNotificationIntent, PendingIntent.FLAG_CANCEL_CURRENT
-    )
 
-    val startNotificationIntent = Intent(this, SensorService::class.java).setAction("START")
-    val playPendingIntent = PendingIntent.getService(
-      this,
-      0, startNotificationIntent, PendingIntent.FLAG_CANCEL_CURRENT
-    )
 
-    val stopNotificationIntent = Intent(this, SensorService::class.java).setAction("STOP")
-    val stopPendingIntent = PendingIntent.getService(
-      this,
-      0,
-      stopNotificationIntent, PendingIntent.FLAG_CANCEL_CURRENT
-    )
+    var lambda = {action: String ->
+      var scopedIntent = Intent(this, SensorService::class.java).setAction(action)
+      PendingIntent.getService(this, 0, scopedIntent, PendingIntent.FLAG_CANCEL_CURRENT)
+    }
+    // todo make pause, start, and stop consts
+    val pausePendingIntent = lambda("PAUSE")
+    val playPendingIntent = lambda("START")
+    val stopPendingIntent = lambda("STOP")
 
     val notification = NotificationCompat.Builder(this, CHANNEL_ID)
       .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
