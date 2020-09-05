@@ -14,11 +14,15 @@ val rotationMatrix = FloatArray(9)
 val orientationAngles = FloatArray(3)
 private var lastUpdate: Long = 0
 
+fun checkZero(angle: Float): Boolean {
+  return angle.toDouble() != 0.0
+}
+
 @RequiresApi(Build.VERSION_CODES.O)
 fun updateOrientationAngles(accelerometerReading: FloatArray, magnetometerReading: FloatArray, eventTimestamp: Long, ctx: Context): SleepPosition {
   SensorManager.getRotationMatrix(rotationMatrix, null, accelerometerReading, magnetometerReading)
   SensorManager.getOrientation(rotationMatrix, orientationAngles)
-  var azimuth = orientationAngles.get(0)
+
   var pitch = orientationAngles.get(1)
   var roll = orientationAngles.get(2)
 
@@ -26,18 +30,16 @@ fun updateOrientationAngles(accelerometerReading: FloatArray, magnetometerReadin
     motionVibrate(ctx)
   }
 
-  // TODO make a zero check and map over azimuth, pitch, and roll
-  if (azimuth.toDouble() != 0.0 || pitch.toDouble() != 0.0 || roll.toDouble() != 0.0) {
+  if (checkZero(pitch) && checkZero(roll)) {
     var currentEventTime = eventTimestamp
 
     if ((currentEventTime - lastUpdate) > (1000)) {
 
-      Log.i("SensorWorker/azimuth", azimuth.toString())
+
       Log.i("SensorWorker/pitch", pitch.toString())
       Log.i("SensorWorker/roll", roll.toString())
 
       lastUpdate = currentEventTime
-
 
     }
   }
