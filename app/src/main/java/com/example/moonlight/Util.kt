@@ -8,15 +8,9 @@ import com.example.moonlight.database.SleepPosition
 import java.text.SimpleDateFormat
 import kotlin.math.abs
 
-val zero = 0.0
-val sideBack = 0.86
-val side = 1.37
-val sideStomach = 2.2
-val stomach = 3.14
+fun convertNumericQualityToString(roll: Double, pitch: Double): String {
 
-fun convertNumericQualityToString(roll: Float, pitch: Float): String {
-
-  val pitch_absolute_double = abs(pitch.toDouble())
+  val pitch_absolute_double = abs(pitch)
 
   if (pitch_absolute_double > 0.45) {
     return "upright"
@@ -31,7 +25,7 @@ fun convertNumericQualityToString(roll: Float, pitch: Float): String {
       else -> "toast"
     }
   } else {
-    val roll_absolute_double = abs(roll.toDouble())
+    val roll_absolute_double = abs(roll)
     return when (roll_absolute_double) {
       in 0.0..0.70 -> "right back"
       in 0.70..1.37 -> "right side back"

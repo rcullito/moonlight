@@ -18,6 +18,10 @@ fun checkZero(angle: Double): Boolean {
   return angle != 0.0
 }
 
+fun decideInRage(position: Double): Boolean {
+  return position < lowerRotationBound || position > upperRotationBound
+}
+
 @RequiresApi(Build.VERSION_CODES.O)
 fun updateOrientationAngles(accelerometerReading: FloatArray, magnetometerReading: FloatArray, eventTimestamp: Long, ctx: Context): SleepPosition {
   SensorManager.getRotationMatrix(rotationMatrix, null, accelerometerReading, magnetometerReading)
@@ -25,16 +29,17 @@ fun updateOrientationAngles(accelerometerReading: FloatArray, magnetometerReadin
 
   var pitch = orientationAngles.get(1).toDouble()
   var roll = orientationAngles.get(2).toDouble()
+  var angles = listOf<Double>(pitch, roll)
+  var allPositive = angles.all { checkZero(it) }
 
-  if (abs(roll) < lowerRotationBound || abs(roll) > upperRotationBound) {
+  if (decideInRage(abs(roll))) {
     motionVibrate(ctx)
   }
 
-  if (checkZero(pitch) && checkZero(roll)) {
+  if (allPositive) {
     var currentEventTime = eventTimestamp
 
     if ((currentEventTime - lastUpdate) > (1000)) {
-
 
       Log.i("SensorWorker/pitch", pitch.toString())
       Log.i("SensorWorker/roll", roll.toString())
