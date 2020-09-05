@@ -14,9 +14,9 @@ data class SleepPosition(
   val sleepPositionTime: Long,
 
   @ColumnInfo(name = "pitch")
-  var pitch: Float,
+  var pitch: Double,
 
   @ColumnInfo(name = "roll")
-  var roll: Float
+  var roll: Double
 
 )

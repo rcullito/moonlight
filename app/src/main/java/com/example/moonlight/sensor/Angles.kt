@@ -14,8 +14,8 @@ val rotationMatrix = FloatArray(9)
 val orientationAngles = FloatArray(3)
 private var lastUpdate: Long = 0
 
-fun checkZero(angle: Float): Boolean {
-  return angle.toDouble() != 0.0
+fun checkZero(angle: Double): Boolean {
+  return angle != 0.0
 }
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -23,10 +23,10 @@ fun updateOrientationAngles(accelerometerReading: FloatArray, magnetometerReadin
   SensorManager.getRotationMatrix(rotationMatrix, null, accelerometerReading, magnetometerReading)
   SensorManager.getOrientation(rotationMatrix, orientationAngles)
 
-  var pitch = orientationAngles.get(1)
-  var roll = orientationAngles.get(2)
+  var pitch = orientationAngles.get(1).toDouble()
+  var roll = orientationAngles.get(2).toDouble()
 
-  if (abs(roll.toDouble()) < lowerRotationBound || abs(roll.toDouble()) > upperRotationBound) {
+  if (abs(roll) < lowerRotationBound || abs(roll) > upperRotationBound) {
     motionVibrate(ctx)
   }
 
