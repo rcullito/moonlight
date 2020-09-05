@@ -29,13 +29,14 @@ fun updateOrientationAngles(accelerometerReading: FloatArray, magnetometerReadin
 
   var pitch = orientationAngles.get(1).toDouble()
   var roll = orientationAngles.get(2).toDouble()
-  var angles = listOf<Double>(pitch, roll)
-  var allPositive = angles.all { checkNotZero(it) }
+  var allPositive = listOf<Double>(pitch, roll).all { checkNotZero(it) }
 
+  // TODO this is all about Action.kt
   if (decideInRage(abs(roll))) {
     motionVibrate(ctx)
   }
 
+  // This section is really meant to be about Recording in the Database. So name it as such.
   if (allPositive) {
     var currentEventTime = eventTimestamp
 
