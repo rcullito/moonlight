@@ -10,7 +10,6 @@ import android.hardware.SensorManager
 import android.os.*
 import android.util.Log
 import androidx.annotation.RequiresApi
-import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
 import com.example.moonlight.*
 import com.example.moonlight.database.SleepDatabase
@@ -79,8 +78,6 @@ class SensorService : Service(), SensorEventListener {
       }
   }
 
-
-
   @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
   override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
     //do heavy work on a background thread
@@ -97,37 +94,12 @@ class SensorService : Service(), SensorEventListener {
         stopSelf();
     }
 
-
-    val input = intent?.getStringExtra("inputExtra")
-    createNotificationChannel()
-
-
-    var buildPendingIntent = {action: String ->
-      var scopedIntent = Intent(this, SensorService::class.java).setAction(action)
-      PendingIntent.getService(this, 0, scopedIntent, PendingIntent.FLAG_CANCEL_CURRENT)
-    }
-
-    val pausePendingIntent = buildPendingIntent(pauseAction)
-    val playPendingIntent = buildPendingIntent(startAction)
-    val stopPendingIntent = buildPendingIntent(stopAction)
-
-    val notification = NotificationCompat.Builder(this, CHANNEL_ID)
-      .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
-      .setContentTitle("Vibrate")
-      .setContentText(input)
-      .setSmallIcon(R.drawable.ic_stat_player)
-      .addAction(R.drawable.ic_play_arrow_black_24dp, "Play", playPendingIntent) // #0
-      .addAction(R.drawable.ic_pause_black_24dp, "Pause", pausePendingIntent) // #1
-      .addAction(R.drawable.ic_baseline_stop_24, "Pause", stopPendingIntent) // #2
-      .setStyle(androidx.media.app.NotificationCompat.MediaStyle()
-        .setShowActionsInCompactView(0, 1, 2))
-      .build()
+    var notification = buildNotification(intent, applicationContext)
 
 
     startForeground(1, notification)
     return START_STICKY
   }
-
 
 
   override fun onDestroy() {
@@ -155,7 +127,7 @@ class SensorService : Service(), SensorEventListener {
       } else if (event.sensor.type == Sensor.TYPE_MAGNETIC_FIELD) {
         System.arraycopy(event.values, 0, magnetometerReading, 0, magnetometerReading.size)
       }
-
+      // TODO make this a function in Utils namespace
       // log different time capabilities here
       var elapsedRealTimeMillis = SystemClock.elapsedRealtime() // Returns milliseconds since boot, including time spent in sleep.
 
@@ -169,6 +141,7 @@ class SensorService : Service(), SensorEventListener {
 
       var eventClockTime = currentClockTime - timeSinceEventMillis
 
+      // TODO allow for this to maybe return a value and only perform work if there is a value
       var mostRecentPosition = updateOrientationAngles(accelerometerReading, magnetometerReading, eventClockTime, applicationContext)
 
       workerScope.launch {
@@ -177,7 +150,6 @@ class SensorService : Service(), SensorEventListener {
           updatePositionInDb(mostRecentPosition)
         }
       }
-
 
   }
 

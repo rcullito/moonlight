@@ -38,7 +38,9 @@ fun updateOrientationAngles(accelerometerReading: FloatArray, magnetometerReadin
 
       lastUpdate = currentEventTime
 
-      return SleepPosition(pitch = pitch, roll = roll, sleepPositionTime = eventTimestamp)
+
     }
   }
+
+  return SleepPosition(pitch = pitch, roll = roll, sleepPositionTime = eventTimestamp)
 }
