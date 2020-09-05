@@ -6,8 +6,8 @@ import android.os.Build
 import android.util.Log
 import androidx.annotation.RequiresApi
 import com.example.moonlight.database.SleepPosition
-import com.example.moonlight.lowerRotationBound
-import com.example.moonlight.upperRotationBound
+import com.example.moonlight.rollLowerRotationBound
+import com.example.moonlight.rollUpperRotationBound
 import kotlin.math.abs
 
 val rotationMatrix = FloatArray(9)
@@ -19,7 +19,7 @@ fun checkNotZero(angle: Double): Boolean {
 }
 
 fun decideInRage(position: Double): Boolean {
-  return position < lowerRotationBound || position > upperRotationBound
+  return position < rollLowerRotationBound || position > rollUpperRotationBound
 }
 
 @RequiresApi(Build.VERSION_CODES.O)
