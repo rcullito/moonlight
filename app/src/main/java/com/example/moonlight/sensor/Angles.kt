@@ -14,7 +14,7 @@ val rotationMatrix = FloatArray(9)
 val orientationAngles = FloatArray(3)
 private var lastUpdate: Long = 0
 
-fun checkZero(angle: Double): Boolean {
+fun checkNotZero(angle: Double): Boolean {
   return angle != 0.0
 }
 
@@ -30,7 +30,7 @@ fun updateOrientationAngles(accelerometerReading: FloatArray, magnetometerReadin
   var pitch = orientationAngles.get(1).toDouble()
   var roll = orientationAngles.get(2).toDouble()
   var angles = listOf<Double>(pitch, roll)
-  var allPositive = angles.all { checkZero(it) }
+  var allPositive = angles.all { checkNotZero(it) }
 
   if (decideInRage(abs(roll))) {
     motionVibrate(ctx)
