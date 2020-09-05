@@ -82,7 +82,7 @@ class SensorService : Service(), SensorEventListener {
       .setSmallIcon(R.drawable.ic_stat_player)
       .addAction(R.drawable.ic_play_arrow_black_24dp, "Play", playPendingIntent) // #0
       .addAction(R.drawable.ic_pause_black_24dp, "Pause", pausePendingIntent) // #1
-      .addAction(R.drawable.ic_album_black_24dp, "Pause", stopPendingIntent) // #2
+      .addAction(R.drawable.ic_baseline_stop_24, "Pause", stopPendingIntent) // #2
       .setStyle(androidx.media.app.NotificationCompat.MediaStyle()
         .setShowActionsInCompactView(0, 1, 2))
       .build()
