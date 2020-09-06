@@ -51,6 +51,15 @@ class SensorService : Service(), SensorEventListener {
     return eventClockTime
   }
 
+  fun updateSleepPositionOnSensorChanged(mostRecentPosition: SleepPosition) {
+    workerScope.launch {
+
+      withContext(Dispatchers.IO) {
+        updatePositionInDb(mostRecentPosition)
+      }
+    }
+  }
+
   fun tearDownListenerAndAssoc() {
     Log.i("SensorService", "unregistering sensor listener")
     sensorManager.unregisterListener(this)
@@ -142,18 +151,12 @@ class SensorService : Service(), SensorEventListener {
       }
 
       var eventClockTime = deriveEventClockTime(event.timestamp)
-
-      if (eventClockTime > 1000) {
-
-        var mostRecentPosition = updateOrientationAngles(accelerometerReading, magnetometerReading, eventClockTime, applicationContext)
-        // TODO think about whether this is right, keep splitting functions that we can out of this class
+      // if the time of the most recent event is more than a second after our last recorded one,
+      //then start recording again and potentially acting again
+      if ((eventClockTime - lastUpdate) > 1000) {
+        var mostRecentPosition = updateOrientationAngles(accelerometerReading, magnetometerReading, eventClockTime, applicationContext) // 1.
         lastUpdate = eventClockTime
-        workerScope.launch {
-
-          withContext(Dispatchers.IO) {
-            updatePositionInDb(mostRecentPosition)
-          }
-        }
+        updatePositionInDb(mostRecentPosition)
       }
   }
 
