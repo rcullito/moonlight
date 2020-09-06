@@ -10,32 +10,30 @@ import java.text.SimpleDateFormat
 import java.util.concurrent.TimeUnit
 import kotlin.math.abs
 
+fun pos(angle: Double): Boolean {
+  return angle >= 0.0
+}
+
 fun convertNumericQualityToString(roll: Double, pitch: Double): String {
 
   val pitch_absolute = abs(pitch)
+  val roll_absolute = abs(roll)
 
   if (pitch_absolute > upRightAccordingToPitch) {
     return "upright"
   }
-  // TODO this should be a fun that says right or left depending on the absolute value of roll
-  if (roll > 0.0) {
-    return when (roll) {
-      in rollBack -> "left back"
-      in rollSideBack -> "left side back"
-      in rollSideStomach -> "left side stomach"
-      in rollStomach -> "left stomach"
-      else -> "toast"
-    }
-  } else {
-    val roll_absolute_double = abs(roll)
-    return when (roll_absolute_double) {
-      in rollBack -> "right back"
-      in rollSideBack -> "right side back"
-      in rollSideStomach -> "right side stomach"
-      in rollStomach -> "right stomach"
-      else -> "toast"
-    }
+
+  val direction = if(pos(roll)) "left" else "right"
+
+  val positionCategory =  when (roll_absolute) {
+    in rollBack -> "back"
+    in rollSideBack -> "side back"
+    in rollSideStomach -> "side stomach"
+    in rollStomach -> "stomach"
+    else -> "toast"
   }
+
+  return direction + " " + positionCategory
 
 }
 
