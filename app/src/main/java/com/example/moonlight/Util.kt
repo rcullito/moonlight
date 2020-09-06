@@ -1,11 +1,13 @@
 package com.example.moonlight
 
 import android.os.Build
+import android.os.SystemClock
 import android.text.Html
 import android.text.Spanned
 import androidx.core.text.HtmlCompat
 import com.example.moonlight.database.SleepPosition
 import java.text.SimpleDateFormat
+import java.util.concurrent.TimeUnit
 import kotlin.math.abs
 
 fun convertNumericQualityToString(roll: Double, pitch: Double): String {
@@ -36,6 +38,19 @@ fun convertNumericQualityToString(roll: Double, pitch: Double): String {
   }
 
 }
+
+fun deriveEventClockTime(eventTimeStamp: Long): Long {
+  // first get an idea of time relative to system boot
+  var elapsedRealTimeMillis = SystemClock.elapsedRealtime()
+  var eventElapsedRealTimeMillis = TimeUnit.NANOSECONDS.toMillis(eventTimeStamp)
+  var timeSinceEventMillis = elapsedRealTimeMillis - eventElapsedRealTimeMillis
+  // what time is it actually from a wall clock's perspective
+  var currentClockTime = System.currentTimeMillis()
+  // when did our event happen in a wall clock sense
+  var eventClockTime = currentClockTime - timeSinceEventMillis
+  return eventClockTime
+}
+
 
 fun convertLongToDateString(systemTime: Long): String {
   // return SimpleDateFormat("EEEE MMM-dd-yyyy' 'HH:mm")

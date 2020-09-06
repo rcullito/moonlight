@@ -1,21 +1,25 @@
 package com.example.moonlight.sensor
 
-import android.app.*
+import android.app.Service
 import android.content.Context
 import android.content.Intent
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
-import android.os.*
+import android.os.Build
+import android.os.IBinder
+import android.os.PowerManager
 import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
-import com.example.moonlight.*
 import com.example.moonlight.database.SleepDatabase
 import com.example.moonlight.database.SleepPosition
+import com.example.moonlight.deriveEventClockTime
+import com.example.moonlight.pauseAction
+import com.example.moonlight.startAction
+import com.example.moonlight.stopAction
 import kotlinx.coroutines.*
-import java.util.concurrent.TimeUnit
 
 class SensorService : Service(), SensorEventListener {
   private lateinit var sensorManager: SensorManager
@@ -39,21 +43,12 @@ class SensorService : Service(), SensorEventListener {
     }
   }
 
-  fun deriveEventClockTime(eventTimeStamp: Long): Long {
-    // first get an idea of time relative to system boot
-    var elapsedRealTimeMillis = SystemClock.elapsedRealtime()
-    var eventElapsedRealTimeMillis = TimeUnit.NANOSECONDS.toMillis(eventTimeStamp)
-    var timeSinceEventMillis = elapsedRealTimeMillis - eventElapsedRealTimeMillis
-    // what time is it actually from a wall clock's perspective
-    var currentClockTime = System.currentTimeMillis()
-    // when did our event happen in a wall clock sense
-    var eventClockTime = currentClockTime - timeSinceEventMillis
-    return eventClockTime
+  private fun updatePositionInDb(position:SleepPosition) {
+    database.sleepPositionDao.insert(position)
   }
 
   fun updateSleepPositionOnSensorChanged(mostRecentPosition: SleepPosition) {
     workerScope.launch {
-
       withContext(Dispatchers.IO) {
         updatePositionInDb(mostRecentPosition)
       }
@@ -118,7 +113,6 @@ class SensorService : Service(), SensorEventListener {
 
     var notification = buildNotification(intent, applicationContext)
 
-
     startForeground(1, notification)
     return START_STICKY
   }
@@ -156,11 +150,8 @@ class SensorService : Service(), SensorEventListener {
       if ((eventClockTime - lastUpdate) > 1000) {
         var mostRecentPosition = updateOrientationAngles(accelerometerReading, magnetometerReading, eventClockTime, applicationContext) // 1.
         lastUpdate = eventClockTime
-        updatePositionInDb(mostRecentPosition)
+        updateSleepPositionOnSensorChanged(mostRecentPosition)
       }
   }
 
-  private fun updatePositionInDb(position:SleepPosition) {
-    database.sleepPositionDao.insert(position)
-  }
 }
