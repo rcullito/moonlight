@@ -33,7 +33,6 @@ fun updateOrientationAngles(accelerometerReading: FloatArray, magnetometerReadin
   Log.i("SensorWorker/pitch", pitch.toString())
   Log.i("SensorWorker/roll", roll.toString())
 
-  // TODO this is all about Action.kt
   if (decideInRage(abs(roll))) {
     motionVibrate(ctx)
   }
