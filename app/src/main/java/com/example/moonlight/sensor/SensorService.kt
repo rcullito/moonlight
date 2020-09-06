@@ -39,6 +39,18 @@ class SensorService : Service(), SensorEventListener {
     }
   }
 
+  fun deriveEventClockTime(eventTimeStamp: Long): Long {
+    // first get an idea of time relative to system boot
+    var elapsedRealTimeMillis = SystemClock.elapsedRealtime()
+    var eventElapsedRealTimeMillis = TimeUnit.NANOSECONDS.toMillis(eventTimeStamp)
+    var timeSinceEventMillis = elapsedRealTimeMillis - eventElapsedRealTimeMillis
+    // what time is it actually from a wall clock's perspective
+    var currentClockTime = System.currentTimeMillis()
+    // when did our event happen in a wall clock sense
+    var eventClockTime = currentClockTime - timeSinceEventMillis
+    return eventClockTime
+  }
+
   fun tearDownListenerAndAssoc() {
     Log.i("SensorService", "unregistering sensor listener")
     sensorManager.unregisterListener(this)
@@ -128,33 +140,21 @@ class SensorService : Service(), SensorEventListener {
       } else if (event.sensor.type == Sensor.TYPE_MAGNETIC_FIELD) {
         System.arraycopy(event.values, 0, magnetometerReading, 0, magnetometerReading.size)
       }
-      // TODO make this a function in Utils namespace
-      // log different time capabilities here
-      var elapsedRealTimeMillis = SystemClock.elapsedRealtime() // Returns milliseconds since boot, including time spent in sleep.
 
-      var eventElapsedRealTimeMillis = TimeUnit.NANOSECONDS.toMillis(event.timestamp) // event.timestamp will return nanoseconds since boot, including time spent in sleep.
+      var eventClockTime = deriveEventClockTime(event.timestamp)
 
-      //  evaluate the difference between now() and the event with the shared backdrop of milliseconds since boot, including sleep
-      var timeSinceEventMillis = elapsedRealTimeMillis - eventElapsedRealTimeMillis
-      // Log.i("timeSinceEvent", timeSinceEventMillis.toString())
+      if (eventClockTime > 1000) {
 
-      var currentClockTime = System.currentTimeMillis()
+        var mostRecentPosition = updateOrientationAngles(accelerometerReading, magnetometerReading, eventClockTime, applicationContext)
+        // TODO think about whether this is right, keep splitting functions that we can out of this class
+        lastUpdate = eventClockTime
+        workerScope.launch {
 
-      var eventClockTime = currentClockTime - timeSinceEventMillis
-
-    if ((eventClockTime - lastUpdate) > (1000)) {
-
-      lastUpdate = eventClockTime
-      var mostRecentPosition = updateOrientationAngles(accelerometerReading, magnetometerReading, eventClockTime, applicationContext)
-
-      workerScope.launch {
-
-        withContext(Dispatchers.IO) {
-          updatePositionInDb(mostRecentPosition)
+          withContext(Dispatchers.IO) {
+            updatePositionInDb(mostRecentPosition)
+          }
         }
       }
-    }
-
   }
 
   private fun updatePositionInDb(position:SleepPosition) {
