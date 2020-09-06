@@ -25,6 +25,7 @@ class SensorService : Service(), SensorEventListener {
   private val workerScope = CoroutineScope(Dispatchers.Default + workerJob)
   private lateinit var database: SleepDatabase
   lateinit var wakelock: PowerManager.WakeLock
+  private var lastUpdate: Long = 0
 
   companion object {
     fun startService(context: Context, message: String) {
@@ -141,7 +142,9 @@ class SensorService : Service(), SensorEventListener {
 
       var eventClockTime = currentClockTime - timeSinceEventMillis
 
-      // TODO allow for this to maybe return a value and only perform work if there is a value
+    if ((eventClockTime - lastUpdate) > (1000)) {
+
+      lastUpdate = eventClockTime
       var mostRecentPosition = updateOrientationAngles(accelerometerReading, magnetometerReading, eventClockTime, applicationContext)
 
       workerScope.launch {
@@ -150,6 +153,7 @@ class SensorService : Service(), SensorEventListener {
           updatePositionInDb(mostRecentPosition)
         }
       }
+    }
 
   }
 

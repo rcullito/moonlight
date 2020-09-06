@@ -12,7 +12,6 @@ import kotlin.math.abs
 
 val rotationMatrix = FloatArray(9)
 val orientationAngles = FloatArray(3)
-private var lastUpdate: Long = 0
 
 fun checkNotZero(angle: Double): Boolean {
   return angle != 0.0
@@ -31,6 +30,9 @@ fun updateOrientationAngles(accelerometerReading: FloatArray, magnetometerReadin
   var roll = orientationAngles.get(2).toDouble()
   var allPositive = listOf<Double>(pitch, roll).all { checkNotZero(it) }
 
+  Log.i("SensorWorker/pitch", pitch.toString())
+  Log.i("SensorWorker/roll", roll.toString())
+
   // TODO this is all about Action.kt
   if (decideInRage(abs(roll))) {
     motionVibrate(ctx)
@@ -38,16 +40,7 @@ fun updateOrientationAngles(accelerometerReading: FloatArray, magnetometerReadin
 
   // This section is really meant to be about Recording in the Database. So name it as such.
   if (allPositive) {
-    var currentEventTime = eventTimestamp
 
-    if ((currentEventTime - lastUpdate) > (1000)) {
-
-      Log.i("SensorWorker/pitch", pitch.toString())
-      Log.i("SensorWorker/roll", roll.toString())
-
-      lastUpdate = currentEventTime
-
-    }
   }
 
   return SleepPosition(pitch = pitch, roll = roll, sleepPositionTime = eventTimestamp)
