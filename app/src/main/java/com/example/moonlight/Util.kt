@@ -11,6 +11,20 @@ import java.text.SimpleDateFormat
 import java.util.concurrent.TimeUnit
 import kotlin.math.abs
 
+fun checkNotZero(angle: Double): Boolean {
+  return angle != 0.0
+}
+
+fun decideInRangeRoll(position: Double): Boolean {
+  // TODO this fn would need an absolute value for position here
+  return position < rollLowerRotationBound || position > rollUpperRotationBound
+}
+
+fun decideInRangePitch(pitch: Double, roll: Double): Boolean {
+  return closerToVertical(abs(roll)) == "stomach" && abs(pitch) < guessPitchBackBound || abs(pitch) > guessPitchBackBound
+}
+
+
 fun pos(angle: Double): Boolean {
   return angle >= 0.0
 }
