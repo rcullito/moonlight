@@ -26,3 +26,6 @@ val rollBack = rollLowest..rollCutPoint1
 val rollSideBack = rollCutPoint1..rollCutPoint2
 val rollSideStomach = rollCutPoint2..rollCutPoint3
 val rollStomach = rollCutPoint3..rollHighestAndThenSome
+
+const val pitchLowest = 0.00
+const val pitchHighestAndThenSome = 1.58

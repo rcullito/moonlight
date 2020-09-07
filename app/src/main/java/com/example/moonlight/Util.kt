@@ -14,7 +14,14 @@ fun pos(angle: Double): Boolean {
   return angle >= 0.0
 }
 
-fun convertNumericQualityToString(roll: Double, pitch: Double): String {
+fun closerToVertical(absAngle: Double): String {
+  val diffPi = 3.14 - absAngle
+  val diffZero = absAngle
+
+  return if(diffPi > diffZero) "back" else "stomach"
+}
+
+fun convertNumericQualityToStringRoll(roll: Double, pitch: Double): String {
 
   val pitch_absolute = abs(pitch)
   val roll_absolute = abs(roll)
@@ -35,6 +42,16 @@ fun convertNumericQualityToString(roll: Double, pitch: Double): String {
 
   return direction + " " + positionCategory
 
+}
+
+fun convertNumericQualityToStringPitch(roll: Double, pitch: Double): String {
+
+  val roll_absolute = abs(roll)
+
+  val side = if(pos(pitch)) "left" else "right"
+  val facing = closerToVertical(roll_absolute)
+
+  return side + " " + facing
 }
 
 fun deriveEventClockTime(eventTimeStamp: Long): Long {
@@ -69,7 +86,8 @@ fun formatPosition(position: SleepPosition): Spanned {
     append("%.2f".format(position.roll))
     append(" ")
     append("<b>Position: <b>")
-    append("\t${convertNumericQualityToString(position.roll, position.pitch)}<br>")
+    // append("\t${convertNumericQualityToStringRoll(position.roll, position.pitch)}<br>")
+    append("\t${convertNumericQualityToStringPitch(position.roll, position.pitch)}<br>")
 
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
       return Html.fromHtml(sb.toString(), Html.FROM_HTML_MODE_LEGACY)
