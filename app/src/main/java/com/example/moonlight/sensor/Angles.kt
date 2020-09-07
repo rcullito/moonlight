@@ -30,12 +30,10 @@ fun updateOrientationAngles(accelerometerReading: FloatArray, magnetometerReadin
   var roll = orientationAngles.get(2).toDouble()
   var allPositive = listOf<Double>(pitch, roll).all { checkNotZero(it) }
 
-  Log.i("SensorWorker/pitch", pitch.toString())
-  Log.i("SensorWorker/roll", roll.toString())
 
-  if (decideInRage(abs(roll))) {
-    motionVibrate(ctx)
-  }
+  //if (decideInRage(abs(roll))) {
+    //motionVibrate(ctx)
+  //}
 
   // This section is really meant to be about Recording in the Database. So name it as such.
   if (allPositive) {

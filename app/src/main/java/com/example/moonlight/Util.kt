@@ -4,6 +4,7 @@ import android.os.Build
 import android.os.SystemClock
 import android.text.Html
 import android.text.Spanned
+import android.util.Log
 import androidx.core.text.HtmlCompat
 import com.example.moonlight.database.SleepPosition
 import java.text.SimpleDateFormat
@@ -56,7 +57,9 @@ fun convertNumericQualityToStringPitch(roll: Double, pitch: Double): String {
   val side = if(pos(pitch)) "left" else "right"
   val facing = closerToVertical(roll_absolute)
 
-  return side + " " + facing
+  val pitchPosition = side + " " + facing
+  Log.i("Util", pitchPosition)
+  return pitchPosition
 }
 
 fun deriveEventClockTime(eventTimeStamp: Long): Long {
