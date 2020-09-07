@@ -21,7 +21,12 @@ fun decideInRangeRoll(position: Double): Boolean {
 }
 
 fun decideInRangePitch(pitch: Double, roll: Double): Boolean {
-  return closerToVertical(abs(roll)) == "stomach" && abs(pitch) < guessPitchBackBound || abs(pitch) > guessPitchBackBound
+
+  if (onBackAccordingToRoll(roll)) {
+    return false
+  }
+
+  return abs(pitch) < guessPitchBackBound || abs(pitch) > guessPitchBackBound
 }
 
 
@@ -29,11 +34,12 @@ fun pos(angle: Double): Boolean {
   return angle >= 0.0
 }
 
-fun closerToVertical(absAngle: Double): String {
-  val diffPi = 3.14 - absAngle
-  val diffZero = absAngle
+fun onBackAccordingToRoll(roll: Double): Boolean {
+  val roll_absolute = abs(roll)
+  val diffPi = 3.14 - roll_absolute
+  val diffZero = roll_absolute
 
-  return if(diffPi > diffZero) "back" else "stomach"
+  return diffPi > diffZero
 }
 
 fun convertNumericQualityToStringRoll(roll: Double, pitch: Double): String {
@@ -61,7 +67,6 @@ fun convertNumericQualityToStringRoll(roll: Double, pitch: Double): String {
 
 fun convertNumericQualityToStringPitch(roll: Double, pitch: Double): String {
 
-  val pitch_absolute = abs(pitch)
   val roll_absolute = abs(roll)
 
   if (roll_absolute in 1.00..2.00) {
@@ -69,7 +74,7 @@ fun convertNumericQualityToStringPitch(roll: Double, pitch: Double): String {
   }
 
   val side = if(pos(pitch)) "left" else "right"
-  val facing = closerToVertical(roll_absolute)
+  val facing = if(onBackAccordingToRoll(roll)) "back" else "stomach"
 
   val pitchPosition = side + " " + facing
   Log.i("Util", pitchPosition)
