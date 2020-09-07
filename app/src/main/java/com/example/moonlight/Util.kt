@@ -46,7 +46,12 @@ fun convertNumericQualityToStringRoll(roll: Double, pitch: Double): String {
 
 fun convertNumericQualityToStringPitch(roll: Double, pitch: Double): String {
 
+  val pitch_absolute = abs(pitch)
   val roll_absolute = abs(roll)
+
+  if (roll_absolute in 1.00..2.00) {
+    return "upright"
+  }
 
   val side = if(pos(pitch)) "left" else "right"
   val facing = closerToVertical(roll_absolute)
