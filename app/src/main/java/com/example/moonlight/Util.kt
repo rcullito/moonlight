@@ -18,7 +18,7 @@ fun decideInRangeRoll(position: Double): Boolean {
 
 fun decideInRangePitch(pitch: Double, roll: Double): Boolean {
 
-  if (abs(roll) in rollUprightRange) {
+  if (abs(roll) in rollUprightRange && abs(pitch) in pitchRangeWhileUpright) {
     return false
   }
 
