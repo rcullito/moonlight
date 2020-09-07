@@ -23,10 +23,10 @@ fun decideInRangeRoll(position: Double): Boolean {
 fun decideInRangePitch(pitch: Double, roll: Double): Boolean {
 
   if (onBackAccordingToRoll(roll)) {
-    return false
+    return true
+  } else {
+    return abs(pitch) < guessPitchStomachBound || abs(pitch) > guessPitchBackBound
   }
-
-  return abs(pitch) < guessPitchBackBound || abs(pitch) > guessPitchBackBound
 }
 
 
