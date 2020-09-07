@@ -32,3 +32,5 @@ const val guessPitchStomachBound = 0.20
 // back bound is regardless of roll
 const val guessPitchBackBound = 0.80
 
+val rollUprightRange = 0.90..1.75
+

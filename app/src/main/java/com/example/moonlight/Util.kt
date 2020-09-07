@@ -18,6 +18,10 @@ fun decideInRangeRoll(position: Double): Boolean {
 
 fun decideInRangePitch(pitch: Double, roll: Double): Boolean {
 
+  if (abs(roll) in rollUprightRange) {
+    return false
+  }
+
   if (onBackAccordingToRoll(roll)) {
     return true
   } else {
@@ -64,7 +68,7 @@ fun convertNumericQualityToStringPitch(roll: Double, pitch: Double): String {
 
   val roll_absolute = abs(roll)
 
-  if (roll_absolute in 1.00..2.00) {
+  if (roll_absolute in rollUprightRange) {
     return "upright"
   }
 
