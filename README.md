@@ -10,7 +10,7 @@
 
 
 ## WHY
-Traditional only prevent a small percentage of the total positions that can be harmful
+Traditional devices only prevent a small percentage of the total positions that can be harmful
 
 10-2 clock image
 
