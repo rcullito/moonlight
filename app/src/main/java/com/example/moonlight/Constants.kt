@@ -28,7 +28,7 @@ val rollSideStomach = rollCutPoint2..rollCutPoint3
 val rollStomach = rollCutPoint3..rollHighestAndThenSome
 
 const val pitchStomachBound = 0.20
-const val pitchBackBound = 1.00
+const val pitchBackBound = 1.05
 
 val rollUprightRange = 0.90..1.5
 val pitchRangeWhileUpright = 0.00..0.50
