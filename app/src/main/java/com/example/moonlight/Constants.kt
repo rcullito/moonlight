@@ -27,10 +27,8 @@ val rollSideBack = rollCutPoint1..rollCutPoint2
 val rollSideStomach = rollCutPoint2..rollCutPoint3
 val rollStomach = rollCutPoint3..rollHighestAndThenSome
 
-// stomach bound is only when abs(roll) is closerToPi
 const val guessPitchStomachBound = 0.20
-// back bound is regardless of roll
-const val guessPitchBackBound = 0.85
+const val guessPitchBackBound = 0.95
 
 val rollUprightRange = 0.90..1.5
 val pitchRangeWhileUpright = 0.00..0.50
