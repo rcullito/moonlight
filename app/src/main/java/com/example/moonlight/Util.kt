@@ -25,7 +25,7 @@ fun decideInRangePitch(pitch: Double, roll: Double): Boolean {
   if (onBackAccordingToRoll(roll)) {
     return true
   } else {
-    return abs(pitch) < guessPitchStomachBound || abs(pitch) > guessPitchBackBound
+    return abs(pitch) < pitchStomachBound || abs(pitch) > pitchBackBound
   }
 }
 
