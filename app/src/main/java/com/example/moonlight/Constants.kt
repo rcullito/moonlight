@@ -28,7 +28,7 @@ val rollSideStomach = rollCutPoint2..rollCutPoint3
 val rollStomach = rollCutPoint3..rollHighestAndThenSome
 
 const val guessPitchStomachBound = 0.20
-const val guessPitchBackBound = 0.95
+const val guessPitchBackBound = 1.00
 
 val rollUprightRange = 0.90..1.5
 val pitchRangeWhileUpright = 0.00..0.50
