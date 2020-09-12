@@ -71,12 +71,13 @@ class IndividualFragment : Fragment() {
         var dataSet = LineDataSet(entries, "Sleep")
         val lineData = LineData(dataSet)
         chart.data = lineData
+
       }
 
     }
 
-
     return binding.root
+
   }
 
 }
