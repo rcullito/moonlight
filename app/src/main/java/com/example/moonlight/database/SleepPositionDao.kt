@@ -21,8 +21,6 @@ interface SleepPositionDao {
   fun getUniqueDates(): LiveData<List<SleepDate>>
 
   @Query("SELECT * FROM sleep_position_table WHERE date(round(sleep_position_timestamp / 1000), 'unixepoch') BETWEEN :beforeDate AND :afterDate")
-  fun getSpecificDate(beforeDate: String, afterDate: String): LiveData<List<SleepPosition>>
-
-
+  fun getSpecificDate(beforeDate: String, afterDate: String): List<SleepPosition>
 
 }

@@ -12,6 +12,7 @@ import com.example.moonlight.*
 import com.example.moonlight.database.SleepDatabase
 import com.example.moonlight.databinding.FragmentIndividualBinding
 import com.github.mikephil.charting.charts.LineChart
+import com.github.mikephil.charting.data.Entry
 
 
 class IndividualFragment : Fragment() {
@@ -52,6 +53,14 @@ class IndividualFragment : Fragment() {
     binding.individualViewModel = individualViewModel
 
     val chart: LineChart = binding.chart as LineChart
+
+    var positions = individualViewModel.positions
+    var entries: ArrayList<Entry> = ArrayList()
+
+    for (position in positions) {
+      // turn your data into Entry objects
+      entries.add(Entry(position.sleepPositionTime.toFloat(), position.pitch.toFloat()));
+    }
 
 
 
