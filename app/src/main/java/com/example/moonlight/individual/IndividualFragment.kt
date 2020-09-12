@@ -7,17 +7,22 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
-import com.example.moonlight.*
+import com.example.moonlight.R
 import com.example.moonlight.database.SleepDatabase
 import com.example.moonlight.databinding.FragmentIndividualBinding
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.data.Entry
+import com.github.mikephil.charting.data.LineData
+import com.github.mikephil.charting.data.LineDataSet
+import kotlinx.coroutines.*
 
 
 class IndividualFragment : Fragment() {
 
   private lateinit var binding: FragmentIndividualBinding
+
+  var hpJob = Job()
+  private val hpScope = CoroutineScope(Dispatchers.Default + hpJob)
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -48,20 +53,27 @@ class IndividualFragment : Fragment() {
     val individualViewModel: IndividualViewModel by activityViewModels({ viewModelFactory })
     binding.setLifecycleOwner(this)
 
-    individualViewModel.getSpecificDate(date)
-
     binding.individualViewModel = individualViewModel
 
-    val chart: LineChart = binding.chart as LineChart
+    hpScope.launch {
+      withContext(Dispatchers.IO) {
+        individualViewModel.getSpecificDate(date)
+        val chart: LineChart = binding.chart as LineChart
 
-    var positions = individualViewModel.positions
-    var entries: ArrayList<Entry> = ArrayList()
+        var positions = individualViewModel.positions
+        var entries: ArrayList<Entry> = ArrayList()
 
-    for (position in positions) {
-      // turn your data into Entry objects
-      entries.add(Entry(position.sleepPositionTime.toFloat(), position.pitch.toFloat()));
+        for (position in positions) {
+          // turn your data into Entry objects
+          entries.add(Entry(position.sleepPositionTime.toFloat(), position.pitch.toFloat()));
+        }
+
+        var dataSet = LineDataSet(entries, "Sleep")
+        val lineData = LineData(dataSet)
+        chart.data = lineData
+      }
+
     }
-
 
 
     return binding.root
