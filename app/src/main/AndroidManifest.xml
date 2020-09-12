@@ -21,6 +21,9 @@
       </intent-filter>
     </activity>
 
+    <activity android:name="com.example.moonlight.IndividualActivity">
+    </activity>
+
     <service android:name="com.example.moonlight.sensor.SensorService">
     </service>
   </application>

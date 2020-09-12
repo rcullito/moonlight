@@ -15,20 +15,15 @@
     android:label="Past Sleep Nights"
     tools:layout="@layout/fragment_results" >
     <action
-      android:id="@+id/action_resultsFragment2_to_individualFragment"
-      app:destination="@id/individualFragment" />
+      android:id="@+id/action_resultsFragment2_to_individualActivity"
+      app:destination="@id/individualActivity" />
   </fragment>
   <fragment
     android:id="@+id/sensorFragment"
     android:name="com.example.moonlight.sensor.SensorFragment"
     android:label="Track" />
-  <fragment
-    android:id="@+id/individualFragment"
-    android:name="com.example.moonlight.individual.IndividualFragment"
-    android:label="Individual Recordings"
-    tools:layout="@layout/fragment_individual">
-    <argument
-      android:name="date"
-      app:argType="string" />
-  </fragment>
+  <activity
+    android:id="@+id/individualActivity"
+    android:name="com.example.moonlight.IndividualActivity"
+    android:label="IndividualActivity" />
 </navigation>
