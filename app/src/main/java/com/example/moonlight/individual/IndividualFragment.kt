@@ -9,8 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import com.example.moonlight.R
-import com.example.moonlight.convertLongToDateString
-import com.example.moonlight.convertLongToHourMinuteString
+import com.example.moonlight.convertLongToTimeString
 import com.example.moonlight.database.SleepDatabase
 import com.example.moonlight.databinding.FragmentIndividualBinding
 import com.github.mikephil.charting.charts.LineChart
@@ -23,7 +22,7 @@ import com.github.mikephil.charting.formatter.ValueFormatter
 
 class MyXAxisFormatter : ValueFormatter() {
   override fun getAxisLabel(value: Float, axis: AxisBase?): String {
-    return convertLongToHourMinuteString(value.toLong())
+    return convertLongToTimeString(value.toLong(), "HH:mm:ss")
   }
 }
 

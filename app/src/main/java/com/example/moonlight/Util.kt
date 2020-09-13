@@ -92,16 +92,9 @@ fun deriveEventClockTime(eventTimeStamp: Long): Long {
   return eventClockTime
 }
 
-
-fun convertLongToHourMinuteString(systemTime: Long): String {
+fun convertLongToTimeString(systemTime: Long, desiredDateFormat: String): String {
   // return SimpleDateFormat("EEEE MMM-dd-yyyy' 'HH:mm")
-  return SimpleDateFormat("HH:mm:ss")
-    .format(systemTime).toString()
-}
-
-fun convertLongToDateString(systemTime: Long): String {
-  // return SimpleDateFormat("EEEE MMM-dd-yyyy' 'HH:mm")
-  return SimpleDateFormat("MMM-dd' 'HH:mm:ss")
+  return SimpleDateFormat(desiredDateFormat)
     .format(systemTime).toString()
 }
 
@@ -109,7 +102,7 @@ fun formatPosition(position: SleepPosition): Spanned {
   val sb = java.lang.StringBuilder()
   sb.apply {
     append("<b>Time:</b>")
-    append("\t${convertLongToDateString(position.sleepPositionTime)}")
+    append("\t${convertLongToTimeString(position.sleepPositionTime, "MMM-dd' 'HH:mm:ss")}")
     append(" ")
     //  append("<b>Pitch: </b>")
     //  append("%.2f".format(it.pitch))
