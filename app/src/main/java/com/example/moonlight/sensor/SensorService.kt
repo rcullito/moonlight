@@ -153,8 +153,6 @@ class SensorService : Service(), SensorEventListener {
       }
 
     var eventClockTime = deriveEventClockTime(event.timestamp)
-
-
     var mostRecentPosition = updateOrientationAngles(accelerometerReading, magnetometerReading, eventClockTime, applicationContext) // 1.
     updateSleepPositionOnSensorChanged(mostRecentPosition)
   }
