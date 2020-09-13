@@ -16,6 +16,7 @@ import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 
+
 class IndividualFragment : Fragment() {
 
   private lateinit var binding: FragmentIndividualBinding
@@ -53,6 +54,13 @@ class IndividualFragment : Fragment() {
     individualViewModel.positions.observe(viewLifecycleOwner, Observer {
       var chart: LineChart = binding.chart as LineChart
       chart.isScaleYEnabled = false
+
+      chart.axisRight.isEnabled = false
+      val xAxis = chart.xAxis
+      xAxis.setDrawGridLines(false)
+
+      val leftAxis = chart.axisLeft
+      leftAxis.setDrawGridLines(false)
 
       var entries: ArrayList<Entry> = ArrayList()
 
