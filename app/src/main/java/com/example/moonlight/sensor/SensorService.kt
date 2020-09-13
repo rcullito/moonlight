@@ -10,16 +10,17 @@ import android.hardware.SensorManager
 import android.os.Build
 import android.os.IBinder
 import android.os.PowerManager
+import android.os.SystemClock
 import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import com.example.moonlight.database.SleepDatabase
 import com.example.moonlight.database.SleepPosition
-import com.example.moonlight.deriveEventClockTime
 import com.example.moonlight.pauseAction
 import com.example.moonlight.startAction
 import com.example.moonlight.stopAction
 import kotlinx.coroutines.*
+import java.util.concurrent.TimeUnit
 
 class SensorService : Service(), SensorEventListener {
   private lateinit var sensorManager: SensorManager
@@ -136,6 +137,13 @@ class SensorService : Service(), SensorEventListener {
   override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
   }
 
+  fun deriveEventClockTime(eventTimeStamp: Long): Long {
+    // event time relative to system boot
+    var timeSinceEventMillis = SystemClock.elapsedRealtime() - TimeUnit.NANOSECONDS.toMillis(eventTimeStamp)
+    // when did our event happen in a wall clock sense
+    return System.currentTimeMillis() - timeSinceEventMillis
+  }
+
   @RequiresApi(Build.VERSION_CODES.O)
   override fun onSensorChanged(event: SensorEvent) {
       if (event.sensor.type == Sensor.TYPE_ACCELEROMETER) {
@@ -144,14 +152,11 @@ class SensorService : Service(), SensorEventListener {
         System.arraycopy(event.values, 0, magnetometerReading, 0, magnetometerReading.size)
       }
 
-      var eventClockTime = deriveEventClockTime(event.timestamp)
-      // if the time of the most recent event is more than a second after our last recorded one,
-      //then start recording again and potentially acting again
-      if ((eventClockTime - lastUpdate) > 1000) {
-        var mostRecentPosition = updateOrientationAngles(accelerometerReading, magnetometerReading, eventClockTime, applicationContext) // 1.
-        lastUpdate = eventClockTime
-        updateSleepPositionOnSensorChanged(mostRecentPosition)
-      }
+    var eventClockTime = deriveEventClockTime(event.timestamp)
+
+
+    var mostRecentPosition = updateOrientationAngles(accelerometerReading, magnetometerReading, eventClockTime, applicationContext) // 1.
+    updateSleepPositionOnSensorChanged(mostRecentPosition)
   }
 
 }

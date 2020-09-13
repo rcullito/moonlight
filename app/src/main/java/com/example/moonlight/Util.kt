@@ -1,33 +1,13 @@
 package com.example.moonlight
 
 import android.os.Build
-import android.os.SystemClock
 import android.text.Html
 import android.text.Spanned
 import android.util.Log
 import androidx.core.text.HtmlCompat
 import com.example.moonlight.database.SleepPosition
 import java.text.SimpleDateFormat
-import java.util.concurrent.TimeUnit
 import kotlin.math.abs
-
-fun decideInRangeRoll(position: Double): Boolean {
-  // TODO this fn would need an absolute value for position here
-  return position < rollLowerRotationBound || position > rollUpperRotationBound
-}
-
-fun decideInRangePitch(pitch: Double, roll: Double): Boolean {
-
-  if (abs(roll) in rollUprightRange && abs(pitch) in pitchRangeWhileUpright) {
-    return false
-  }
-
-  if (onBackAccordingToRoll(roll)) {
-    return true
-  } else {
-    return abs(pitch) < pitchStomachBound || abs(pitch) > pitchBackBound
-  }
-}
 
 fun pos(angle: Double): Boolean {
   return angle >= 0.0
@@ -78,18 +58,6 @@ fun convertNumericQualityToStringPitch(roll: Double, pitch: Double): String {
   val pitchPosition = side + " " + facing
   Log.i("Util", pitchPosition)
   return pitchPosition
-}
-
-fun deriveEventClockTime(eventTimeStamp: Long): Long {
-  // first get an idea of time relative to system boot
-  var elapsedRealTimeMillis = SystemClock.elapsedRealtime()
-  var eventElapsedRealTimeMillis = TimeUnit.NANOSECONDS.toMillis(eventTimeStamp)
-  var timeSinceEventMillis = elapsedRealTimeMillis - eventElapsedRealTimeMillis
-  // what time is it actually from a wall clock's perspective
-  var currentClockTime = System.currentTimeMillis()
-  // when did our event happen in a wall clock sense
-  var eventClockTime = currentClockTime - timeSinceEventMillis
-  return eventClockTime
 }
 
 fun convertLongToTimeString(systemTime: Long, desiredDateFormat: String): String {

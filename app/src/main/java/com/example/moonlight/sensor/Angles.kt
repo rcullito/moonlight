@@ -4,11 +4,30 @@ import android.content.Context
 import android.hardware.SensorManager
 import android.os.Build
 import androidx.annotation.RequiresApi
+import com.example.moonlight.*
 import com.example.moonlight.database.SleepPosition
-import com.example.moonlight.decideInRangePitch
+import kotlin.math.abs
 
 val rotationMatrix = FloatArray(9)
 val orientationAngles = FloatArray(3)
+
+fun decideInRangeRoll(position: Double): Boolean {
+  // TODO this fn would need an absolute value for position here
+  return position < rollLowerRotationBound || position > rollUpperRotationBound
+}
+
+fun decideInRangePitch(pitch: Double, roll: Double): Boolean {
+
+  if (abs(roll) in rollUprightRange && abs(pitch) in pitchRangeWhileUpright) {
+    return false
+  }
+
+  if (onBackAccordingToRoll(roll)) {
+    return true
+  } else {
+    return abs(pitch) < pitchStomachBound || abs(pitch) > pitchBackBound
+  }
+}
 
 @RequiresApi(Build.VERSION_CODES.O)
 fun updateOrientationAngles(accelerometerReading: FloatArray, magnetometerReading: FloatArray, eventTimestamp: Long, ctx: Context): SleepPosition {
