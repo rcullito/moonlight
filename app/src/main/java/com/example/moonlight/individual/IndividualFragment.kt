@@ -52,6 +52,7 @@ class IndividualFragment : Fragment() {
 
     individualViewModel.positions.observe(viewLifecycleOwner, Observer {
       var chart: LineChart = binding.chart as LineChart
+      chart.isScaleYEnabled = false
 
       var entries: ArrayList<Entry> = ArrayList()
 
