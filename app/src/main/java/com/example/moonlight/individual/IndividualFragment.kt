@@ -12,11 +12,7 @@ import com.example.moonlight.R
 import com.example.moonlight.convertLongToTimeString
 import com.example.moonlight.database.SleepDatabase
 import com.example.moonlight.databinding.FragmentIndividualBinding
-import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.AxisBase
-import com.github.mikephil.charting.data.Entry
-import com.github.mikephil.charting.data.LineData
-import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.ValueFormatter
 
 
@@ -25,8 +21,6 @@ class MyXAxisFormatter : ValueFormatter() {
     return convertLongToTimeString(value.toLong(), "HH:mm:ss")
   }
 }
-
-
 class IndividualFragment : Fragment() {
 
   private lateinit var binding: FragmentIndividualBinding
@@ -62,28 +56,7 @@ class IndividualFragment : Fragment() {
     binding.setLifecycleOwner(this)
 
     individualViewModel.positions.observe(viewLifecycleOwner, Observer {
-      var chart: LineChart = binding.chart as LineChart
-      chart.isScaleYEnabled = false
-
-      chart.axisRight.isEnabled = false
-      val xAxis = chart.xAxis
-
-      xAxis.valueFormatter = MyXAxisFormatter()
-      xAxis.setDrawGridLines(false)
-
-      val leftAxis = chart.axisLeft
-      leftAxis.setDrawGridLines(false)
-
-      var entries: ArrayList<Entry> = ArrayList()
-
-      for (position in it) {
-        entries.add(Entry(position.sleepPositionTime.toFloat(), position.pitch.toFloat()));
-      }
-
-      var dataSet = LineDataSet(entries, "Sleep")
-      val lineData = LineData(dataSet)
-      chart.data = lineData
-      chart.data.isHighlightEnabled = false
+      buildChart(binding, it)
     })
 
     return binding.root
