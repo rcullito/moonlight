@@ -93,6 +93,12 @@ fun deriveEventClockTime(eventTimeStamp: Long): Long {
 }
 
 
+fun convertLongToHourMinuteString(systemTime: Long): String {
+  // return SimpleDateFormat("EEEE MMM-dd-yyyy' 'HH:mm")
+  return SimpleDateFormat("HH:mm:ss")
+    .format(systemTime).toString()
+}
+
 fun convertLongToDateString(systemTime: Long): String {
   // return SimpleDateFormat("EEEE MMM-dd-yyyy' 'HH:mm")
   return SimpleDateFormat("MMM-dd' 'HH:mm:ss")

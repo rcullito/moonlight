@@ -9,12 +9,23 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import com.example.moonlight.R
+import com.example.moonlight.convertLongToDateString
+import com.example.moonlight.convertLongToHourMinuteString
 import com.example.moonlight.database.SleepDatabase
 import com.example.moonlight.databinding.FragmentIndividualBinding
 import com.github.mikephil.charting.charts.LineChart
+import com.github.mikephil.charting.components.AxisBase
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
+import com.github.mikephil.charting.formatter.ValueFormatter
+
+
+class MyXAxisFormatter : ValueFormatter() {
+  override fun getAxisLabel(value: Float, axis: AxisBase?): String {
+    return convertLongToHourMinuteString(value.toLong())
+  }
+}
 
 
 class IndividualFragment : Fragment() {
@@ -57,6 +68,8 @@ class IndividualFragment : Fragment() {
 
       chart.axisRight.isEnabled = false
       val xAxis = chart.xAxis
+
+      xAxis.valueFormatter = MyXAxisFormatter()
       xAxis.setDrawGridLines(false)
 
       val leftAxis = chart.axisLeft
