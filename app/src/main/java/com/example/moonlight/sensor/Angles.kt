@@ -50,39 +50,29 @@ fun buildMinuteRange(hoursList: List<Int>): MutableList<String> {
 }
 
 val top_hours = listOf(9, 10, 11, 12, 1, 2)
-// get the count of this, and then the ratio will give us the index
+val bottom_hours = listOf(3, 4, 5, 6, 7, 8)
+
 val top_of_clock_range = buildMinuteRange(top_hours)
+val bottom_of_clock_range = buildMinuteRange(bottom_hours)
+
 val top_of_clock_start_index = 0
 val top_of_clock_end_index = top_of_clock_range.count() - 1
 val clockIntRange = IntRange(top_of_clock_start_index, top_of_clock_end_index)
 
-
-
-
 fun cooCoo(pitch: Double, roll: Double): String {
-  // if we are on our back according to roll, then our range is  9-12, 0-3
 
   var floatPitch = pitch.toFloat()
+
+  var sixHourIndex =  robRange(FloatRange(-1.57f, 1.57f), clockIntRange, floatPitch)
+
   if (onBackAccordingToRoll(roll)) {
-    var sixHourIndex =  robRange(FloatRange(-1.57f, 1.57f), clockIntRange, floatPitch)
-    var pitchClockTime = top_of_clock_range[sixHourIndex]
-    return pitchClockTime
+
+    return top_of_clock_range[sixHourIndex]
+
+  } else {
+
+    return bottom_of_clock_range[sixHourIndex]
   }
-
-  // pitch of 0 is 12 noon
-  //  -1.57 is 3
-  // -0.78 is 1:30
-  // 0.78 is 10:30
-  // 1.57 is 9
-
-
-  // if we are on our stomach according to roll, then our range is 3-9
-
-  // then it becomes a mapping of ranges
-  // then if want to get fancy, going from base 100 to base 60 for the minutes
-  // round to nearest minute
-
-  return "up next is the other six hours"
 }
 
 @RequiresApi(Build.VERSION_CODES.O)
