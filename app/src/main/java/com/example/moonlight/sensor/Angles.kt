@@ -40,9 +40,12 @@ fun ClosedFloatingPointRange<Double>.convert(number: Double, target: ClosedFloat
 
 // welp ok, nice, we are halfway through both, but we need our target range to be in minutes!
 
-fun buildMinuteRange(): String {
+fun buildMinuteRange(): MutableList<String> {
+  var minutesHours = mutableListOf<String>()
   for (minute in 0..60) for (hour in 0..3)
-    hour.toString() + minute.toString()
+    minutesHours.add(hour.toString() + minute.toString())
+
+  return minutesHours
 }
 
 
