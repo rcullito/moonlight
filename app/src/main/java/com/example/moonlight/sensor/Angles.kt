@@ -38,21 +38,29 @@ fun ClosedFloatingPointRange<Double>.convert(number: Double, target: ClosedFloat
   return ratio * (target.endInclusive - target.start)
 }
 
-fun buildMinuteRange(): MutableList<String> {
+fun buildMinuteRange(hoursList: List<Int>): MutableList<String> {
   var minutesHours = mutableListOf<String>()
-  for (hour in listOf(12, 1, 2, 3)) for (minute in 0..59)
+  for (hour in hoursList) for (minute in 0..59)
     minutesHours.add("$hour:$minute")
 
   return minutesHours
 }
 
+val top_hours = listOf(9, 10, 11, 12, 1, 2)
+// get the count of this, and then the ratio will give us the index
+val top_of_clock_range = buildMinuteRange(top_hours)
 
 
-val result =  (-0.0..-1.57).convert(-0.78, 0.0..3.0)
 
 
 fun cooCoo(pitch: Double, roll: Double): Double {
-  // if we are on our back according to roll, then our range is JOIN 9-12, 0-3
+  // if we are on our back according to roll, then our range is  9-12, 0-3
+
+
+  if (onBackAccordingToRoll(roll)) {
+    // TODO convert this to a const, pi and pi/2
+    val result =  (-1.57..1.57).convert(-0.78, top_of_clock_range)
+  }
 
   // pitch of 0 is 12 noon
   //  -1.57 is 3
