@@ -32,8 +32,25 @@ fun decideInRangePitch(pitch: Double, roll: Double): Boolean {
   }
 }
 
+// extension function assumed to always act on our time range
+fun ClosedFloatingPointRange<Double>.convert(number: Double, target: ClosedFloatingPointRange<Double>): Double {
+  val ratio = number.toFloat() / (endInclusive - start)
+  return ratio * (target.endInclusive - target.start)
+}
+
+val result =  (-0.0..-1.57).convert(-0.78, 0.0..3.0)
+
+
 fun cooCoo(pitch: Double, roll: Double): Double {
   // if we are on our back according to roll, then our range is JOIN 9-12, 0-3
+
+  // pitch of 0 is 12 noon
+  //  -1.57 is 3
+  // -0.78 is 1:30
+  // 0.78 is 10:30
+  // 1.57 is 9
+
+
   // if we are on our stomach according to roll, then our range is 3-9
 
   // then it becomes a mapping of ranges
