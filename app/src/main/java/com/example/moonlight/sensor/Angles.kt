@@ -29,6 +29,10 @@ fun decideInRangePitch(pitch: Double, roll: Double): Boolean {
   }
 }
 
+fun cooCoo(pitch: Double, roll: Double): Double {
+  return 12.57
+}
+
 @RequiresApi(Build.VERSION_CODES.O)
 fun updateOrientationAngles(accelerometerReading: FloatArray, magnetometerReading: FloatArray, eventTimestamp: Long, ctx: Context): SleepPosition {
   SensorManager.getRotationMatrix(rotationMatrix, null, accelerometerReading, magnetometerReading)
@@ -41,5 +45,7 @@ fun updateOrientationAngles(accelerometerReading: FloatArray, magnetometerReadin
     motionVibrate(ctx)
   }
 
-  return SleepPosition(pitch = pitch, roll = roll, sleepPositionTime = eventTimestamp)
+  var wallClock = cooCoo(pitch, roll)
+
+  return SleepPosition(pitch = pitch, roll = roll, sleepPositionTime = eventTimestamp, wallClock = 12.57)
 }

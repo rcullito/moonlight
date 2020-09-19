@@ -1,11 +1,20 @@
 package com.example.moonlight.individual
 
+import com.example.moonlight.convertLongToTimeString
 import com.example.moonlight.database.SleepPosition
 import com.example.moonlight.databinding.FragmentIndividualBinding
 import com.github.mikephil.charting.charts.LineChart
+import com.github.mikephil.charting.components.AxisBase
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
+import com.github.mikephil.charting.formatter.ValueFormatter
+
+class MyXAxisFormatter : ValueFormatter() {
+  override fun getAxisLabel(value: Float, axis: AxisBase?): String {
+    return convertLongToTimeString(value.toLong(), "HH:mm:ss")
+  }
+} 
 
 fun buildChart(binding: FragmentIndividualBinding, sleepPositions: List<SleepPosition>) {
   var chart: LineChart = binding.chart as LineChart

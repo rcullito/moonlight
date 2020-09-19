@@ -9,18 +9,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import com.example.moonlight.R
-import com.example.moonlight.convertLongToTimeString
 import com.example.moonlight.database.SleepDatabase
 import com.example.moonlight.databinding.FragmentIndividualBinding
-import com.github.mikephil.charting.components.AxisBase
-import com.github.mikephil.charting.formatter.ValueFormatter
 
 
-class MyXAxisFormatter : ValueFormatter() {
-  override fun getAxisLabel(value: Float, axis: AxisBase?): String {
-    return convertLongToTimeString(value.toLong(), "HH:mm:ss")
-  }
-}
 class IndividualFragment : Fragment() {
 
   private lateinit var binding: FragmentIndividualBinding

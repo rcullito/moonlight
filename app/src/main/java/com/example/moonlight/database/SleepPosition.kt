@@ -17,6 +17,9 @@ data class SleepPosition(
   var pitch: Double,
 
   @ColumnInfo(name = "roll")
-  var roll: Double
+  var roll: Double,
+
+  @ColumnInfo(name = "wall_clock")
+  var wallClock:  Double
 
 )
