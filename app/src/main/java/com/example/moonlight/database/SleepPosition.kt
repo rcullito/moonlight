@@ -20,6 +20,6 @@ data class SleepPosition(
   var roll: Double,
 
   @ColumnInfo(name = "wall_clock")
-  var wallClock:  Double
+  var wallClock:  String
 
 )

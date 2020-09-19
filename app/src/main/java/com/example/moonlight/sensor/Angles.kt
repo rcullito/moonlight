@@ -89,5 +89,5 @@ fun updateOrientationAngles(accelerometerReading: FloatArray, magnetometerReadin
 
   var wallClock = cooCoo(pitch, roll)
 
-  return SleepPosition(pitch = pitch, roll = roll, sleepPositionTime = eventTimestamp, wallClock = 12.57)
+  return SleepPosition(pitch = pitch, roll = roll, sleepPositionTime = eventTimestamp, wallClock = wallClock)
 }
