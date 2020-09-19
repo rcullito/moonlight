@@ -6,19 +6,12 @@ import android.text.Spanned
 import android.util.Log
 import androidx.core.text.HtmlCompat
 import com.example.moonlight.database.SleepPosition
+import com.example.moonlight.sensor.onBackAccordingToRoll
 import java.text.SimpleDateFormat
 import kotlin.math.abs
 
 fun pos(angle: Double): Boolean {
   return angle >= 0.0
-}
-
-fun onBackAccordingToRoll(roll: Double): Boolean {
-  val roll_absolute = abs(roll)
-  val diffPi = 3.14 - roll_absolute
-  val diffZero = roll_absolute
-
-  return diffPi > diffZero
 }
 
 fun convertNumericQualityToStringRoll(roll: Double, pitch: Double): String {

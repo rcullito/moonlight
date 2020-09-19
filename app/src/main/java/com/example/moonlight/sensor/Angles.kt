@@ -11,9 +11,12 @@ import kotlin.math.abs
 val rotationMatrix = FloatArray(9)
 val orientationAngles = FloatArray(3)
 
-fun decideInRangeRoll(position: Double): Boolean {
-  // TODO this fn would need an absolute value for position here
-  return position < rollLowerRotationBound || position > rollUpperRotationBound
+fun onBackAccordingToRoll(roll: Double): Boolean {
+  val roll_absolute = abs(roll)
+  val diffPi = 3.14 - roll_absolute
+  val diffZero = roll_absolute
+
+  return diffPi > diffZero
 }
 
 fun decideInRangePitch(pitch: Double, roll: Double): Boolean {
@@ -30,6 +33,13 @@ fun decideInRangePitch(pitch: Double, roll: Double): Boolean {
 }
 
 fun cooCoo(pitch: Double, roll: Double): Double {
+  // if we are on our back according to roll, then our range is JOIN 9-12, 0-3
+  // if we are on our stomach according to roll, then our range is 3-9
+
+  // then it becomes a mapping of ranges
+  // then if want to get fancy, going from base 100 to base 60 for the minutes
+  // round to nearest minute
+
   return 12.57
 }
 
