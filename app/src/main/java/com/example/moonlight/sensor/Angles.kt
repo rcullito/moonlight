@@ -38,12 +38,10 @@ fun ClosedFloatingPointRange<Double>.convert(number: Double, target: ClosedFloat
   return ratio * (target.endInclusive - target.start)
 }
 
-// welp ok, nice, we are halfway through both, but we need our target range to be in minutes!
-
 fun buildMinuteRange(): MutableList<String> {
   var minutesHours = mutableListOf<String>()
-  for (minute in 0..60) for (hour in 0..3)
-    minutesHours.add(hour.toString() + minute.toString())
+  for (hour in listOf(12, 1, 2, 3)) for (minute in 0..59)
+    minutesHours.add("$hour:$minute")
 
   return minutesHours
 }
