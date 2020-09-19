@@ -38,6 +38,15 @@ fun ClosedFloatingPointRange<Double>.convert(number: Double, target: ClosedFloat
   return ratio * (target.endInclusive - target.start)
 }
 
+// welp ok, nice, we are halfway through both, but we need our target range to be in minutes!
+
+fun buildMinuteRange(): String {
+  for (minute in 0..60) for (hour in 0..3)
+    hour.toString() + minute.toString()
+}
+
+
+
 val result =  (-0.0..-1.57).convert(-0.78, 0.0..3.0)
 
 
