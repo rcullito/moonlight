@@ -3,6 +3,7 @@ package com.example.moonlight.individual
 import com.example.moonlight.convertLongToTimeString
 import com.example.moonlight.database.SleepPosition
 import com.example.moonlight.databinding.FragmentIndividualBinding
+import com.example.moonlight.sensor.staticClockDataStructure
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.AxisBase
 import com.github.mikephil.charting.data.Entry
@@ -14,7 +15,13 @@ class MyXAxisFormatter : ValueFormatter() {
   override fun getAxisLabel(value: Float, axis: AxisBase?): String {
     return convertLongToTimeString(value.toLong(), "HH:mm:ss")
   }
-} 
+}
+
+class MyYAxisFormatter : ValueFormatter() {
+  override fun getAxisLabel(value: Float, axis: AxisBase?): String {
+    return staticClockDataStructure[value.toInt()]
+  }
+}
 
 fun buildChart(binding: FragmentIndividualBinding, sleepPositions: List<SleepPosition>) {
   var chart: LineChart = binding.chart as LineChart
@@ -27,6 +34,7 @@ fun buildChart(binding: FragmentIndividualBinding, sleepPositions: List<SleepPos
   xAxis.setDrawGridLines(false)
 
   val leftAxis = chart.axisLeft
+  leftAxis.valueFormatter = MyYAxisFormatter()
   leftAxis.setDrawGridLines(false)
 
   var entries: ArrayList<Entry> = ArrayList()
