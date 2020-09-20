@@ -9,7 +9,7 @@ fun buildMinuteRange(hoursList: List<Int>): MutableList<String> {
 }
 
 var hours = listOf(12, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11)
-
+// will be used from within the axis formatter
 var staticClockDataStructure: MutableList<String> = buildMinuteRange(hours)
 
 

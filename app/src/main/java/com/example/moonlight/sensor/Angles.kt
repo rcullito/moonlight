@@ -14,7 +14,9 @@ val orientationAngles = FloatArray(3)
 
 class FloatRange(override val start: Float, override val endInclusive: Float) : ClosedRange<Float>
 
-fun robRange(range1: FloatRange, range2: IntRange, value: Float): Int {
+val pitchRange = FloatRange(-1.57f, 1.57f)
+
+fun floatToIntRange(range1: FloatRange, range2: IntRange, value: Float): Int {
   if (value !in range1) throw IllegalArgumentException("value is not within the first range")
   if (range1.endInclusive == range1.start) throw IllegalArgumentException("first range cannot be single-valued")
   return range2.start + ((value - range1.start) * (range2.endInclusive - range2.start) / (range1.endInclusive - range1.start)).toInt()
@@ -41,19 +43,14 @@ fun decideInRangePitch(pitch: Double, roll: Double): Boolean {
   }
 }
 
-fun cooCoo(pitch: Double, roll: Double): String {
+fun cooCoo(pitch: Double, roll: Double): Int {
 
-  var floatPitch = pitch.toFloat()
-
-  var sixHourIndex =  robRange(FloatRange(-1.57f, 1.57f), clockIntRange, floatPitch)
+  var tempindex = floatToIntRange(pitchRange, 1..360, pitch.toFloat())
 
   if (onBackAccordingToRoll(roll)) {
-
-    return top_of_clock_range[sixHourIndex]
-
+    return topHalfInts[tempindex]
   } else {
-
-    return bottom_of_clock_range[sixHourIndex]
+    return bottomHalfInts[tempindex]
   }
 }
 
