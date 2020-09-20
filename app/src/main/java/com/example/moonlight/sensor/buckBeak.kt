@@ -19,11 +19,10 @@ val top_of_clock_end_index = top_of_clock_range.count() - 1
 val clockIntRange = IntRange(top_of_clock_start_index, top_of_clock_end_index)
 
 
-// data structure for charting lib
 fun buildTopHalfOfClockInts(): MutableList<Int> {
   var topOfClockInts = mutableListOf<Int>()
-  for (i in (540..720)) topOfClockInts.add(i)
-  for (i in (0..180)) topOfClockInts.add(i)
+  for (i in (540..719)) topOfClockInts.add(i)
+  for (i in (0..179)) topOfClockInts.add(i)
   return topOfClockInts
 }
 
