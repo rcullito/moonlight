@@ -8,15 +8,9 @@ fun buildMinuteRange(hoursList: List<Int>): MutableList<String> {
   return minutesHours
 }
 
-val top_hours = listOf(9, 10, 11, 12, 1, 2)
-val bottom_hours = listOf(3, 4, 5, 6, 7, 8)
+var hours = listOf(12, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11)
 
-val top_of_clock_range = buildMinuteRange(top_hours)
-val bottom_of_clock_range = buildMinuteRange(bottom_hours)
-
-val top_of_clock_start_index = 0
-val top_of_clock_end_index = top_of_clock_range.count() - 1
-val clockIntRange = IntRange(top_of_clock_start_index, top_of_clock_end_index)
+var staticClockDataStructure: MutableList<String> = buildMinuteRange(hours)
 
 
 fun buildHalfOfClockInts(range1: IntRange, range2: IntRange): MutableList<Int> {
