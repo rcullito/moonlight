@@ -14,10 +14,14 @@ import com.github.mikephil.charting.formatter.ValueFormatter
 import com.github.mikephil.charting.utils.ColorTemplate
 
 
+var baseTime: Long = 0
 
 class MyXAxisFormatter : ValueFormatter() {
   override fun getAxisLabel(value: Float, axis: AxisBase?): String {
-    return convertLongToTimeString(value.toLong(), "HH:mm:ss")
+
+    var reAddedValue = value.toLong() + baseTime
+
+    return convertLongToTimeString(reAddedValue, "HH:mm:ss")
   }
 }
 
@@ -28,6 +32,9 @@ class MyYAxisFormatter : ValueFormatter() {
 }
 
 fun buildChart(binding: FragmentIndividualBinding, sleepPositions: List<SleepPosition>) {
+
+  baseTime = sleepPositions.first().sleepPositionTime
+
   var chart: ScatterChart = binding.chart
   chart.isScaleYEnabled = false
 
@@ -44,7 +51,11 @@ fun buildChart(binding: FragmentIndividualBinding, sleepPositions: List<SleepPos
   var entries: ArrayList<Entry> = ArrayList()
 
   for (position in sleepPositions) {
-    entries.add(Entry(position.sleepPositionTime.toFloat(), position.wallClock.toFloat()));
+
+    var xValue = (position.sleepPositionTime - baseTime).toFloat()
+    var yValue = position.wallClock.toFloat()
+
+    entries.add(Entry(xValue, yValue));
   }
 
   var dataSet = ScatterDataSet(entries, "Sleep")
