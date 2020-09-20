@@ -40,7 +40,7 @@ fun buildChart(binding: FragmentIndividualBinding, sleepPositions: List<SleepPos
   var entries: ArrayList<Entry> = ArrayList()
 
   for (position in sleepPositions) {
-    entries.add(Entry(position.sleepPositionTime.toFloat(), position.pitch.toFloat()));
+    entries.add(Entry(position.sleepPositionTime.toFloat(), position.wallClock.toFloat()));
   }
 
   var dataSet = LineDataSet(entries, "Sleep")

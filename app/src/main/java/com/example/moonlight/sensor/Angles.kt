@@ -3,6 +3,7 @@ package com.example.moonlight.sensor
 import android.content.Context
 import android.hardware.SensorManager
 import android.os.Build
+import android.util.Log
 import androidx.annotation.RequiresApi
 import com.example.moonlight.*
 import com.example.moonlight.database.SleepPosition
@@ -67,6 +68,8 @@ fun updateOrientationAngles(accelerometerReading: FloatArray, magnetometerReadin
   }
 
   var wallClock = cooCoo(pitch, roll)
+  Log.i("Angles", pitch.toString())
+  Log.i("Angles", wallClock.toString())
 
   return SleepPosition(pitch = pitch, roll = roll, sleepPositionTime = eventTimestamp, wallClock = wallClock)
 }
