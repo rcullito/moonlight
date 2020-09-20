@@ -19,12 +19,15 @@ val top_of_clock_end_index = top_of_clock_range.count() - 1
 val clockIntRange = IntRange(top_of_clock_start_index, top_of_clock_end_index)
 
 
-fun buildTopHalfOfClockInts(): MutableList<Int> {
+fun buildHalfOfClockInts(range1: IntRange, range2: IntRange): MutableList<Int> {
   var topOfClockInts = mutableListOf<Int>()
-  for (i in (540..719)) topOfClockInts.add(i)
-  for (i in (0..179)) topOfClockInts.add(i)
+  for (i in (range1)) topOfClockInts.add(i)
+  for (i in (range2)) topOfClockInts.add(i)
   return topOfClockInts
 }
+
+var topHalfInts = buildHalfOfClockInts(540..719, 0..179)
+var bottomHalfInts = buildHalfOfClockInts(180..359, 360..539)
 
 
 
