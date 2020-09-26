@@ -6,7 +6,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moonlight.database.SleepPosition
 import com.example.moonlight.databinding.ListItemSleepPositionBinding
-import com.example.moonlight.formatPosition
 
 /**
  * ViewHolder that holds a single [TextView].
