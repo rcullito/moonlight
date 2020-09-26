@@ -13,6 +13,10 @@ import kotlin.math.roundToInt
 val rotationMatrix = FloatArray(9)
 val orientationAngles = FloatArray(3)
 
+fun pos(angle: Double): Boolean {
+  return angle >= 0.0
+}
+
 class FloatRange(override val start: Float, override val endInclusive: Float) : ClosedRange<Float>
 
 val pitchRange = FloatRange(-1.57f, 1.57f)

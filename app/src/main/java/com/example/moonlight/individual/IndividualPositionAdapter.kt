@@ -39,8 +39,6 @@ class IndividualPositionAdapter(): RecyclerView.Adapter<IndividualPositionAdapte
 
   class ViewHolder private constructor(val binding: ListItemSleepPositionBinding): RecyclerView.ViewHolder(binding.root) {
     fun bind(item: SleepPosition) {
-      // binding.position = item
-      binding.positionString = formatPosition(item)
       binding.executePendingBindings()
     }
 
