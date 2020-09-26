@@ -16,6 +16,7 @@ val orientationAngles = FloatArray(3)
 class FloatRange(override val start: Float, override val endInclusive: Float) : ClosedRange<Float>
 
 val pitchRange = FloatRange(-1.57f, 1.57f)
+val rollRange = FloatRange(-3.14f, 3.14f)
 
 fun floatToIntRange(range1: FloatRange, range2: IntRange, value: Float): Int {
   if (value !in range1) throw IllegalArgumentException("value is not within the first range")
@@ -29,6 +30,12 @@ fun onBackAccordingToRoll(roll: Double): Boolean {
   val diffZero = roll_absolute
 
   return diffPi > diffZero
+}
+
+fun onBackAccordingToPitch(pitch: Double): Boolean {
+  val pitch_absolute = abs(pitch)
+
+  return pitch_absolute > upRightAccordingToPitch
 }
 
 fun decideInRangePitch(pitch: Double, roll: Double): Boolean {
@@ -46,13 +53,8 @@ fun decideInRangePitch(pitch: Double, roll: Double): Boolean {
 
 fun cooCoo(pitch: Double, roll: Double): Int {
 
-  var tempindex = floatToIntRange(pitchRange, 1..360, pitch.toFloat())
-
-  if (onBackAccordingToRoll(roll)) {
-    return topHalfInts[tempindex]
-  } else {
-    return bottomHalfInts[tempindex]
-  }
+  var tempindex = floatToIntRange(rollRange, 0..719, roll.toFloat())
+  return rollInts[tempindex]
 }
 
 @RequiresApi(Build.VERSION_CODES.O)

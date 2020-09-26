@@ -23,6 +23,8 @@ fun buildHalfOfClockInts(range1: IntRange, range2: IntRange): MutableList<Int> {
 var topHalfInts = buildHalfOfClockInts(540..719, 0..179)
 var bottomHalfInts = buildHalfOfClockInts(180..359, 360..539)
 
+var rollInts = buildHalfOfClockInts(0..359, 360..719)
+
 
 
 
