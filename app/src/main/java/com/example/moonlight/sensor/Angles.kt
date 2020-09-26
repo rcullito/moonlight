@@ -63,7 +63,7 @@ fun updateOrientationAngles(accelerometerReading: FloatArray, magnetometerReadin
   var pitch = orientationAngles.get(1).toDouble()
   var roll = orientationAngles.get(2).toDouble()
 
-  if (decideInRangePitch(pitch, roll)) {
+  if (decideInRangePitch(pitch, roll) && interfere) {
     motionVibrate(ctx)
   }
 
