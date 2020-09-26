@@ -18,17 +18,6 @@ const val rollUpperRotationBound = 2.95
 // would measure upright according to pitch
 const val upRightAccordingToPitch = 0.45
 
-const val rollLowest = 0.00
-const val rollCutPoint1 = 0.70
-const val rollCutPoint2 = 1.37
-const val rollCutPoint3 = 2.20
-const val rollHighestAndThenSome = 3.15
-
-val rollBack = rollLowest..rollCutPoint1
-val rollSideBack = rollCutPoint1..rollCutPoint2
-val rollSideStomach = rollCutPoint2..rollCutPoint3
-val rollStomach = rollCutPoint3..rollHighestAndThenSome
-
 const val pitchStomachBound = 0.20
 const val pitchBackBound = 1.20
 

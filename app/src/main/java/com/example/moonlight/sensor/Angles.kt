@@ -51,8 +51,7 @@ fun decideInRangePitch(pitch: Double, roll: Double): Boolean {
   }
 }
 
-fun cooCoo(pitch: Double, roll: Double): Int {
-
+fun cooCoo(roll: Double): Int {
   var tempindex = floatToIntRange(rollRange, 0..719, roll.toFloat())
   return rollInts[tempindex]
 }
@@ -65,11 +64,12 @@ fun updateOrientationAngles(accelerometerReading: FloatArray, magnetometerReadin
   var pitch = orientationAngles.get(1).toDouble()
   var roll = orientationAngles.get(2).toDouble()
 
-  if (decideInRangePitch(pitch, roll) && interfere) {
+  if (interfere) {
+    // TODO refactor this if we re-introduce interfering in a roll centric world decideInRangePitch(pitch, roll)
     motionVibrate(ctx)
   }
 
-  var wallClock = cooCoo(pitch, roll)
+  var wallClock = cooCoo(roll)
   Log.i("Angles", pitch.toString())
   Log.i("Angles", wallClock.toString())
 
