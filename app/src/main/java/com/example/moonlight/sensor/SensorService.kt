@@ -1,5 +1,6 @@
 package com.example.moonlight.sensor
 
+import android.app.Notification
 import android.app.Service
 import android.content.Context
 import android.content.Intent
@@ -32,6 +33,7 @@ class SensorService : Service(), SensorEventListener {
   private lateinit var database: SleepDatabase
   lateinit var wakelock: PowerManager.WakeLock
   private var lastUpdate: Long = 0
+  private lateinit var notification: Notification
 
   companion object {
     fun startService(context: Context, message: String) {
@@ -66,12 +68,10 @@ class SensorService : Service(), SensorEventListener {
 
   fun fireUpAndAssoc() {
     database = SleepDatabase.getInstance(applicationContext)
-
-    Log.i("SensorService", "oncreate that we just put in place")
     sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
 
-
     sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER).also { accelerometer ->
+      Log.i("SensorService", "registering sensor listener")
       sensorManager.registerListener(
         this,
         accelerometer,
@@ -99,25 +99,23 @@ class SensorService : Service(), SensorEventListener {
 
   @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
   override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-    //do heavy work on a background thread
 
-    // TODO looks like we are re-doing the notification here based off of what our intent action is
 
     if (intent != null) {
       if(intent.action.equals(pauseAction))
         Log.i("SensorService", "pausing")
+        notification = buildNotification(intent, applicationContext)
         tearDownListenerAndAssoc();
 
       if(intent.action.equals(startAction))
         Log.i("SensorService", "starting")
+        notification = buildNotification(intent, applicationContext)
         fireUpAndAssoc();
 
       if(intent.action.equals(stopAction))
         // TODO having issues here with the wakelock
         stopSelf();
     }
-
-    var notification = buildNotification(intent, applicationContext)
 
     startForeground(notificationId, notification)
     return START_STICKY
