@@ -100,6 +100,7 @@ class SensorService : Service(), SensorEventListener {
   @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
   override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
 
+    Log.i("SensorService", "onStart called")
 
     if (intent != null) {
       if(intent.action.equals(pauseAction))
@@ -114,6 +115,7 @@ class SensorService : Service(), SensorEventListener {
 
       if(intent.action.equals(stopAction))
         // TODO having issues here with the wakelock
+        Log.i("SensorService", "stopping")
         stopSelf();
     }
 
@@ -124,6 +126,7 @@ class SensorService : Service(), SensorEventListener {
 
   override fun onDestroy() {
     super.onDestroy()
+    Log.i("SensorService", "calling onDestroy")
     tearDownListenerAndAssoc()
   }
 
