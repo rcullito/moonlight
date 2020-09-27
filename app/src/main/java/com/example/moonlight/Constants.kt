@@ -7,6 +7,10 @@ package com.example.moonlight
 
 const val interfere =  false
 
+const val notificationId = 4
+
+const val logAngles = false
+
 const val startAction = "START"
 const val pauseAction = "PAUSE"
 const val stopAction = "STOP"

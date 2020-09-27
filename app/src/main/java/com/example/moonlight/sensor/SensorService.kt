@@ -16,6 +16,7 @@ import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import com.example.moonlight.database.SleepDatabase
 import com.example.moonlight.database.SleepPosition
+import com.example.moonlight.notificationId
 import com.example.moonlight.pauseAction
 import com.example.moonlight.startAction
 import com.example.moonlight.stopAction
@@ -100,11 +101,15 @@ class SensorService : Service(), SensorEventListener {
   override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
     //do heavy work on a background thread
 
+    // TODO looks like we are re-doing the notification here based off of what our intent action is
+
     if (intent != null) {
       if(intent.action.equals(pauseAction))
+        Log.i("SensorService", "pausing")
         tearDownListenerAndAssoc();
 
       if(intent.action.equals(startAction))
+        Log.i("SensorService", "starting")
         fireUpAndAssoc();
 
       if(intent.action.equals(stopAction))
@@ -114,7 +119,7 @@ class SensorService : Service(), SensorEventListener {
 
     var notification = buildNotification(intent, applicationContext)
 
-    startForeground(1, notification)
+    startForeground(notificationId, notification)
     return START_STICKY
   }
 

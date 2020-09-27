@@ -74,8 +74,13 @@ fun updateOrientationAngles(accelerometerReading: FloatArray, magnetometerReadin
   }
 
   var wallClock = cooCoo(roll)
-  Log.i("Angles", pitch.toString())
-  Log.i("Angles", wallClock.toString())
+
+  if (logAngles) {
+    Log.i("Angles", pitch.toString())
+    Log.i("Angles", roll.toString())
+    Log.i("Angles", wallClock.toString())
+  }
+
 
   return SleepPosition(pitch = pitch, roll = roll, sleepPositionTime = eventTimestamp, wallClock = wallClock)
 }

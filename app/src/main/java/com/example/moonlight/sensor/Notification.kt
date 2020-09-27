@@ -34,7 +34,7 @@ fun buildNotification(intent: Intent?, ctx: Context): Notification {
   createNotificationChannel(ctx)
 
   val pausePendingIntent = buildPendingIntent(pauseAction, ctx)
-  val playPendingIntent = buildPendingIntent(startAction, ctx)
+  //val playPendingIntent = buildPendingIntent(startAction, ctx)
   val stopPendingIntent = buildPendingIntent(stopAction, ctx)
 
   val notification = NotificationCompat.Builder(ctx, CHANNEL_ID)
@@ -42,11 +42,11 @@ fun buildNotification(intent: Intent?, ctx: Context): Notification {
     .setContentTitle("Vibrate")
     .setContentText(input)
     .setSmallIcon(R.drawable.ic_stat_player)
-    .addAction(R.drawable.ic_play_arrow_black_24dp, "Play", playPendingIntent) // #0
+   // .addAction(R.drawable.ic_play_arrow_black_24dp, "Play", playPendingIntent) // #0
     .addAction(R.drawable.ic_pause_black_24dp, "Pause", pausePendingIntent) // #1
     .addAction(R.drawable.ic_baseline_stop_24, "Pause", stopPendingIntent) // #2
     .setStyle(androidx.media.app.NotificationCompat.MediaStyle()
-      .setShowActionsInCompactView(0, 1, 2))
+      .setShowActionsInCompactView(0, 1))
     .build()
 
   return notification
