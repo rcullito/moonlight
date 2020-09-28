@@ -33,7 +33,6 @@ class SensorService : Service(), SensorEventListener {
   private lateinit var database: SleepDatabase
   lateinit var wakelock: PowerManager.WakeLock
   private var lastUpdate: Long = 0
-  private lateinit var notification: Notification
 
   companion object {
     fun startService(context: Context, message: String) {
@@ -103,21 +102,24 @@ class SensorService : Service(), SensorEventListener {
     Log.i("SensorService", "onStart called")
 
     if (intent != null) {
-      if(intent.action.equals(pauseAction))
+      if(intent.action.equals(pauseAction)) {
         Log.i("SensorService", "pausing")
-        notification = buildNotification(intent, applicationContext)
         tearDownListenerAndAssoc();
+      }
 
-      if(intent.action.equals(startAction))
+      if(intent.action.equals(startAction)) {
         Log.i("SensorService", "starting")
-        notification = buildNotification(intent, applicationContext)
         fireUpAndAssoc();
+      }
 
-      if(intent.action.equals(stopAction))
+      if(intent.action.equals(stopAction)) {
         // TODO having issues here with the wakelock
         Log.i("SensorService", "stopping")
         stopSelf();
+      }
     }
+
+    var notification = buildNotification(intent, applicationContext)
 
     startForeground(notificationId, notification)
     return START_STICKY
@@ -126,7 +128,6 @@ class SensorService : Service(), SensorEventListener {
 
   override fun onDestroy() {
     super.onDestroy()
-    Log.i("SensorService", "calling onDestroy")
     tearDownListenerAndAssoc()
   }
 
