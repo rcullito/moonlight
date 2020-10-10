@@ -45,7 +45,6 @@ class ResultsFragment : Fragment() {
 
     val adapter =
       SleepDateAdapter(SleepNightListener { date ->
-        // Toast.makeText(context, "${date}", Toast.LENGTH_LONG).show()
         this.findNavController().navigate(
           ResultsFragmentDirections.actionResultsFragment2ToIndividualFragment(
             date

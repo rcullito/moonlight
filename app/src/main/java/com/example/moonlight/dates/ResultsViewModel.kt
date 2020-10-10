@@ -12,4 +12,6 @@ class ResultsViewModel(val database: SleepPositionDao, application: Application)
 
   val dates = database.getUniqueDates()
 
+  // TODO we may also need start and end times from here
+
 }
