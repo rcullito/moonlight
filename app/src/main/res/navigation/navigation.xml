@@ -25,7 +25,7 @@
   <fragment
     android:id="@+id/individualFragment"
     android:name="com.example.moonlight.individual.IndividualFragment"
-    android:label="IndividualFragment" >
+    android:label="Sleep Position">
     <argument
       android:name="date"
       app:argType="string" />
