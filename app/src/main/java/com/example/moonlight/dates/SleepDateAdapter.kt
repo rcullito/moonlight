@@ -1,11 +1,15 @@
 package com.example.moonlight.dates
 
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moonlight.database.SleepDate
 import com.example.moonlight.databinding.ListItemSleepNightBinding
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 /**
  * ViewHolder that holds a single [TextView].
@@ -36,15 +40,20 @@ class SleepDateAdapter(val clickListener: SleepNightListener): RecyclerView.Adap
     )
   }
 
+  @RequiresApi(Build.VERSION_CODES.O)
   override fun onBindViewHolder(holder: ViewHolder, position: Int) {
     val item = data[position]
     holder.bind(clickListener, item)
   }
 
   class ViewHolder private constructor(val binding: ListItemSleepNightBinding): RecyclerView.ViewHolder(binding.root) {
+    @RequiresApi(Build.VERSION_CODES.O)
     fun bind(clickListener: SleepNightListener, item: SleepDate) {
       // TODO potentially format date according to our wishes right here
-      binding.date = item
+      var date = LocalDate.parse(item.date)
+      var formatter = DateTimeFormatter.ofPattern("EEE, MMM dd")
+
+      binding.date = SleepDate(date.format(formatter))
       binding.clickListener = clickListener
       binding.executePendingBindings()
     }
