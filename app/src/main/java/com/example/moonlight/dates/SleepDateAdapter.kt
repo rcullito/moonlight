@@ -43,6 +43,7 @@ class SleepDateAdapter(val clickListener: SleepNightListener): RecyclerView.Adap
 
   class ViewHolder private constructor(val binding: ListItemSleepNightBinding): RecyclerView.ViewHolder(binding.root) {
     fun bind(clickListener: SleepNightListener, item: SleepDate) {
+      // TODO potentially format date according to our wishes right here
       binding.date = item
       binding.clickListener = clickListener
       binding.executePendingBindings()

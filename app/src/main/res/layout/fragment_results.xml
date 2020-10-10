@@ -23,12 +23,7 @@
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent" />
-
-    <!-- With data binding and LiveData, we can track the buttons' visibility states
-         from the ViewModel. The click handler is in the ViewModel as well, and
-         you can set it for the Views using this lambda pattern. -->
-
-
+    
   </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>
