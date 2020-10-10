@@ -21,7 +21,7 @@
   <fragment
     android:id="@+id/sensorFragment"
     android:name="com.example.moonlight.sensor.SensorFragment"
-    android:label="Record Your Sleep" />
+    android:label="Record Sleep" />
   <fragment
     android:id="@+id/individualFragment"
     android:name="com.example.moonlight.individual.IndividualFragment"
