@@ -69,7 +69,6 @@ fun updateOrientationAngles(accelerometerReading: FloatArray, magnetometerReadin
   var roll = orientationAngles.get(2).toDouble()
 
   if (interfere) {
-    // TODO refactor this if we re-introduce interfering in a roll centric world decideInRangePitch(pitch, roll)
     motionVibrate(ctx)
   }
 

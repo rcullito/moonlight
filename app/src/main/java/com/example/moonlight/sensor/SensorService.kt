@@ -113,7 +113,6 @@ class SensorService : Service(), SensorEventListener {
       }
 
       if(intent.action.equals(stopAction)) {
-        // TODO having issues here with the wakelock
         Log.i("SensorService", "stopping")
         stopSelf();
       }
