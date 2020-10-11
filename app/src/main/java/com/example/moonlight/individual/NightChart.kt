@@ -34,6 +34,8 @@ fun buildChart(binding: FragmentIndividualBinding, sleepPositions: List<SleepPos
   baseTime = sleepPositions.first().sleepPositionTime
 
   var chart: ScatterChart = binding.chart
+
+  chart.description.isEnabled = false
   chart.isScaleYEnabled = false
 
   chart.axisRight.isEnabled = false
@@ -56,7 +58,7 @@ fun buildChart(binding: FragmentIndividualBinding, sleepPositions: List<SleepPos
     entries.add(Entry(xValue, yValue));
   }
 
-  var dataSet = ScatterDataSet(entries, "Sleep")
+  var dataSet = ScatterDataSet(entries, "Wall Clock Resting Position")
   dataSet.setDrawValues(false)
   val scatterData = ScatterData(dataSet)
   chart.data = scatterData
