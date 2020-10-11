@@ -8,6 +8,9 @@
       type="com.example.moonlight.database.SleepDate" />
     <variable
       name="clickListener" type="com.example.moonlight.dates.SleepNightListener"/>
+    <variable
+      name="display"
+      type="String" />
   </data>
 
   <androidx.constraintlayout.widget.ConstraintLayout
@@ -24,7 +27,7 @@
       android:layout_marginStart="16dp"
       android:layout_marginTop="8dp"
       android:layout_marginBottom="8dp"
-      android:text="@{date.date}"
+      android:text="@{display}"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent" />
