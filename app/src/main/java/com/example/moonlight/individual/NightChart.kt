@@ -1,5 +1,7 @@
 package com.example.moonlight.individual
 
+import android.annotation.SuppressLint
+import android.graphics.Color
 import com.example.moonlight.convertLongToTimeString
 import com.example.moonlight.database.SleepPosition
 import com.example.moonlight.databinding.FragmentIndividualBinding
@@ -29,6 +31,7 @@ class MyYAxisFormatter : ValueFormatter() {
   }
 }
 
+@SuppressLint("ResourceType")
 fun buildChart(binding: FragmentIndividualBinding, sleepPositions: List<SleepPosition>) {
 
   baseTime = sleepPositions.first().sleepPositionTime
@@ -59,6 +62,7 @@ fun buildChart(binding: FragmentIndividualBinding, sleepPositions: List<SleepPos
   }
 
   var dataSet = ScatterDataSet(entries, "Wall Clock Resting Position")
+  dataSet.setColor(Color.BLUE)
   dataSet.setDrawValues(false)
   val scatterData = ScatterData(dataSet)
   chart.data = scatterData
