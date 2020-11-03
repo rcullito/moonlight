@@ -15,14 +15,12 @@ import android.os.SystemClock
 import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
+import com.example.moonlight.*
 import com.example.moonlight.database.SleepDatabase
 import com.example.moonlight.database.SleepPosition
-import com.example.moonlight.notificationId
-import com.example.moonlight.pauseAction
-import com.example.moonlight.startAction
-import com.example.moonlight.stopAction
 import kotlinx.coroutines.*
 import java.util.concurrent.TimeUnit
+import kotlin.math.abs
 
 class SensorService : Service(), SensorEventListener {
   private lateinit var sensorManager: SensorManager
@@ -163,7 +161,12 @@ class SensorService : Service(), SensorEventListener {
     if ((eventClockTime - lastUpdate) > 1000) {
       lastUpdate = eventClockTime
       var mostRecentPosition = updateOrientationAngles(accelerometerReading, magnetometerReading, eventClockTime, applicationContext) // 1.
-      updateSleepPositionOnSensorChanged(mostRecentPosition)
+
+      // Only record position in database if we are close to being on our back.
+      // We want to be really clear about when we are standing up
+      if (abs(mostRecentPosition.pitch) < upRightAccordingToPitch) {
+        updateSleepPositionOnSensorChanged(mostRecentPosition)
+      }
     }
 
   }

@@ -21,14 +21,6 @@ fun floatToIntRange(range1: FloatRange, range2: IntRange, value: Float): Int {
   return range2.start + ((value - range1.start) * (range2.endInclusive - range2.start) / (range1.endInclusive - range1.start)).toInt()
 }
 
-
-// this is what we actually want to use
-fun onBackAccordingToPitch(pitch: Double): Boolean {
-  val pitch_absolute = abs(pitch)
-
-  return pitch_absolute > upRightAccordingToPitch
-}
-
 fun cooCoo(roll: Double): Int {
   var tempindex = floatToIntRange(rollRange, 0..719, roll.toFloat())
   return rollInts[tempindex]
