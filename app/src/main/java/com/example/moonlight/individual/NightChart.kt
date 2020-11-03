@@ -2,7 +2,6 @@ package com.example.moonlight.individual
 
 import android.annotation.SuppressLint
 import android.graphics.Color
-import com.example.moonlight.convertLongToTimeString
 import com.example.moonlight.database.SleepPosition
 import com.example.moonlight.databinding.FragmentIndividualBinding
 import com.example.moonlight.sensor.staticClockDataStructure
@@ -12,9 +11,16 @@ import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.ScatterData
 import com.github.mikephil.charting.data.ScatterDataSet
 import com.github.mikephil.charting.formatter.ValueFormatter
+import java.text.SimpleDateFormat
 
 
 var baseTime: Long = 0
+
+fun convertLongToTimeString(systemTime: Long, desiredDateFormat: String): String {
+  // return SimpleDateFormat("EEEE MMM-dd-yyyy' 'HH:mm")
+  return SimpleDateFormat(desiredDateFormat)
+    .format(systemTime).toString()
+}
 
 class MyXAxisFormatter : ValueFormatter() {
   override fun getAxisLabel(value: Float, axis: AxisBase?): String {
