@@ -13,46 +13,20 @@ import kotlin.math.roundToInt
 val rotationMatrix = FloatArray(9)
 val orientationAngles = FloatArray(3)
 
-fun pos(angle: Double): Boolean {
-  return angle >= 0.0
-}
-
 class FloatRange(override val start: Float, override val endInclusive: Float) : ClosedRange<Float>
 
-val pitchRange = FloatRange(-1.57f, 1.57f)
 val rollRange = FloatRange(-3.14f, 3.14f)
 
 fun floatToIntRange(range1: FloatRange, range2: IntRange, value: Float): Int {
-  if (value !in range1) throw IllegalArgumentException("value is not within the first range")
-  if (range1.endInclusive == range1.start) throw IllegalArgumentException("first range cannot be single-valued")
   return range2.start + ((value - range1.start) * (range2.endInclusive - range2.start) / (range1.endInclusive - range1.start)).toInt()
 }
 
-fun onBackAccordingToRoll(roll: Double): Boolean {
-  val roll_absolute = abs(roll)
-  val diffPi = 3.14 - roll_absolute
-  val diffZero = roll_absolute
 
-  return diffPi > diffZero
-}
-
+// this is what we actually want to use
 fun onBackAccordingToPitch(pitch: Double): Boolean {
   val pitch_absolute = abs(pitch)
 
   return pitch_absolute > upRightAccordingToPitch
-}
-
-fun decideInRangePitch(pitch: Double, roll: Double): Boolean {
-
-  if (abs(roll) in rollUprightRange && abs(pitch) in pitchRangeWhileUpright) {
-    return false
-  }
-
-  if (onBackAccordingToRoll(roll)) {
-    return true
-  } else {
-    return abs(pitch) < pitchStomachBound || abs(pitch) > pitchBackBound
-  }
 }
 
 fun cooCoo(roll: Double): Int {
