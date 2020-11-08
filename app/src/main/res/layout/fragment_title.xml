@@ -34,5 +34,17 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/textView" />
 
+    <TextView
+      android:id="@+id/textView2"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="176dp"
+      android:layout_marginTop="75dp"
+      android:layout_marginEnd="177dp"
+      android:text="Moonlight tracks your sleep position. The angle you face is recorded the same way as a wall clock. 12 means you slept on your back back. 6, your stomach. 9 and 3: sides"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
   </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
