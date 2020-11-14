@@ -13,6 +13,10 @@ import kotlin.math.roundToInt
 val rotationMatrix = FloatArray(9)
 val orientationAngles = FloatArray(3)
 
+fun notUpright(pitch: Double): Boolean {
+  return abs(pitch) < upRightAccordingToPitch
+}
+
 class FloatRange(override val start: Float, override val endInclusive: Float) : ClosedRange<Float>
 
 val rollRange = FloatRange(-3.14f, 3.14f)
@@ -35,14 +39,9 @@ fun updateOrientationAngles(accelerometerReading: FloatArray, magnetometerReadin
   var roll = orientationAngles.get(2).toDouble()
 
 
- if (abs(roll) < onBackAccordingToRoll && abs(pitch) < upRightAccordingToPitch) {
-   if (interfere) {
+ if (abs(roll) < onBackAccordingToRoll && notUpright(pitch) && interfere) {
      motionVibrate(ctx)
-   }
-
-   if (interfere) {
      motionAudio(ctx)
-   }
  }
 
 

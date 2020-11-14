@@ -164,7 +164,7 @@ class SensorService : Service(), SensorEventListener {
 
       // Only record position in database if we are close to being on our back.
       // We want to be really clear about when we are standing up
-      if (abs(mostRecentPosition.pitch) < upRightAccordingToPitch) {
+      if (notUpright(mostRecentPosition.pitch)) {
         updateSleepPositionOnSensorChanged(mostRecentPosition)
       }
     }
