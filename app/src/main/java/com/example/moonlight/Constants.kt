@@ -5,7 +5,7 @@ package com.example.moonlight
  * Constants used throughout the app.
  */
 
-const val interfere =  false
+const val interfere =  true
 
 const val notificationId = 4
 
@@ -19,4 +19,6 @@ const val stopAction = "STOP"
 // than what we are currently attuned to. so the roll section
 // would measure upright according to pitch
 const val upRightAccordingToPitch = 0.45
+
+const val onBackAccordingToRoll = 1.00
 

@@ -34,9 +34,17 @@ fun updateOrientationAngles(accelerometerReading: FloatArray, magnetometerReadin
   var pitch = orientationAngles.get(1).toDouble()
   var roll = orientationAngles.get(2).toDouble()
 
-  if (interfere) {
-    motionVibrate(ctx)
-  }
+
+ if (abs(roll) < onBackAccordingToRoll) {
+   if (interfere) {
+     motionVibrate(ctx)
+   }
+
+   if (interfere) {
+     motionAudio(ctx)
+   }
+ }
+
 
   var wallClock = cooCoo(roll)
 
