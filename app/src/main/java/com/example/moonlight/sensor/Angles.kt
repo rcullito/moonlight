@@ -20,7 +20,7 @@ fun notUpright(pitch: Double): Boolean {
 }
 
 fun onBack(roll: Double): Boolean {
-  abs(roll) < onBackAccordingToRoll
+  return abs(roll) < onBackAccordingToRoll
 }
 
 class FloatRange(override val start: Float, override val endInclusive: Float) : ClosedRange<Float>
