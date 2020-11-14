@@ -2,12 +2,11 @@ package com.example.moonlight.sensor
 
 import android.content.Context
 import android.media.AudioManager
-import android.media.AudioManager.FX_KEYPRESS_STANDARD
+import android.media.AudioManager.FX_KEYPRESS_INVALID
 import android.os.Build
 import android.os.VibrationEffect
 import android.os.Vibrator
 import androidx.annotation.RequiresApi
-import androidx.core.content.ContextCompat.getSystemService
 
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -22,5 +21,5 @@ fun motionVibrate(ctx: Context) {
 
 fun motionAudio(ctx: Context) {
   val am = ctx.getSystemService(Context.AUDIO_SERVICE) as AudioManager
-  am.playSoundEffect(FX_KEYPRESS_STANDARD)
+  am.playSoundEffect(FX_KEYPRESS_INVALID)
 }
