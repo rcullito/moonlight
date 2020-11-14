@@ -5,16 +5,22 @@ import android.hardware.SensorManager
 import android.os.Build
 import android.util.Log
 import androidx.annotation.RequiresApi
-import com.example.moonlight.*
 import com.example.moonlight.database.SleepPosition
+import com.example.moonlight.interfere
+import com.example.moonlight.logAngles
+import com.example.moonlight.onBackAccordingToRoll
+import com.example.moonlight.upRightAccordingToPitch
 import kotlin.math.abs
-import kotlin.math.roundToInt
 
 val rotationMatrix = FloatArray(9)
 val orientationAngles = FloatArray(3)
 
 fun notUpright(pitch: Double): Boolean {
   return abs(pitch) < upRightAccordingToPitch
+}
+
+fun onBack(roll: Double): Boolean {
+  abs(roll) < onBackAccordingToRoll
 }
 
 class FloatRange(override val start: Float, override val endInclusive: Float) : ClosedRange<Float>
@@ -39,7 +45,7 @@ fun updateOrientationAngles(accelerometerReading: FloatArray, magnetometerReadin
   var roll = orientationAngles.get(2).toDouble()
 
 
- if (abs(roll) < onBackAccordingToRoll && notUpright(pitch) && interfere) {
+ if (onBack(roll) && notUpright(pitch) && interfere) {
      motionVibrate(ctx)
      motionAudio(ctx)
  }

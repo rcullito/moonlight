@@ -1,6 +1,5 @@
 package com.example.moonlight.sensor
 
-import android.app.Notification
 import android.app.Service
 import android.content.Context
 import android.content.Intent
@@ -15,12 +14,14 @@ import android.os.SystemClock
 import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
-import com.example.moonlight.*
 import com.example.moonlight.database.SleepDatabase
 import com.example.moonlight.database.SleepPosition
+import com.example.moonlight.notificationId
+import com.example.moonlight.pauseAction
+import com.example.moonlight.startAction
+import com.example.moonlight.stopAction
 import kotlinx.coroutines.*
 import java.util.concurrent.TimeUnit
-import kotlin.math.abs
 
 class SensorService : Service(), SensorEventListener {
   private lateinit var sensorManager: SensorManager
