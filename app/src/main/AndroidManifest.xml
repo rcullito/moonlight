@@ -20,6 +20,8 @@
         <category android:name="android.intent.category.LAUNCHER" />
       </intent-filter>
     </activity>
+    <activity android:name="com.example.moonlight.realtime.RealTimeActivity">
+    </activity>
 
     <service android:name="com.example.moonlight.sensor.SensorService">
     </service>

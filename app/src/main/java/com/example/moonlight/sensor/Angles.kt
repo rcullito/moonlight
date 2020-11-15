@@ -1,4 +1,4 @@
-package com.example.moonlight.sensor
+  package com.example.moonlight.sensor
 
 import android.content.Context
 import android.hardware.SensorManager

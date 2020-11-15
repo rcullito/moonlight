@@ -6,4 +6,7 @@
   <item
     android:id="@+id/resultsFragment2"
     android:title="Past Sleep Data" />
+  <item
+    android:id="@+id/realTimeActivity"
+    android:title="Real Time Test" />
 </menu>
