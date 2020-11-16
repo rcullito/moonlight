@@ -129,9 +129,9 @@ class RealTimeFragment: Fragment(), SensorEventListener {
 
     var roll = orientationAngles.get(2)
 
-    if (Math.abs(roll) < VALUE_DRIFT) {
-      roll = 0f
-    }
+//    if (Math.abs(roll) < VALUE_DRIFT) {
+//      roll = 0f
+//    }
 
     binding.roll = roll.toString()
   }

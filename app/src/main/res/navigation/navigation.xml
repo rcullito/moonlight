@@ -33,5 +33,5 @@
   <fragment
     android:id="@+id/realTimeFragment"
     android:name="com.example.moonlight.realtime.RealTimeFragment"
-    android:label="RealTimeFragment" />
+    android:label="Real Time Test" />
 </navigation>
