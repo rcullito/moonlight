@@ -2,21 +2,18 @@ package com.example.moonlight.realtime
 
 
 import android.content.Context
-import android.content.Context.SENSOR_SERVICE
-import android.content.Context.WINDOW_SERVICE
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.os.Bundle
 import android.util.Log
-import android.view.*
-import android.widget.TextView
-import androidx.core.content.ContextCompat.getSystemService
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.example.moonlight.R
-import com.example.moonlight.databinding.FragmentIndividualBinding
 import com.example.moonlight.databinding.FragmentRealTimeBinding
 import com.example.moonlight.sensor.orientationAngles
 import com.example.moonlight.sensor.rotationMatrix
@@ -72,8 +69,10 @@ class RealTimeFragment: Fragment(), SensorEventListener {
     inflater: LayoutInflater, container: ViewGroup?,
     savedInstanceState: Bundle?
   ): View? {
-    binding = DataBindingUtil.inflate<FragmentRealTimeBinding>(inflater,
-      R.layout.fragment_real_time, container, false)
+    binding = DataBindingUtil.inflate<FragmentRealTimeBinding>(
+      inflater,
+      R.layout.fragment_real_time, container, false
+    )
 
     binding.setLifecycleOwner(this)
 
@@ -128,8 +127,12 @@ class RealTimeFragment: Fragment(), SensorEventListener {
     SensorManager.getRotationMatrix(rotationMatrix, null, mAccelerometerData, mMagnetometerData)
     SensorManager.getOrientation(rotationMatrix, orientationAngles)
 
-
     var roll = orientationAngles.get(2)
+
+    if (Math.abs(roll) < VALUE_DRIFT) {
+      roll = 0f
+    }
+
     binding.roll = roll.toString()
   }
 
