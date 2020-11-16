@@ -107,12 +107,15 @@ class RealTimeFragment: Fragment(), SensorEventListener {
     }
   }
 
-  override fun onStop() {
-    super.onStop()
-
+  override fun onPause() {
+    super.onPause()
     // Unregister all sensor listeners in this callback so they don't
     // continue to use resources when the app is stopped.
     mSensorManager!!.unregisterListener(this)
+  }
+
+  override fun onStop() {
+    super.onStop()
   }
 
   override fun onSensorChanged(event: SensorEvent) {
