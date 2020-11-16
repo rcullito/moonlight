@@ -18,6 +18,7 @@ import com.example.moonlight.databinding.FragmentRealTimeBinding
 import com.example.moonlight.sensor.orientationAngles
 import com.example.moonlight.sensor.rollToSevenTwenty
 import com.example.moonlight.sensor.rotationMatrix
+import com.example.moonlight.sensor.staticClockDataStructure
 
 
 class RealTimeFragment: Fragment(), SensorEventListener {
@@ -129,15 +130,10 @@ class RealTimeFragment: Fragment(), SensorEventListener {
     SensorManager.getOrientation(rotationMatrix, orientationAngles)
 
     var roll = orientationAngles.get(2)
-
-//    if (Math.abs(roll) < VALUE_DRIFT) {
-//      roll = 0f
-//    }
-
     var clock = rollToSevenTwenty(roll.toDouble())
 
     binding.roll = roll.toString()
-    binding.clock = clock.toString()
+    binding.clock = staticClockDataStructure[clock]
   }
 
   /**
