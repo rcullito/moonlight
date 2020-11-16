@@ -31,7 +31,7 @@ fun floatToIntRange(range1: FloatRange, range2: IntRange, value: Float): Int {
   return range2.start + ((value - range1.start) * (range2.endInclusive - range2.start) / (range1.endInclusive - range1.start)).toInt()
 }
 
-fun cooCoo(roll: Double): Int {
+fun rollToSevenTwenty(roll: Double): Int {
   var tempindex = floatToIntRange(rollRange, 0..719, roll.toFloat())
   return rollInts[tempindex]
 }
@@ -51,7 +51,7 @@ fun updateOrientationAngles(accelerometerReading: FloatArray, magnetometerReadin
  }
 
 
-  var wallClock = cooCoo(roll)
+  var wallClock = rollToSevenTwenty(roll)
 
   if (logAngles) {
     Log.i("Angles", pitch.toString())

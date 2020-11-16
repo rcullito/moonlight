@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment
 import com.example.moonlight.R
 import com.example.moonlight.databinding.FragmentRealTimeBinding
 import com.example.moonlight.sensor.orientationAngles
+import com.example.moonlight.sensor.rollToSevenTwenty
 import com.example.moonlight.sensor.rotationMatrix
 
 
@@ -133,7 +134,10 @@ class RealTimeFragment: Fragment(), SensorEventListener {
 //      roll = 0f
 //    }
 
+    var clock = rollToSevenTwenty(roll.toDouble())
+
     binding.roll = roll.toString()
+    binding.clock = clock.toString()
   }
 
   /**
