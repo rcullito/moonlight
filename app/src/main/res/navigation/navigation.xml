@@ -30,9 +30,8 @@
       android:name="date"
       app:argType="string" />
   </fragment>
-  <activity
-    android:id="@+id/realTimeActivity"
-    android:name="com.example.moonlight.realtime.RealTimeActivity"
-    android:label="activity_real_time"
-    tools:layout="@layout/activity_real_time" />
+  <fragment
+    android:id="@+id/realTimeFragment"
+    android:name="com.example.moonlight.realtime.RealTimeFragment"
+    android:label="RealTimeFragment" />
 </navigation>
