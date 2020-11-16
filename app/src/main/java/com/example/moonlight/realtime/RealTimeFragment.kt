@@ -9,14 +9,22 @@ import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.os.Bundle
-import android.view.Display
-import android.view.WindowManager
+import android.util.Log
+import android.view.*
 import android.widget.TextView
 import androidx.core.content.ContextCompat.getSystemService
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import com.example.moonlight.R
+import com.example.moonlight.databinding.FragmentIndividualBinding
+import com.example.moonlight.databinding.FragmentRealTimeBinding
+import com.example.moonlight.sensor.orientationAngles
+import com.example.moonlight.sensor.rotationMatrix
 
 
 class RealTimeFragment: Fragment(), SensorEventListener {
+
+  private lateinit var binding: FragmentRealTimeBinding
   // System sensor manager instance.
   private var mSensorManager: SensorManager? = null
 
@@ -30,16 +38,6 @@ class RealTimeFragment: Fragment(), SensorEventListener {
   private var mAccelerometerData = FloatArray(3)
   private var mMagnetometerData = FloatArray(3)
 
-  // TextViews to display current sensor values.
-  private var mTextSensorAzimuth: TextView? = null
-  private var mTextSensorPitch: TextView? = null
-  private var mTextSensorRoll: TextView? = null
-
-  // ImageView drawables to display spots.
-
-
-  // System display. Need this for determining rotation.
-  private var mDisplay: Display? = null
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
 
@@ -49,13 +47,37 @@ class RealTimeFragment: Fragment(), SensorEventListener {
     // is not available on the device.
     mSensorManager = requireActivity().getSystemService(Context.SENSOR_SERVICE) as SensorManager
 
-    mSensorAccelerometer = mSensorManager!!.getDefaultSensor(
-      Sensor.TYPE_ACCELEROMETER
-    )
-    mSensorMagnetometer = mSensorManager!!.getDefaultSensor(
-      Sensor.TYPE_MAGNETIC_FIELD
-    )
+    mSensorManager!!.getDefaultSensor(Sensor.TYPE_ACCELEROMETER).also { accelerometer ->
+      Log.i("SensorService", "registering sensor listener")
+      mSensorManager!!.registerListener(
+        this,
+        accelerometer,
+        SensorManager.SENSOR_DELAY_NORMAL,
+        // When maxReportLatencyUs is 0 it requires the events to be delivered as soon as possible
+        0
+      )
+    }
+    mSensorManager!!.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD).also { magneticField ->
+      mSensorManager!!.registerListener(
+        this,
+        magneticField,
+        SensorManager.SENSOR_DELAY_NORMAL,
+        0
+      )
+    }
 
+  }
+
+  override fun onCreateView(
+    inflater: LayoutInflater, container: ViewGroup?,
+    savedInstanceState: Bundle?
+  ): View? {
+    binding = DataBindingUtil.inflate<FragmentRealTimeBinding>(inflater,
+      R.layout.fragment_real_time, container, false)
+
+    binding.setLifecycleOwner(this)
+
+    return binding.root
   }
 
   /**
@@ -93,8 +115,19 @@ class RealTimeFragment: Fragment(), SensorEventListener {
     mSensorManager!!.unregisterListener(this)
   }
 
-  override fun onSensorChanged(sensorEvent: SensorEvent) {
+  override fun onSensorChanged(event: SensorEvent) {
+    if (event.sensor.type == Sensor.TYPE_ACCELEROMETER) {
+      System.arraycopy(event.values, 0, mAccelerometerData, 0, mAccelerometerData.size)
+    } else if (event.sensor.type == Sensor.TYPE_MAGNETIC_FIELD) {
+      System.arraycopy(event.values, 0, mMagnetometerData, 0, mMagnetometerData.size)
+    }
 
+    SensorManager.getRotationMatrix(rotationMatrix, null, mAccelerometerData, mMagnetometerData)
+    SensorManager.getOrientation(rotationMatrix, orientationAngles)
+
+
+    var roll = orientationAngles.get(2)
+    binding.roll = roll.toString()
   }
 
   /**
