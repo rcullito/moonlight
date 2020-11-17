@@ -132,8 +132,8 @@ class RealTimeFragment: Fragment(), SensorEventListener {
     var roll = orientationAngles.get(2)
     var clock = rollToSevenTwenty(roll.toDouble())
 
-    binding.roll = roll.toString()
-    binding.clock = staticClockDataStructure[clock]
+    binding.roll = "Roll: ".plus(roll.toString())
+    binding.clock = "Clock: ".plus(staticClockDataStructure[clock])
   }
 
   /**
