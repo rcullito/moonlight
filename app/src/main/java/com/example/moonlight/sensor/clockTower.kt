@@ -1,16 +1,30 @@
 package com.example.moonlight.sensor
 
-fun buildMinuteRange(hoursList: List<Int>): MutableList<String> {
+
+fun buildCleanMinutes(minutesList: IntRange): MutableList<String> {
+  var cleanStrings = mutableListOf<String>()
+
+  for (rawMinute in minutesList) {
+    var cleanMinute = if (rawMinute < 10) "0".plus(rawMinute.toString()) else rawMinute.toString()
+    cleanStrings.add(cleanMinute)
+  }
+
+  return cleanStrings
+}
+
+var cleanMinutes: MutableList<String> = buildCleanMinutes(0..59)
+
+fun buildMinuteRange(hoursList: List<Int>, cleanMinutesList: List<String>): MutableList<String> {
   var minutesHours = mutableListOf<String>()
-  for (hour in hoursList) for (minute in 0..59)
-    minutesHours.add("$hour:$minute")
+  for (hour in hoursList) for (cleanMinute in cleanMinutesList)
+  minutesHours.add("$hour:$cleanMinute")
 
   return minutesHours
 }
 
 var hours = listOf(12, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11)
-// will be used from within the axis formatter
-var staticClockDataStructure: MutableList<String> = buildMinuteRange(hours)
+
+var staticClockDataStructure: MutableList<String> = buildMinuteRange(hours, cleanMinutes)
 
 
 fun buildHalfOfClockInts(range1: IntRange, range2: IntRange): MutableList<Int> {
@@ -19,9 +33,6 @@ fun buildHalfOfClockInts(range1: IntRange, range2: IntRange): MutableList<Int> {
   for (i in (range2)) topOfClockInts.add(i)
   return topOfClockInts
 }
-
-var topHalfInts = buildHalfOfClockInts(540..719, 0..179)
-var bottomHalfInts = buildHalfOfClockInts(180..359, 360..539)
 
 var rollInts = buildHalfOfClockInts( 360..719, 0..359)
 
