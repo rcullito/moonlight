@@ -20,5 +20,5 @@ const val stopAction = "STOP"
 // would measure upright according to pitch
 const val upRightAccordingToPitch = 0.45
 
-const val onBackAccordingToRoll = 1.00
+const val onBackAccordingToRoll = 2.10
 
