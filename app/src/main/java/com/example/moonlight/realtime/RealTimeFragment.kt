@@ -19,6 +19,7 @@ import com.example.moonlight.sensor.orientationAngles
 import com.example.moonlight.sensor.rollToSevenTwenty
 import com.example.moonlight.sensor.rotationMatrix
 import com.example.moonlight.sensor.staticClockDataStructure
+import java.text.DecimalFormat
 
 
 class RealTimeFragment: Fragment(), SensorEventListener {
@@ -65,6 +66,11 @@ class RealTimeFragment: Fragment(), SensorEventListener {
       )
     }
 
+  }
+
+  fun Float.roundOff(): String {
+    val df = DecimalFormat("##.##")
+    return df.format(this)
   }
 
   override fun onCreateView(
@@ -132,7 +138,7 @@ class RealTimeFragment: Fragment(), SensorEventListener {
     var roll = orientationAngles.get(2)
     var clock = rollToSevenTwenty(roll.toDouble())
 
-    binding.roll = "Roll: ".plus(roll.toString())
+    binding.roll = "Roll: ".plus(roll.roundOff())
     binding.clock = "Clock: ".plus(staticClockDataStructure[clock])
   }
 
