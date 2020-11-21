@@ -24,6 +24,16 @@
     app:layout_constraintRight_toRightOf="parent"
     app:layout_constraintTop_toTopOf="parent">
 
+    <TextView
+      android:id="@+id/textView3"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Roll your phone around to get an idea of how the values will change. If you can, try and keep the top and bottom of your phone at the same height, rotating your phone around the sides. (In the below diagram, keep the navy blue line fixed, but rotate the green line) This will simulate how your sleep is tracked when the phone is held vertically against your torso."
+      tools:layout_editor_absoluteX="0dp"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      tools:layout_editor_absoluteY="93dp" />
+
 
     <TextView
       android:id="@+id/value_roll"
@@ -31,14 +41,15 @@
       android:layout_height="wrap_content"
       android:gravity="center"
       android:text="@{roll}"
+      android:visibility="gone"
       android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
       android:textSize="36sp"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintHorizontal_bias="1.0"
+      app:layout_constraintHorizontal_bias="0.0"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
-      app:layout_constraintVertical_bias="0.312"
+      app:layout_constraintVertical_bias="0.183"
       tools:text="roll" />
 
     <TextView
@@ -54,17 +65,21 @@
       app:layout_constraintHorizontal_bias="0.0"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/value_roll"
-      app:layout_constraintVertical_bias="0.333"
+      app:layout_constraintVertical_bias="0.056"
       tools:text="clock" />
 
-    <TextView
-      android:id="@+id/textView3"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:text="Roll your phone around to get an idea of how the values will change. If you can, try and keep the top and bottom of your phone at the same height, rotating your phone around with the sides. This will simulate how your sleep is tracked when the phone is held vertically against your torso."
-      tools:layout_editor_absoluteX="0dp"
-      tools:layout_editor_absoluteY="93dp" />
-
+    <ImageView
+      android:id="@+id/imageView"
+      android:layout_width="279dp"
+      android:layout_height="447dp"
+      android:adjustViewBounds="true"
+      android:src="@drawable/axis_device"
+      app:layout_constraintBottom_toTopOf="@+id/value_roll"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.497"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/value_clock"
+      app:layout_constraintVertical_bias="0.0" />
 
   </androidx.constraintlayout.widget.ConstraintLayout>
 

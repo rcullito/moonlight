@@ -8,5 +8,5 @@
     android:title="Past Sleep Data" />
   <item
     android:id="@+id/realTimeFragment"
-    android:title="Real Time Test" />
+    android:title="How It Works" />
 </menu>
