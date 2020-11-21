@@ -57,6 +57,14 @@
       app:layout_constraintVertical_bias="0.333"
       tools:text="clock" />
 
+    <TextView
+      android:id="@+id/textView3"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Roll your phone around to get an idea of how the values will change. If you can, try and keep the top and bottom of your phone at the same height, rotating your phone around with the sides. This will simulate how your sleep is tracked when the phone is held vertically against your torso."
+      tools:layout_editor_absoluteX="0dp"
+      tools:layout_editor_absoluteY="93dp" />
+
 
   </androidx.constraintlayout.widget.ConstraintLayout>
 

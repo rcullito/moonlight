@@ -15,10 +15,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.example.moonlight.R
 import com.example.moonlight.databinding.FragmentRealTimeBinding
-import com.example.moonlight.sensor.orientationAngles
-import com.example.moonlight.sensor.rollToSevenTwenty
-import com.example.moonlight.sensor.rotationMatrix
-import com.example.moonlight.sensor.staticClockDataStructure
+import com.example.moonlight.sensor.*
 import java.text.DecimalFormat
 
 
@@ -135,11 +132,17 @@ class RealTimeFragment: Fragment(), SensorEventListener {
     SensorManager.getRotationMatrix(rotationMatrix, null, mAccelerometerData, mMagnetometerData)
     SensorManager.getOrientation(rotationMatrix, orientationAngles)
 
+    var pitch = orientationAngles.get(1)
     var roll = orientationAngles.get(2)
     var clock = rollToSevenTwenty(roll.toDouble())
 
-    binding.roll = "Roll: ".plus(roll.roundOff())
-    binding.clock = "Clock: ".plus(staticClockDataStructure[clock])
+    var roundedRoll = roll.roundOff()
+
+    var rollDisplay = if (upRight(pitch.toDouble())) "upright" else roundedRoll
+    var clockDisplay = if (upRight(pitch.toDouble())) "upright" else staticClockDataStructure[clock]
+
+    binding.roll = "Roll: ".plus(rollDisplay)
+    binding.clock = "Clock: ".plus(clockDisplay)
   }
 
   /**

@@ -19,6 +19,10 @@ fun notUpright(pitch: Double): Boolean {
   return abs(pitch) < upRightAccordingToPitch
 }
 
+
+  fun upRight(pitch: Double): Boolean {
+    return abs(pitch) > upRightAccordingToPitch
+  }
 fun onBack(roll: Double): Boolean {
   return abs(roll) < onBackAccordingToRoll
 }
