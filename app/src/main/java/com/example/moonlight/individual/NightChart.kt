@@ -56,6 +56,9 @@ fun buildChart(binding: FragmentIndividualBinding, sleepPositions: List<SleepPos
   val leftAxis = chart.axisLeft
   leftAxis.valueFormatter = MyYAxisFormatter()
   leftAxis.setDrawGridLines(false)
+  leftAxis.axisMaximum = 719F
+  leftAxis.axisMinimum = 0F
+  leftAxis.setLabelCount(13, true)
 
   var entries: ArrayList<Entry> = ArrayList()
 

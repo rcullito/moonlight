@@ -19,6 +19,9 @@ fun buildMinuteRange(hoursList: List<Int>, cleanMinutesList: List<String>): Muta
   for (hour in hoursList) for (cleanMinute in cleanMinutesList)
   minutesHours.add("$hour:$cleanMinute")
 
+  minutesHours.removeAt(0)
+  minutesHours.add("12:00")
+
   return minutesHours
 }
 
