@@ -58,7 +58,6 @@ fun buildNotification(intent: Intent?, ctx: Context): Notification {
 
   val notification = NotificationCompat.Builder(ctx, CHANNEL_ID)
     .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
-    .setContentTitle("Vibrate")
     .setContentText(input)
     .setSmallIcon(R.drawable.ic_stat_player)
     .addAction(icon1, title1, intent1)

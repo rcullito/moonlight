@@ -34,9 +34,8 @@ class SensorService : Service(), SensorEventListener {
   private var lastUpdate: Long = 0
 
   companion object {
-    fun startService(context: Context, message: String) {
+    fun startService(context: Context) {
       val startIntent = Intent(context, SensorService::class.java)
-      startIntent.putExtra("inputExtra", message)
       ContextCompat.startForegroundService(context, startIntent)
     }
     fun cancelService(context: Context) {

@@ -31,19 +31,14 @@ class SensorFragment : Fragment() {
       Log.i("SensorFragment", "start service click listener called")
 
       context?.let { it1 ->
-        SensorService.startService(
-          it1,
-          "Running"
-        )
+        SensorService.startService(it1)
       }
     }
 
     binding.cancelServiceButton.setOnClickListener {
       Log.i("SensorFragment", "cancel service click listener called")
       context?.let { it1 ->
-        SensorService.cancelService(
-          it1
-        )
+        SensorService.cancelService(it1)
       }
 
     }
