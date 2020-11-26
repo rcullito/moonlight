@@ -142,7 +142,7 @@ class RealTimeFragment: Fragment(), SensorEventListener {
     var clockDisplay = if (upRight(pitch.toDouble())) "upright" else staticClockDataStructure[clock]
 
     binding.roll = "Roll: ".plus(rollDisplay)
-    binding.clock = "Clock: ".plus(clockDisplay)
+    binding.clock = clockDisplay
   }
 
   /**
