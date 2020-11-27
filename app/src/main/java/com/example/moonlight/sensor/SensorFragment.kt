@@ -1,5 +1,9 @@
 package com.example.moonlight.sensor
 
+import android.annotation.SuppressLint
+import android.app.ActivityManager
+import android.content.Context
+import android.content.Context.ACTIVITY_SERVICE
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -19,6 +23,14 @@ class SensorFragment : Fragment() {
     super.onCreate(savedInstanceState)
   }
 
+  @SuppressLint("ServiceCast")
+  @Suppress("DEPRECATION")
+  fun <T> Context.isServiceRunning(service: Class<T>): Boolean {
+    return (getSystemService(ACTIVITY_SERVICE) as ActivityManager)
+      .getRunningServices(Integer.MAX_VALUE)
+      .any { it -> it.service.className == service.name }
+  }
+
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
     savedInstanceState: Bundle?
@@ -26,6 +38,22 @@ class SensorFragment : Fragment() {
 
     binding = DataBindingUtil.inflate<FragmentSensorBinding>(inflater,
       R.layout.fragment_sensor, container, false)
+
+
+    // set the state initially before any button is clicked
+    var running = context?.isServiceRunning(SensorService::class.java)
+
+    if (running!!) {
+      binding.cancelServiceButton.visibility = View.VISIBLE
+      binding.startServiceButton.visibility = View.INVISIBLE
+    } else {
+      binding.cancelServiceButton.visibility = View.INVISIBLE
+      binding.startServiceButton.visibility = View.VISIBLE
+    }
+
+    // TODO see if we need to set state manually in the wake of a button click
+    // better to have it derived from the state of the service itself
+    // rather than the click
 
     binding.startServiceButton.setOnClickListener {
       Log.i("SensorFragment", "start service click listener called")
@@ -36,9 +64,6 @@ class SensorFragment : Fragment() {
           "Tracking Sleep Movements"
         )
       }
-
-      binding.startServiceButton.visibility = View.INVISIBLE
-      binding.cancelServiceButton.visibility = View.VISIBLE
     }
 
     binding.cancelServiceButton.setOnClickListener {
@@ -48,9 +73,6 @@ class SensorFragment : Fragment() {
           it1
         )
       }
-
-      binding.cancelServiceButton.visibility = View.INVISIBLE
-      binding.startServiceButton.visibility = View.VISIBLE
 
     }
     // Inflate the layout for this fragment
