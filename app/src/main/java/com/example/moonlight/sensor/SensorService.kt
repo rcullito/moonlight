@@ -17,7 +17,6 @@ import androidx.core.content.ContextCompat
 import com.example.moonlight.database.SleepDatabase
 import com.example.moonlight.database.SleepPosition
 import com.example.moonlight.notificationId
-import com.example.moonlight.pauseAction
 import com.example.moonlight.startAction
 import com.example.moonlight.stopAction
 import kotlinx.coroutines.*
@@ -101,11 +100,6 @@ class SensorService : Service(), SensorEventListener {
     Log.i("SensorService", "onStart called")
 
     if (intent != null) {
-      if(intent.action.equals(pauseAction)) {
-        Log.i("SensorService", "pausing")
-        tearDownListenerAndAssoc();
-      }
-
       if(intent.action.equals(startAction)) {
         Log.i("SensorService", "starting")
         fireUpAndAssoc();
