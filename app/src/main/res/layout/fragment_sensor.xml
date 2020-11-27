@@ -45,13 +45,14 @@
       android:id="@+id/cancel_service_button"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_marginTop="56dp"
-      android:visibility="invisible"
       android:text="Stop Tracking"
+      android:visibility="invisible"
+      app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintHorizontal_bias="0.0"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/start_service_button" />
+      app:layout_constraintTop_toTopOf="parent"
+
+ />
 
 
   </androidx.constraintlayout.widget.ConstraintLayout>
