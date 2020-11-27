@@ -31,33 +31,27 @@
     android:layout_height="match_parent">
 
 
-    <Button
+    <com.google.android.material.button.MaterialButton
       android:id="@+id/start_service_button"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:background="@color/colorPrimary"
-      android:paddingLeft="10dp"
-      android:paddingRight="10dp"
-      android:paddingTop="5dp"
-      android:paddingBottom="5dp"
+      style="@style/Widget.MaterialComponents.Button"
+      app:cornerRadius="8dp"
+      app:strokeColor="@color/colorPrimary"
       android:text="Start Tracking"
-      android:textColor="@android:color/white"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
       android:id="@+id/cancel_service_button"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:background="@color/colorPrimary"
-      android:paddingLeft="10dp"
-      android:paddingRight="10dp"
-      android:paddingTop="5dp"
-      android:paddingBottom="5dp"
+      style="@style/Widget.MaterialComponents.Button"
+      app:cornerRadius="8dp"
+      app:strokeColor="@color/colorPrimary"
       android:text="Stop Tracking"
-      android:textColor="@android:color/white"
       android:visibility="invisible"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
