@@ -23,6 +23,11 @@ class SensorFragment : Fragment() {
     super.onCreate(savedInstanceState)
   }
 
+  fun isSensorServiceRunning(): Boolean? {
+    return context?.isServiceRunning(SensorService::class.java)
+  }
+
+
   @SuppressLint("ServiceCast")
   @Suppress("DEPRECATION")
   fun <T> Context.isServiceRunning(service: Class<T>): Boolean {
@@ -41,7 +46,7 @@ class SensorFragment : Fragment() {
 
 
     // set the state initially before any button is clicked
-    var running = context?.isServiceRunning(SensorService::class.java)
+    var running = isSensorServiceRunning()
 
     if (running!!) {
       binding.cancelServiceButton.visibility = View.VISIBLE
@@ -64,6 +69,16 @@ class SensorFragment : Fragment() {
           "Tracking Sleep Movements"
         )
       }
+
+      var running = isSensorServiceRunning()
+
+      if (running!!) {
+        binding.cancelServiceButton.visibility = View.VISIBLE
+        binding.startServiceButton.visibility = View.INVISIBLE
+      } else {
+        binding.cancelServiceButton.visibility = View.INVISIBLE
+        binding.startServiceButton.visibility = View.VISIBLE
+      }
     }
 
     binding.cancelServiceButton.setOnClickListener {
@@ -72,6 +87,16 @@ class SensorFragment : Fragment() {
         SensorService.cancelService(
           it1
         )
+      }
+
+      var running = isSensorServiceRunning()
+
+      if (running!!) {
+        binding.cancelServiceButton.visibility = View.VISIBLE
+        binding.startServiceButton.visibility = View.INVISIBLE
+      } else {
+        binding.cancelServiceButton.visibility = View.INVISIBLE
+        binding.startServiceButton.visibility = View.VISIBLE
       }
 
     }
