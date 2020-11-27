@@ -75,7 +75,7 @@ fun buildChart(binding: FragmentIndividualBinding, sleepPositions: List<SleepPos
   dataSet.setDrawValues(false)
   val scatterData = ScatterData(dataSet)
   chart.data = scatterData
-  chart.data.isHighlightEnabled = true
+  chart.data.isHighlightEnabled = false
   dataSet.highLightColor = Color.BLUE;
 
 
