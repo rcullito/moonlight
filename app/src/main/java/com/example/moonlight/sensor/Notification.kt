@@ -60,10 +60,10 @@ fun buildNotification(intent: Intent?, ctx: Context): Notification {
     .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
     .setContentText(input)
     .setSmallIcon(R.drawable.ic_stat_player)
-    .addAction(icon1, title1, intent1)
+  //  .addAction(icon1, title1, intent1)
     .addAction(R.drawable.ic_baseline_stop_24, "Pause", stopPendingIntent)
     .setStyle(androidx.media.app.NotificationCompat.MediaStyle()
-      .setShowActionsInCompactView(0, 1))
+      .setShowActionsInCompactView(0))
     .build()
 
   return notification
