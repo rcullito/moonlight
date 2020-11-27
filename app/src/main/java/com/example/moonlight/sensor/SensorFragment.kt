@@ -15,25 +15,35 @@ import com.example.moonlight.R
 import com.example.moonlight.databinding.FragmentSensorBinding
 
 
+@SuppressLint("ServiceCast")
+@Suppress("DEPRECATION")
+fun <T> Context.isServiceRunning(service: Class<T>): Boolean {
+  return (getSystemService(ACTIVITY_SERVICE) as ActivityManager)
+    .getRunningServices(Integer.MAX_VALUE)
+    .any { it -> it.service.className == service.name }
+}
+
 class SensorFragment : Fragment() {
 
   private lateinit var binding: FragmentSensorBinding
-
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-  }
 
   fun isSensorServiceRunning(): Boolean? {
     return context?.isServiceRunning(SensorService::class.java)
   }
 
+  fun updateButtons(running: Boolean?, binding: FragmentSensorBinding) {
+    if (running!!) {
+      binding.cancelServiceButton.visibility = View.VISIBLE
+      binding.startServiceButton.visibility = View.INVISIBLE
+    } else {
+      binding.cancelServiceButton.visibility = View.INVISIBLE
+      binding.startServiceButton.visibility = View.VISIBLE
+    }
+  }
 
-  @SuppressLint("ServiceCast")
-  @Suppress("DEPRECATION")
-  fun <T> Context.isServiceRunning(service: Class<T>): Boolean {
-    return (getSystemService(ACTIVITY_SERVICE) as ActivityManager)
-      .getRunningServices(Integer.MAX_VALUE)
-      .any { it -> it.service.className == service.name }
+
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
   }
 
   override fun onCreateView(
@@ -44,21 +54,9 @@ class SensorFragment : Fragment() {
     binding = DataBindingUtil.inflate<FragmentSensorBinding>(inflater,
       R.layout.fragment_sensor, container, false)
 
-
-    // set the state initially before any button is clicked
     var running = isSensorServiceRunning()
+    updateButtons(running, binding)
 
-    if (running!!) {
-      binding.cancelServiceButton.visibility = View.VISIBLE
-      binding.startServiceButton.visibility = View.INVISIBLE
-    } else {
-      binding.cancelServiceButton.visibility = View.INVISIBLE
-      binding.startServiceButton.visibility = View.VISIBLE
-    }
-
-    // TODO see if we need to set state manually in the wake of a button click
-    // better to have it derived from the state of the service itself
-    // rather than the click
 
     binding.startServiceButton.setOnClickListener {
       Log.i("SensorFragment", "start service click listener called")
@@ -71,14 +69,8 @@ class SensorFragment : Fragment() {
       }
 
       var running = isSensorServiceRunning()
+      updateButtons(running, binding)
 
-      if (running!!) {
-        binding.cancelServiceButton.visibility = View.VISIBLE
-        binding.startServiceButton.visibility = View.INVISIBLE
-      } else {
-        binding.cancelServiceButton.visibility = View.INVISIBLE
-        binding.startServiceButton.visibility = View.VISIBLE
-      }
     }
 
     binding.cancelServiceButton.setOnClickListener {
@@ -90,17 +82,22 @@ class SensorFragment : Fragment() {
       }
 
       var running = isSensorServiceRunning()
-
-      if (running!!) {
-        binding.cancelServiceButton.visibility = View.VISIBLE
-        binding.startServiceButton.visibility = View.INVISIBLE
-      } else {
-        binding.cancelServiceButton.visibility = View.INVISIBLE
-        binding.startServiceButton.visibility = View.VISIBLE
-      }
-
+      updateButtons(running, binding)
     }
     // Inflate the layout for this fragment
     return binding.root
+  }
+
+  override fun onResume() {
+    super.onResume()
+    var running = isSensorServiceRunning()
+    updateButtons(running, binding)
+
+  }
+
+  override fun onPause() {
+    super.onPause()
+    binding.cancelServiceButton.visibility = View.INVISIBLE
+    binding.startServiceButton.visibility = View.INVISIBLE
   }
 }
