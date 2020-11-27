@@ -36,6 +36,9 @@ class SensorFragment : Fragment() {
           "Tracking Sleep Movements"
         )
       }
+
+      binding.startServiceButton.visibility = View.INVISIBLE
+      binding.cancelServiceButton.visibility = View.VISIBLE
     }
 
     binding.cancelServiceButton.setOnClickListener {
@@ -45,6 +48,9 @@ class SensorFragment : Fragment() {
           it1
         )
       }
+
+      binding.cancelServiceButton.visibility = View.INVISIBLE
+      binding.startServiceButton.visibility = View.VISIBLE
 
     }
     // Inflate the layout for this fragment
