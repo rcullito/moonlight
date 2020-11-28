@@ -9,4 +9,7 @@
   <item
     android:id="@+id/realTimeFragment"
     android:title="How It Works" />
+  <item
+    android:id="@+id/phoenix"
+    android:title="Settings" />
 </menu>

@@ -34,4 +34,8 @@
     android:id="@+id/realTimeFragment"
     android:name="com.example.moonlight.realtime.RealTimeFragment"
     android:label="How It Works" />
+  <fragment
+    android:id="@+id/phoenix"
+    android:name="com.example.moonlight.Phoenix"
+    android:label="Settings" />
 </navigation>
