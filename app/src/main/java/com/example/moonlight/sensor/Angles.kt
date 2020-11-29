@@ -54,9 +54,16 @@ fun updateOrientationAngles(accelerometerReading: FloatArray, magnetometerReadin
 
  if (onBack(roll) && notUpright(pitch)) {
 
-   var roulette = (0..1).random()
+   when (interfere) {
+     "vibrate" -> motionVibrate(ctx)
+     "chime" -> motionAudio(ctx)
+     "both" -> {
+       var roulette = (0..1).random()
+       if (roulette < 1) motionVibrate(ctx) else motionAudio(ctx)
+     }
+   }
 
-   if (roulette < 1) motionVibrate(ctx) else motionAudio(ctx)
+
  }
 
 
