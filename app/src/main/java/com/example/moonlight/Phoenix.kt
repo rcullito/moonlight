@@ -34,12 +34,17 @@ class Phoenix: Fragment() {
     binding.setLifecycleOwner(this)
 
     binding.radioGroup1.setOnCheckedChangeListener { group, checkedId ->
-      // Responds to child RadioButton checked/unchecked
-
-      Log.i("interfere", checkedId.toString())
 
       with (sharedPref?.edit()) {
         this?.putInt(getString(R.string.interfere), checkedId)
+        this?.apply()
+      }
+    }
+
+    binding.radioGroup2.setOnCheckedChangeListener { group, checkedId ->
+
+      with (sharedPref?.edit()) {
+        this?.putInt(getString(R.string.bound), checkedId)
         this?.apply()
       }
     }
