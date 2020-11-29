@@ -11,8 +11,16 @@ xmlns:tools="http://schemas.android.com/tools">
   android:layout_width="match_parent"
   android:layout_height="match_parent">
 
-  <RadioGroup
+  <TextView
+    android:id="@+id/textView4"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintLeft_toLeftOf="parent"
+    android:text="Interfere" />
+
+  <RadioGroup
+    app:layout_constraintTop_toBottomOf="@id/textView4"
     android:id="@+id/radioGroup1"
     android:checkedButton="@+id/radio_button_1"
     android:layout_width="match_parent"
@@ -32,27 +40,39 @@ xmlns:tools="http://schemas.android.com/tools">
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:text="Both"/>
+    <RadioButton
+      android:id="@+id/radio_button_4"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:text="Both"/>
   </RadioGroup>
 
+
+  <TextView
+    android:id="@+id/textView5"
+    app:layout_constraintTop_toBottomOf="@id/radioGroup1"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Boundary" />
 
   <RadioGroup
     android:id="@+id/radioGroup2"
     android:checkedButton="@+id/radio_button_1"
-    app:layout_constraintTop_toBottomOf="@id/radioGroup1"
+    app:layout_constraintTop_toBottomOf="@id/textView5"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
-  <RadioButton
-    android:id="@+id/radio_button_4"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:text="10-2"/>
   <RadioButton
     android:id="@+id/radio_button_5"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:text="9-3"/>
+    android:text="10-2"/>
   <RadioButton
     android:id="@+id/radio_button_6"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:text="9-3"/>
+  <RadioButton
+    android:id="@+id/radio_button_7"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:text="4-8"/>
