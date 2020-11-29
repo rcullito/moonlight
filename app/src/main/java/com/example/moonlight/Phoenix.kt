@@ -1,19 +1,14 @@
 package com.example.moonlight
 
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
-import com.example.moonlight.database.SleepDatabase
-import com.example.moonlight.databinding.FragmentIndividualBinding
 import com.example.moonlight.databinding.FragmentPhoenixBinding
-import com.example.moonlight.individual.IndividualFragmentArgs
-import com.example.moonlight.individual.IndividualViewModel
-import com.example.moonlight.individual.IndividualViewModelFactory
-import com.example.moonlight.individual.buildChart
 
 class Phoenix: Fragment() {
 
@@ -29,10 +24,30 @@ class Phoenix: Fragment() {
     savedInstanceState: Bundle?
   ): View? {
 
+    val sharedPref = activity?.getSharedPreferences(
+      getString(R.string.preference_file_key), Context.MODE_PRIVATE)
+
+
     binding = DataBindingUtil.inflate<FragmentPhoenixBinding>(inflater,
       R.layout.fragment_phoenix, container, false)
 
     binding.setLifecycleOwner(this)
+
+    binding.radioGroup1.setOnCheckedChangeListener { group, checkedId ->
+      // Responds to child RadioButton checked/unchecked
+
+      Log.i("interfere", checkedId.toString())
+
+      with (sharedPref?.edit()) {
+        this?.putInt(getString(R.string.interfere), checkedId)
+        this?.apply()
+      }
+    }
+
+
+
+
+
 
 
     return binding.root
