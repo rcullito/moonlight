@@ -10,6 +10,16 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.example.moonlight.databinding.FragmentPhoenixBinding
 
+
+fun checkedIdToInterfere(checkedId: Int): String {
+  return when (checkedId) {
+    2131231065 -> "vibrate"
+    2131231066 -> "chime"
+    2131231067 -> "both"
+    else -> "none"
+  }
+}
+
 class Phoenix: Fragment() {
 
   private lateinit var binding: FragmentPhoenixBinding
@@ -33,10 +43,10 @@ class Phoenix: Fragment() {
 
     binding.setLifecycleOwner(this)
 
-    binding.radioGroup1.setOnCheckedChangeListener { group, checkedId ->
+    binding.radioGroup1.setOnCheckedChangeListener { _, checkedId ->
 
       with (sharedPref?.edit()) {
-        this?.putInt(getString(R.string.interfere), checkedId)
+        this?.putString(getString(R.string.interfere), checkedIdToInterfere(checkedId))
         this?.apply()
       }
     }
