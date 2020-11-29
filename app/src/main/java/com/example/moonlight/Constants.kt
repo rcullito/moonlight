@@ -4,13 +4,7 @@ package com.example.moonlight
 /**
  * Constants used throughout the app.
  */
-
-const val interfere =  true
-
 const val notificationId = 4
-
-const val logAngles = false
-
 const val startAction = "START"
 const val stopAction = "STOP"
 

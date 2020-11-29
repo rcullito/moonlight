@@ -5,11 +5,9 @@ import android.hardware.SensorManager
 import android.os.Build
 import android.util.Log
 import androidx.annotation.RequiresApi
+import androidx.core.content.res.TypedArrayUtils.getString
+import com.example.moonlight.*
 import com.example.moonlight.database.SleepPosition
-import com.example.moonlight.interfere
-import com.example.moonlight.logAngles
-import com.example.moonlight.onBackAccordingToRoll
-import com.example.moonlight.upRightAccordingToPitch
 import kotlin.math.abs
 
 val rotationMatrix = FloatArray(9)
@@ -49,7 +47,12 @@ fun updateOrientationAngles(accelerometerReading: FloatArray, magnetometerReadin
   var roll = orientationAngles.get(2).toDouble()
 
 
- if (onBack(roll) && notUpright(pitch) && interfere) {
+  val sharedPref = ctx.applicationContext.getSharedPreferences("lupin", Context.MODE_PRIVATE)
+  val interfere = sharedPref.getString("interfere", "none")
+
+  Log.i("ServiceInterfere", interfere)
+
+ if (onBack(roll) && notUpright(pitch)) {
 
    var roulette = (0..1).random()
 
@@ -58,13 +61,6 @@ fun updateOrientationAngles(accelerometerReading: FloatArray, magnetometerReadin
 
 
   var wallClock = rollToSevenTwenty(roll)
-
-  if (logAngles) {
-    Log.i("Angles", pitch.toString())
-    Log.i("Angles", roll.toString())
-    Log.i("Angles", wallClock.toString())
-  }
-
 
   return SleepPosition(pitch = pitch, roll = roll, sleepPositionTime = eventTimestamp, wallClock = wallClock)
 }

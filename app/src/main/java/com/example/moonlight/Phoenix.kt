@@ -13,9 +13,9 @@ import com.example.moonlight.databinding.FragmentPhoenixBinding
 
 fun checkedIdToInterfere(checkedId: Int): String {
   return when (checkedId) {
-    2131231065 -> "vibrate"
-    2131231066 -> "chime"
-    2131231067 -> "both"
+    R.id.radio_button_1 -> "vibrate"
+    R.id.radio_button_2 -> "chime"
+    R.id.radio_button_3 -> "both"
     else -> "none"
   }
 }
@@ -37,7 +37,6 @@ class Phoenix: Fragment() {
     val sharedPref = activity?.getSharedPreferences(
       getString(R.string.preference_file_key), Context.MODE_PRIVATE)
 
-
     binding = DataBindingUtil.inflate<FragmentPhoenixBinding>(inflater,
       R.layout.fragment_phoenix, container, false)
 
@@ -45,25 +44,22 @@ class Phoenix: Fragment() {
 
     binding.radioGroup1.setOnCheckedChangeListener { _, checkedId ->
 
+      var interfereChoice = checkedIdToInterfere(checkedId)
+
       with (sharedPref?.edit()) {
-        this?.putString(getString(R.string.interfere), checkedIdToInterfere(checkedId))
+        this?.putString("interfere", interfereChoice)
         this?.apply()
       }
+
     }
 
-    binding.radioGroup2.setOnCheckedChangeListener { group, checkedId ->
+    binding.radioGroup2.setOnCheckedChangeListener { _, checkedId ->
 
       with (sharedPref?.edit()) {
         this?.putInt(getString(R.string.bound), checkedId)
         this?.apply()
       }
     }
-
-
-
-
-
-
 
     return binding.root
 

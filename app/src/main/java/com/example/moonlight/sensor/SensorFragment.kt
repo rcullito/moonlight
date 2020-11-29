@@ -57,7 +57,6 @@ class SensorFragment : Fragment() {
     var running = isSensorServiceRunning()
     updateButtons(running, binding)
 
-
     binding.startServiceButton.setOnClickListener {
       Log.i("SensorFragment", "start service click listener called")
 
