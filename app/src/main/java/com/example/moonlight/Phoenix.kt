@@ -50,14 +50,19 @@ class Phoenix: Fragment() {
     binding.setLifecycleOwner(this)
 
     val interfere = sharedPref?.getString("interfere", "none")
-
-    Log.i("Phoenix", interfere)
+    val boundary = sharedPref?.getString("boundary", "8-4")
 
     when (interfere) {
       "vibrate" -> binding.radioButton1.isChecked = true
       "chime" -> binding.radioButton2.isChecked = true
       "both" -> binding.radioButton3.isChecked = true
       else -> binding.radioButton4.isChecked = true
+    }
+
+    when (boundary) {
+      "10-2" -> binding.radioButton5.isChecked = true
+      "9-3" -> binding.radioButton6.isChecked = true
+      else -> binding.radioButton7.isChecked = true
     }
 
     binding.radioGroup1.setOnCheckedChangeListener { _, checkedId ->
