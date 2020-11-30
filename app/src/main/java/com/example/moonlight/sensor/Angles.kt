@@ -21,8 +21,15 @@ fun notUpright(pitch: Double): Boolean {
   fun upRight(pitch: Double): Boolean {
     return abs(pitch) > upRightAccordingToPitch
   }
-fun onBack(roll: Double): Boolean {
-  return abs(roll) < eightToFourBoundary
+fun onBack(roll: Double, boundary: String?): Boolean {
+
+  var rollBoundary = when (boundary) {
+    "10-2" -> tenToTwoBoundary
+    "9-3" -> nineToThreeBoundary
+    else -> eightToFourBoundary
+  }
+
+  return abs(roll) < rollBoundary
 }
 
 class FloatRange(override val start: Float, override val endInclusive: Float) : ClosedRange<Float>
@@ -54,7 +61,7 @@ fun updateOrientationAngles(accelerometerReading: FloatArray, magnetometerReadin
 
   Log.i("ServiceInterfere", interfere)
 
- if (onBack(roll) && notUpright(pitch)) {
+ if (onBack(roll, boundary) && notUpright(pitch)) {
 
    when (interfere) {
      "vibrate" -> motionVibrate(ctx)
