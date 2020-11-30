@@ -13,5 +13,9 @@ const val stopAction = "STOP"
 // would measure upright according to pitch
 const val upRightAccordingToPitch = 0.45
 
-const val onBackAccordingToRoll = 2.10
+const val tenToTwoBoundary ="bleep"
+const val nineToThreeBoundary = "bleep"
+const val eightToFourBoundary = 2.10
+
+
 

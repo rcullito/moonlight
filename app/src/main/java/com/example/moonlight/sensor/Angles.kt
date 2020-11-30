@@ -22,7 +22,7 @@ fun notUpright(pitch: Double): Boolean {
     return abs(pitch) > upRightAccordingToPitch
   }
 fun onBack(roll: Double): Boolean {
-  return abs(roll) < onBackAccordingToRoll
+  return abs(roll) < eightToFourBoundary
 }
 
 class FloatRange(override val start: Float, override val endInclusive: Float) : ClosedRange<Float>
