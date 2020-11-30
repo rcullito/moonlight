@@ -89,7 +89,7 @@ xmlns:tools="http://schemas.android.com/tools">
         android:id="@+id/radio_button_7"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="4-8" />
+        android:text="8-4" />
     </RadioGroup>
   </androidx.constraintlayout.widget.ConstraintLayout>
 

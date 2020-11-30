@@ -49,6 +49,8 @@ fun updateOrientationAngles(accelerometerReading: FloatArray, magnetometerReadin
 
   val sharedPref = ctx.applicationContext.getSharedPreferences("lupin", Context.MODE_PRIVATE)
   val interfere = sharedPref.getString("interfere", "none")
+  val boundary = sharedPref.getString("boundary", "8-4")
+
 
   Log.i("ServiceInterfere", interfere)
 

@@ -19,6 +19,14 @@ fun checkedIdToInterfere(checkedId: Int): String {
   }
 }
 
+fun checkedToBound(checkedId: Int): String {
+  return when (checkedId) {
+    R.id.radio_button_5 -> "10-2"
+    R.id.radio_button_6 -> "9-3"
+    else -> "8-4"
+  }
+}
+
 class Phoenix: Fragment() {
 
   private lateinit var binding: FragmentPhoenixBinding
@@ -66,7 +74,10 @@ class Phoenix: Fragment() {
     binding.radioGroup2.setOnCheckedChangeListener { _, checkedId ->
 
       with (sharedPref?.edit()) {
-        this?.putInt(getString(R.string.bound), checkedId)
+
+        var boundChoice = checkedToBound(checkedId)
+
+        this?.putString("boundary", boundChoice)
         this?.apply()
       }
     }
@@ -77,6 +88,3 @@ class Phoenix: Fragment() {
 
 
 }
-
-
-
