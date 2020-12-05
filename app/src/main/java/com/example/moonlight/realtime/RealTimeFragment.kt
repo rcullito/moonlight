@@ -139,7 +139,7 @@ class RealTimeFragment: Fragment(), SensorEventListener {
     var roundedRoll = roll.roundOff()
 
     var rollDisplay = if (upRight(pitch.toDouble())) "upright" else roundedRoll
-    var clockDisplay = if (upRight(pitch.toDouble())) "upright" else staticClockDataStructure[clock]
+    var clockDisplay = if (upRight(pitch.toDouble())) "hold top and bottom of phone level to see live reading" else staticClockDataStructure[clock]
 
     binding.roll = "Roll: ".plus(rollDisplay)
     binding.clock = clockDisplay

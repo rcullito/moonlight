@@ -9,6 +9,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.children
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.example.moonlight.R
@@ -52,11 +53,23 @@ class SensorFragment : Fragment() {
     if (running!!) {
       binding.cancelServiceButton.visibility = View.VISIBLE
       binding.startServiceButton.visibility = View.INVISIBLE
-      binding.radioGroup1.isEnabled = false
+      binding.radioButton1.isEnabled = false
+      binding.radioButton2.isEnabled = false
+      binding.radioButton3.isEnabled = false
+      binding.radioButton4.isEnabled = false
+      binding.radioButton5.isEnabled = false
+      binding.radioButton6.isEnabled = false
+      binding.radioButton7.isEnabled = false
     } else {
       binding.cancelServiceButton.visibility = View.INVISIBLE
       binding.startServiceButton.visibility = View.VISIBLE
-      binding.radioGroup1.isEnabled = true
+      binding.radioButton1.isEnabled = true
+      binding.radioButton2.isEnabled = true
+      binding.radioButton3.isEnabled = true
+      binding.radioButton4.isEnabled = true
+      binding.radioButton5.isEnabled = true
+      binding.radioButton6.isEnabled = true
+      binding.radioButton7.isEnabled = true
     }
   }
 
