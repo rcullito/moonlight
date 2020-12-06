@@ -5,8 +5,8 @@
     android:title="Record" />
   <item
     android:id="@+id/resultsFragment2"
-    android:title="Data" />
+    android:title="Prior Nights" />
   <item
     android:id="@+id/realTimeFragment"
-    android:title="How" />
+    android:title="How It Works" />
 </menu>

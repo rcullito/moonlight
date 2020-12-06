@@ -95,10 +95,11 @@
       android:layout_height="wrap_content"
       android:gravity="center"
       android:text="@{clock}"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintEnd_toStartOf="@+id/textView6"
-      app:layout_constraintTop_toBottomOf="@id/imageView2"
+      android:textSize="18sp"
       app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toStartOf="@+id/textView6"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/imageView2"
       tools:text="clock" />
 
     <TextView
