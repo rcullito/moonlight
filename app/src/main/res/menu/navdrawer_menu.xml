@@ -2,11 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
   <item
     android:id="@+id/sensorFragment"
-    android:title="Record Sleep" />
+    android:title="Record" />
   <item
     android:id="@+id/resultsFragment2"
-    android:title="Past Sleep Data" />
+    android:title="Data" />
   <item
     android:id="@+id/realTimeFragment"
-    android:title="How It Works" />
+    android:title="How" />
 </menu>
