@@ -18,6 +18,7 @@
     android:id="@+id/label_group"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="15dp"
     android:orientation="vertical"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintLeft_toLeftOf="parent"
@@ -28,12 +29,25 @@
       android:id="@+id/textView3"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:text="Roll your phone around to get an idea of how the values will change. If you can, try and keep the top and bottom of your phone at the same height, rotating your phone around the sides. (In the below diagram, keep the navy blue line fixed, but rotate the green line) This will simulate how your sleep is tracked when the phone is held vertically against your torso."
-      tools:layout_editor_absoluteX="0dp"
+      android:text="Your sleep position is measured by changes around the left and right of your phone. Roll your phone around to get an idea of how the values will change."
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
+      tools:layout_editor_absoluteX="0dp"
       tools:layout_editor_absoluteY="93dp" />
 
+
+    <ImageView
+      android:id="@+id/imageView"
+      android:layout_width="160dp"
+      android:layout_height="160dp"
+      android:layout_marginTop="64dp"
+      android:layout_marginBottom="66dp"
+      android:adjustViewBounds="true"
+      android:src="@drawable/fly_owl_fly"
+      app:layout_constraintBottom_toTopOf="@+id/value_clock"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <TextView
       android:id="@+id/value_roll"
@@ -41,9 +55,9 @@
       android:layout_height="wrap_content"
       android:gravity="center"
       android:text="@{roll}"
-      android:visibility="gone"
       android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
       android:textSize="36sp"
+      android:visibility="gone"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintHorizontal_bias="0.0"
@@ -65,21 +79,8 @@
       app:layout_constraintHorizontal_bias="0.0"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/value_roll"
-      app:layout_constraintVertical_bias="0.056"
+      app:layout_constraintVertical_bias="0.407"
       tools:text="clock" />
-
-    <ImageView
-      android:id="@+id/imageView"
-      android:layout_width="279dp"
-      android:layout_height="447dp"
-      android:adjustViewBounds="true"
-      android:src="@drawable/axis_device"
-      app:layout_constraintBottom_toTopOf="@+id/value_roll"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintHorizontal_bias="0.497"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/value_clock"
-      app:layout_constraintVertical_bias="0.0" />
 
   </androidx.constraintlayout.widget.ConstraintLayout>
 

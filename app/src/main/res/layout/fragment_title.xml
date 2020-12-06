@@ -42,7 +42,7 @@
       android:layout_marginEnd="32dp"
       android:paddingLeft="32dp"
       android:paddingRight="32dp"
-      android:text="Moonlight tracks your sleep position. The angle you face is recorded the same way as a wall clock. 12 means you slept on your back back. 6, your stomach. 9 and 3: sides."
+      android:text="Moonlight tracks your sleep position. Jump over to the 'How It Works' page to learn more."
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/imageView" />
