@@ -28,25 +28,27 @@
   <androidx.constraintlayout.widget.ConstraintLayout
     android:id="@+id/titleConstraint"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:paddingStart="15dp">
 
     <TextView
       android:id="@+id/textView4"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
+      android:layout_marginTop="15dp"
       android:paddingBottom="10dp"
       android:text="Interfere"
       android:textSize="24sp"
-      app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintEnd_toStartOf="@+id/textView5"
+      app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent" />
 
     <RadioGroup
       android:id="@+id/radioGroup1"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
-      app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintEnd_toStartOf="@+id/radioGroup2"
+      app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/textView4">
 
       <RadioButton
@@ -79,19 +81,20 @@
       android:id="@+id/textView5"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
+      android:layout_marginTop="15dp"
       android:paddingBottom="10dp"
       android:text="Boundary"
       android:textSize="24sp"
-      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toEndOf="@+id/textView4"
-      app:layout_constraintEnd_toEndOf="parent" />
+      app:layout_constraintTop_toTopOf="parent" />
 
     <RadioGroup
       android:id="@+id/radioGroup2"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
-      app:layout_constraintStart_toEndOf="@+id/radioGroup1"
       app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toEndOf="@+id/radioGroup1"
       app:layout_constraintTop_toBottomOf="@id/textView5">
 
       <RadioButton
