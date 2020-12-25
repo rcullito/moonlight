@@ -5,7 +5,7 @@
     android:title="Record" />
   <item
     android:id="@+id/resultsFragment2"
-    android:title="Prior Nights" />
+    android:title="@string/past_sleep_nights" />
   <item
     android:id="@+id/realTimeFragment"
     android:title="How It Works" />

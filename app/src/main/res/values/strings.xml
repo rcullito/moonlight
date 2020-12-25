@@ -9,5 +9,6 @@
   <string name="preference_file_key">lupin</string>
   <string name="interfere">none</string>
   <string name="bound">10-2</string>
+    <string name="past_sleep_nights">Past Sleep Nights</string>
 
 </resources>

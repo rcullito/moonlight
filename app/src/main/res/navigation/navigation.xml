@@ -12,7 +12,7 @@
   <fragment
     android:id="@+id/resultsFragment2"
     android:name="com.example.moonlight.dates.ResultsFragment"
-    android:label="Past Sleep Nights"
+    android:label="@string/past_sleep_nights"
     tools:layout="@layout/fragment_results" >
     <action
       android:id="@+id/action_resultsFragment2_to_individualFragment"
