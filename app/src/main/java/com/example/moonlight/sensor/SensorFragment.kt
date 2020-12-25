@@ -35,7 +35,7 @@ fun checkedIdToInterfere(checkedId: Int): String {
 
 fun checkedToBound(checkedId: Int): String {
   return when (checkedId) {
-    R.id.radio_button_5 -> "10-2"
+    R.id.radio_button_5 -> "8:30-3:30"
     R.id.radio_button_6 -> "9-3"
     else -> "8-4"
   }
@@ -102,7 +102,7 @@ class SensorFragment : Fragment() {
     }
 
     when (boundary) {
-      "10-2" -> binding.radioButton5.isChecked = true
+      "8:30-3:30" -> binding.radioButton5.isChecked = true
       "9-3" -> binding.radioButton6.isChecked = true
       else -> binding.radioButton7.isChecked = true
     }

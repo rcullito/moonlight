@@ -24,7 +24,7 @@ fun notUpright(pitch: Double): Boolean {
 fun onBack(roll: Double, boundary: String?): Boolean {
 
   var rollBoundary = when (boundary) {
-    "10-2" -> tenToTwoBoundary
+    "8:30-3:30" -> eightThirtyToThreeThirtyBoundary
     "9-3" -> nineToThreeBoundary
     else -> eightToFourBoundary
   }

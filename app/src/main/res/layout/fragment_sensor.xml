@@ -97,17 +97,18 @@
       app:layout_constraintStart_toEndOf="@+id/radioGroup1"
       app:layout_constraintTop_toBottomOf="@id/textView5">
 
-      <RadioButton
-        android:id="@+id/radio_button_5"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="10-2" />
 
       <RadioButton
         android:id="@+id/radio_button_6"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="9-3" />
+
+      <RadioButton
+        android:id="@+id/radio_button_5"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="8:30-3:30" />
 
       <RadioButton
         android:id="@+id/radio_button_7"

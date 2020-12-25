@@ -13,8 +13,10 @@ const val stopAction = "STOP"
 // would measure upright according to pitch
 const val upRightAccordingToPitch = 0.45
 
-const val tenToTwoBoundary = 1.05
+
 const val nineToThreeBoundary = 1.57
+// exactly the midpoint between 8 & 4, but it was still worth checking :)
+const val eightThirtyToThreeThirtyBoundary = 1.83
 const val eightToFourBoundary = 2.10
 
 
