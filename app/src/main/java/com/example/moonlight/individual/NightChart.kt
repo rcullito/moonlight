@@ -70,7 +70,7 @@ fun buildChart(binding: FragmentIndividualBinding, sleepPositions: List<SleepPos
     entries.add(Entry(xValue, yValue));
   }
 
-  var dataSet = ScatterDataSet(entries, "Wall Clock Resting Position")
+  var dataSet = ScatterDataSet(entries, "recording sleep angle (left) at a specific time (top)")
   dataSet.setColor(Color.BLUE)
   dataSet.setDrawValues(false)
   val scatterData = ScatterData(dataSet)
