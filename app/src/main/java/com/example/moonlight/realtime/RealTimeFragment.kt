@@ -35,6 +35,32 @@ class RealTimeFragment: Fragment(), SensorEventListener {
   private var mAccelerometerData = FloatArray(3)
   private var mMagnetometerData = FloatArray(3)
 
+  fun Float.roundOff(): String {
+    val df = DecimalFormat("##.##")
+    return df.format(this)
+  }
+
+  fun registerListeners(manager: SensorManager?) {
+    manager!!.getDefaultSensor(Sensor.TYPE_ACCELEROMETER).also { accelerometer ->
+      Log.i("SensorService", "registering sensor listener")
+      manager!!.registerListener(
+        this,
+        accelerometer,
+        SensorManager.SENSOR_DELAY_NORMAL,
+        // When maxReportLatencyUs is 0 it requires the events to be delivered as soon as possible
+        0
+      )
+    }
+    manager!!.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD).also { magneticField ->
+      manager!!.registerListener(
+        this,
+        magneticField,
+        SensorManager.SENSOR_DELAY_NORMAL,
+        0
+      )
+    }
+  }
+
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
 
@@ -44,30 +70,8 @@ class RealTimeFragment: Fragment(), SensorEventListener {
     // is not available on the device.
     mSensorManager = requireActivity().getSystemService(Context.SENSOR_SERVICE) as SensorManager
 
-    mSensorManager!!.getDefaultSensor(Sensor.TYPE_ACCELEROMETER).also { accelerometer ->
-      Log.i("SensorService", "registering sensor listener")
-      mSensorManager!!.registerListener(
-        this,
-        accelerometer,
-        SensorManager.SENSOR_DELAY_NORMAL,
-        // When maxReportLatencyUs is 0 it requires the events to be delivered as soon as possible
-        0
-      )
-    }
-    mSensorManager!!.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD).also { magneticField ->
-      mSensorManager!!.registerListener(
-        this,
-        magneticField,
-        SensorManager.SENSOR_DELAY_NORMAL,
-        0
-      )
-    }
+    registerListeners(mSensorManager)
 
-  }
-
-  fun Float.roundOff(): String {
-    val df = DecimalFormat("##.##")
-    return df.format(this)
   }
 
   override fun onCreateView(
@@ -120,6 +124,11 @@ class RealTimeFragment: Fragment(), SensorEventListener {
 
   override fun onStop() {
     super.onStop()
+  }
+
+  override fun onResume() {
+    super.onResume()
+    registerListeners(mSensorManager)
   }
 
   override fun onSensorChanged(event: SensorEvent) {
