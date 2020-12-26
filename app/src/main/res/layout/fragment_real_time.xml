@@ -45,7 +45,7 @@
       android:layout_height="0dp"
       android:gravity="center"
       android:layout_marginTop="16dp"
-      android:text="1. Measurement starts when the top and bottom of your phone are at the same height (Blue line is parallel to the ground, as in sleep)"
+      android:text="1. Measurement starts when the top and bottom of your phone are level. (Blue line is parallel to the ground, as in sleep)"
       app:layout_constraintStart_toEndOf="@+id/imageView1"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintTop_toTopOf="parent"
@@ -57,7 +57,7 @@
       android:layout_width="0dp"
       android:layout_height="wrap_content"
       android:gravity="center"
-      android:text="2. Changes are detected via the left and right side moving up and down (Green line rotates as you roll over)"
+      android:text="2. Changes are detected via the left and right side of your phone moving up and down. (Green line tilts, and the red line points in a new direction)"
       app:layout_constraintEnd_toStartOf="@+id/imageView2"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/imageView1"
@@ -109,7 +109,7 @@
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/imageView2"
       app:layout_constraintBottom_toBottomOf="parent"
-      android:text="3. To keep things simple, we measure the roll in hours and minutes." />
+      android:text="3. Get a feel for how we record 'clock time' by moving your phone around. Watch the value on the left change." />
 
 
 
