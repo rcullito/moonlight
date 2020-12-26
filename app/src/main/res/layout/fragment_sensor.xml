@@ -83,7 +83,7 @@
       android:layout_height="wrap_content"
       android:layout_marginTop="15dp"
       android:paddingBottom="10dp"
-      android:text="Boundary"
+      android:text="Boundary*"
       android:textSize="24sp"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toEndOf="@+id/textView4"
@@ -153,6 +153,18 @@
       app:layout_constraintTop_toTopOf="parent"
       app:layout_constraintVertical_bias="0.671"
       app:strokeColor="@color/colorPrimary" />
+
+    <TextView
+      android:id="@+id/textView6"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="15dp"
+      android:paddingBottom="10dp"
+      android:text="*The point on the 'wall clock', beyond which, if you roll over, Moonlight will vibrate or chime you awake to prevent you from sleeping on your back."
+      android:textSize="14dp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintBottom_toBottomOf="parent"/>
 
 
   </androidx.constraintlayout.widget.ConstraintLayout>
