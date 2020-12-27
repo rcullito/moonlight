@@ -5,9 +5,9 @@
   <data>
     <variable
       name="date"
-      type="com.example.moonlight.database.SleepDate" />
+      type="com.robertculliton.moonlight.database.SleepDate" />
     <variable
-      name="clickListener" type="com.example.moonlight.dates.SleepNightListener"/>
+      name="clickListener" type="com.robertculliton.moonlight.dates.SleepNightListener"/>
     <variable
       name="display"
       type="String" />

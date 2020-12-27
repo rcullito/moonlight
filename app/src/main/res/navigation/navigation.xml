@@ -7,11 +7,11 @@
 
   <fragment
     android:id="@+id/titleFragment3"
-    android:name="com.example.moonlight.TitleFragment"
+    android:name="com.robertculliton.moonlight.TitleFragment"
     android:label="Sleep Position Tracker" />
   <fragment
     android:id="@+id/resultsFragment2"
-    android:name="com.example.moonlight.dates.ResultsFragment"
+    android:name="com.robertculliton.moonlight.dates.ResultsFragment"
     android:label="@string/past_sleep_nights"
     tools:layout="@layout/fragment_results" >
     <action
@@ -20,11 +20,11 @@
   </fragment>
   <fragment
     android:id="@+id/sensorFragment"
-    android:name="com.example.moonlight.sensor.SensorFragment"
+    android:name="com.robertculliton.moonlight.sensor.SensorFragment"
     android:label="Record Sleep" />
   <fragment
     android:id="@+id/individualFragment"
-    android:name="com.example.moonlight.individual.IndividualFragment"
+    android:name="com.robertculliton.moonlight.individual.IndividualFragment"
     android:label="Sleep Angle &amp; Time">
     <argument
       android:name="date"
@@ -32,6 +32,6 @@
   </fragment>
   <fragment
     android:id="@+id/realTimeFragment"
-    android:name="com.example.moonlight.realtime.RealTimeFragment"
+    android:name="com.robertculliton.moonlight.realtime.RealTimeFragment"
     android:label="How It Works" />
 </navigation>
