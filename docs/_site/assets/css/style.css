@@ -318,6 +318,8 @@ a:hover { text-decoration: underline; }
 
 .site-footer-credits { color: #819198; }
 
+.main-content h2 { color: #6a5acd; }
+
 .page-header { color: #fff; text-align: center; background-color: #6a5acd; background-image: none; }
 @media screen and (min-width: 64em) { .page-header { padding: 5rem 6rem; } }
 @media screen and (min-width: 42em) and (max-width: 64em) { .page-header { padding: 3rem 4rem; } }

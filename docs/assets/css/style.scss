@@ -4,6 +4,16 @@
 @import "{{ site.theme }}";
 
 $color-moonlight-purple: #6a5acd;
+$color-moonlight-blue: #483d8b;
+
+.main-content {
+
+    h2 {
+        color: $color-moonlight-purple;
+    }
+
+}
+
 
 .page-header {
   color: $header-heading-color;
@@ -23,3 +33,5 @@ $color-moonlight-purple: #6a5acd;
     padding: 2rem 1rem;
   }
 }
+
+
