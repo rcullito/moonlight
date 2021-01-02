@@ -1,6 +1,6 @@
 Last updated on December 30, 2020
 
-#Privacy Policy
+# Privacy Policy
 
 ## What this Policy Covers
 
