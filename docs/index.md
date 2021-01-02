@@ -23,7 +23,9 @@ We use your personal data to provide and improve the Service, including to creat
 
 The information provided by Moonlight (“we,” “us” or “our”) on the mobile app is intended for informational, educational, and research purposes only, it is not, and is not intended, for use in the diagnosis of disease or other conditions, or in the cure, mitigation, treatment, or prevention of disease.
 
-All information on the mobile app is provided in good faith, however we make no representation or warranty of any kind, express or implied, regarding the accuracy, adequacy, validity, reliability, availability or completeness of any information on the mobile app. UNDER NO CIRCUMSTANCE SHALL WE HAVE ANY LIABILITY TO YOU FOR ANY LOSS OR DAMAGE OF ANY KIND INCURRED AS A RESULT OF THE USE OF THE MOBILE APP OR RELIANCE ON ANY INFORMATION PROVIDED ON THE MOBILE APP. YOUR USE OF THE MOBILE APP AND YOUR RELIANCE ON ANY INFORMATION ON THE MOBILE APP IS SOLELY AT YOUR OWN RISK.
+All information on the mobile app is provided in good faith, however we make no representation or warranty of any kind, express or implied, regarding the accuracy, adequacy, validity, reliability, availability or completeness of any information on the mobile app. Under no circumstance shall we have any liability to you for any loss or damage of any kind incurred as a result of the use of the mobile app or reliance on any information provided on the mobile app. Your use of the mobile app and your reliance on any information on the mobile app is solely at your own risk.
+
+
 
 
 
