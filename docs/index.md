@@ -17,7 +17,7 @@ Storage of Sensor Data: The raw data collected by the Device sensors is meant to
 
 ## How We Use Information
 
-We use your personal data to provide and improve the Service, including to create graphs of positional information and to generate device interactions such as vibrations and sound effects. None of your information is accessible to Moonlight, nor is it passed along to any third-pary.
+We use your personal data to provide and improve the Service, including to create graphs of device orientation and to generate device interactions such as vibrations and sound effects. None of your information is accessible to Moonlight, nor is it passed along to any third-pary. Deleting the app from your phone will delete all data stored locally by the app.
 
 # Terms & Conditions
 
