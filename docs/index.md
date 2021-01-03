@@ -23,17 +23,16 @@ We use your personal data to provide and improve the Service, including to creat
 
 Use of the Service is subject to the following terms of use. Moonlight may modify these terms and conditions at any time, and such modifications shall be effective immediately upon posting the modified terms and conditions. You agree to review the agreement periodically to be aware of such modifications, and your accessing or using the service constitutes your acceptance of the agreement as it appears at the time of your access or use. 
 
-
-## Intended for users 18 and older
-
-The Site is intended for use by individuals 18 years of age or older. This website is not directed for use by children under the age of 18. Users under the age of 18 should get the assistance of a parent or guardian to use this Service.
-
 You agree that you will not:
 
 - Use this website for any purpose in violation of local, state, national or international laws.
 - Attempt to disable, "hack" or otherwise interfere with the proper functioning of this website
 
 You are responsible for maintaining the confidentiality of your phone and app account and for restricting access to your phone and computer. You agree to accept responsibility for all activities that occur under your account or password.
+
+## Intended for users 18 and older
+
+The Site is intended for use by individuals 18 years of age or older. This website is not directed for use by children under the age of 18. Users under the age of 18 should get the assistance of a parent or guardian to use this Service.
 
 
 ## Availability
