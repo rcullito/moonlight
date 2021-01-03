@@ -45,7 +45,7 @@ You will not copy or transmit any of the material from the Service except if you
 
 ## Disclaimer
 
-The information provided by Moonlight (“we,” “us” or “our”) on the mobile app is intended for informational, educational, and research purposes only, it is not, and is not intended, for use in the diagnosis of disease or other conditions, or in the cure, mitigation, treatment, or prevention of disease.
+The information provided by Moonlight on the mobile app is intended for informational, educational, and research purposes only, it is not, and is not intended, for use in the diagnosis of disease or other conditions, or in the cure, mitigation, treatment, or prevention of disease.
 
 ## Limitations of liability
 
