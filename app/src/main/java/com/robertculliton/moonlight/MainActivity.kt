@@ -23,7 +23,6 @@ class MainActivity : AppCompatActivity() {
     Log.i("MainActivity", "onCreate Called yipee")
     super.onCreate(savedInstanceState)
 
-
     val sharedPref = this.getSharedPreferences(
       getString(R.string.preference_file_key), Context.MODE_PRIVATE)
 
@@ -38,13 +37,6 @@ class MainActivity : AppCompatActivity() {
           this?.apply()
         }
 
-        Log.i("terms", "click listener called")
-
-        val viewedTerms = sharedPref?.getString("viewedTerms", "no")
-
-        Log.i("terms", viewedTerms)
-
-        // TODO go back to main activity
         val intent = Intent(this, MainActivity::class.java).apply {
           putExtra("terms", "accepted")
         }
