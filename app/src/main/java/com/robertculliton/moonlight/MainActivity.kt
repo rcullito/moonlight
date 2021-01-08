@@ -1,6 +1,7 @@
 package com.robertculliton.moonlight
 
 import android.content.Context
+import android.content.Intent
 import  android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
@@ -30,6 +31,26 @@ class MainActivity : AppCompatActivity() {
 
     if (viewedTerms == "no") {
       termsBinding = DataBindingUtil.setContentView(this, R.layout.fragment_terms)
+
+      termsBinding.acceptTermsButton.setOnClickListener {
+        with (sharedPref?.edit()) {
+          this?.putString("viewedTerms", "yes")
+          this?.apply()
+        }
+
+        Log.i("terms", "click listener called")
+
+        val viewedTerms = sharedPref?.getString("viewedTerms", "no")
+
+        Log.i("terms", viewedTerms)
+
+        // TODO go back to main activity
+        val intent = Intent(this, MainActivity::class.java).apply {
+          putExtra("terms", "accepted")
+        }
+        startActivity(intent)
+
+      }
     } else {
       binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
