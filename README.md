@@ -1,4 +1,4 @@
-# lupin
+# Moonlight
 
 ![Professor Lupin](professor-lupin.png)
 
