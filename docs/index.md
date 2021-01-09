@@ -47,7 +47,7 @@ You will not copy or transmit any of the material from the Service except if you
 
 The information provided by Moonlight on the mobile app is intended for informational, educational, and research purposes only, it is not, and is not intended, for use in the diagnosis of disease or other conditions, or in the cure, mitigation, treatment, or prevention of disease.
 
-## Limitations of liability
+## Limitations of Liability
 
 All information on the mobile app is provided in good faith, however we make no representation or warranty of any kind, express or implied, regarding the accuracy, adequacy, validity, reliability, availability or completeness of any information on the mobile app. Under no circumstance shall we have any liability to you for any loss or damage of any kind incurred as a result of the use of the mobile app or reliance on any information provided on the mobile app. Your use of the mobile app and your reliance on any information on the mobile app is solely at your own risk.
 
