@@ -10,5 +10,6 @@
   <string name="interfere">none</string>
   <string name="bound">10-2</string>
     <string name="past_sleep_nights">Past Sleep Nights</string>
+    <string name="messageWithLink"><a href="https://www.google.com/">Privacy Policy &amp; Terms of Use</a></string>
 
 </resources>
