@@ -4,38 +4,35 @@
   xmlns:tools="http://schemas.android.com/tools"
   tools:context="com.robertculliton.android.navigation.TitleFragment">
 
-  <androidx.constraintlayout.widget.ConstraintLayout
-    android:id="@+id/titleConstraint"
+  <ScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/titleConstraint"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    >
 
     <TextView
       android:id="@+id/textView7"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_marginStart="93dp"
       android:layout_marginTop="@dimen/terms_margin_top"
-      android:layout_marginEnd="111dp"
-      android:layout_marginBottom="356dp"
       android:text="Last updated on December 30, 2020"
-      app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintHorizontal_bias="0.0"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent"
-      app:layout_constraintVertical_bias="0.0" />
+      app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
       android:id="@+id/textView8"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_marginStart="93dp"
       android:layout_marginTop="@dimen/terms_margin_top"
-      android:layout_marginEnd="111dp"
       android:text="Privacy Policy"
       app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintHorizontal_bias="0.575"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/textView7" />
 
@@ -43,12 +40,9 @@
       android:id="@+id/textView9"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_marginStart="93dp"
       android:layout_marginTop="@dimen/terms_margin_top"
-      android:layout_marginEnd="111dp"
       android:text="What this Policy Covers: This Privacy Policy describes how Moonlight  (we, us or our) may collect information about you during your visit to our mobile app. When we refer to our Services in this policy, we mean Moonlight’s mobile app. By using the Service, you agree to the collection and use of information in accordance with this Privacy Policy."
       app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintHorizontal_bias="0.455"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/textView8" />
 
@@ -56,9 +50,7 @@
       android:id="@+id/textView10"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_marginStart="93dp"
       android:layout_marginTop="@dimen/terms_margin_top"
-      android:layout_marginEnd="111dp"
       android:text="Information We Collect
 
 We collect or receive the following types of information:
@@ -67,7 +59,6 @@ Position Sensors: Position sensors are used for determining the device's physica
 
 Storage of Sensor Data: The raw data collected by the Device sensors is meant to remain on your Device, and then only if you have enabled the applicable Service(s). This data is not collected by Moonlight."
       app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintHorizontal_bias="0.455"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/textView9" />
 
@@ -75,35 +66,62 @@ Storage of Sensor Data: The raw data collected by the Device sensors is meant to
       android:id="@+id/textView11"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_marginStart="93dp"
       android:layout_marginTop="@dimen/terms_margin_top"
-      android:layout_marginEnd="111dp"
       android:text="How We Use Information
 
 We use your personal data to provide and improve the Service, including to create graphs of device orientation and to generate device interactions such as vibrations and sound effects. None of your information is accessible to Moonlight, nor is it passed along to any third-pary. Deleting the app from your phone will delete all data stored locally by the app."
       app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintHorizontal_bias="0.455"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/textView10" />
+
+    <TextView
+      android:id="@+id/textView12"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="@dimen/terms_margin_top"
+      android:text="Terms &amp; Conditions"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/textView11" />
+
+
+    <TextView
+      android:id="@+id/textView13"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="@dimen/terms_margin_top"
+      android:text="Use of the Service is subject to the following terms of use. Moonlight may modify these terms and conditions at any time, and such modifications shall be effective immediately upon posting the modified terms and conditions. You agree to review the agreement periodically to be aware of such modifications, and your accessing or using the service constitutes your acceptance of the agreement as it appears at the time of your access or use."
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/textView12" />
+
+    <TextView
+      android:id="@+id/textView14"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="@dimen/terms_margin_top"
+      android:text="You agree that you will not:\n - Use this website for any purpose in violation of local, state, national or international laws.\n - Attempt to disable, hack or otherwise interfere with the proper functioning of this website\nYou are responsible for maintaining the confidentiality of your phone and app account and for restricting access to your phone and computer. You agree to accept responsibility for all activities that occur under your account or password."
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/textView13" />
 
     <com.google.android.material.button.MaterialButton
       android:id="@+id/accept_terms_button"
       style="@style/Widget.MaterialComponents.Button"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
+      android:layout_marginTop="@dimen/terms_margin_top"
       android:paddingTop="10dp"
       android:paddingBottom="10dp"
       android:text="Accept"
       android:textSize="16dp"
       app:cornerRadius="8dp"
-      app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintHorizontal_bias="0.509"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent"
-      app:layout_constraintVertical_bias="0.772"
+      app:layout_constraintTop_toBottomOf="@id/textView14"
       app:strokeColor="@color/colorPrimary" />
 
   </androidx.constraintlayout.widget.ConstraintLayout>
+  </ScrollView>
 </layout>
 
