@@ -105,6 +105,16 @@ We use your personal data to provide and improve the Service, including to creat
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/textView13" />
 
+    <TextView
+      android:id="@+id/textView15"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Intended for users 18 and older: The Site is intended for use by individuals 18 years of age or older. This website is not directed for use by children under the age of 18. Users under the age of 18 should get the assistance of a parent or guardian to use this Service. \n\nAvailability:We reserve the right, temporarily or permanently, in whole or in part, to modify, suspend or discontinue the App without notice for any reason without liability to you, except where prohibited by applicable law.\n\n Intellectual Property Rights: You will not copy or transmit any of the material from the Service except if you are doing so for your personal, non-commercial use. Your use of and access to our Service does not grant you any license or right to use any of the marks included."
+      android:layout_marginTop="@dimen/terms_margin_top"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/textView14" />
+
     <com.google.android.material.button.MaterialButton
       android:id="@+id/accept_terms_button"
       style="@style/Widget.MaterialComponents.Button"
@@ -118,7 +128,7 @@ We use your personal data to provide and improve the Service, including to creat
       app:cornerRadius="8dp"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/textView14"
+      app:layout_constraintTop_toBottomOf="@id/textView15"
       app:strokeColor="@color/colorPrimary" />
 
   </androidx.constraintlayout.widget.ConstraintLayout>
