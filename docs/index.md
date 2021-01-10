@@ -53,7 +53,7 @@ All information on the mobile app is provided in good faith, however we make no 
 
 ## Contact Information
 
-If you have any questions about the Service, please contact us at rob.culliton@gmail.com
+If you have any questions about the Service, please contact us at support@moonlightapp.zendesk.com
 
 
 
