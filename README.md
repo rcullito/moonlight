@@ -14,9 +14,11 @@ For more information on why this is relevant, please see this [blog post](https:
 
 To learn more about the interactions of sleep position, heart rate, and oxygen saturation, check out [this post.](https://rob-culliton.medium.com/patterns-of-sleep-position-sp02-d6c185c9559f)
 
-## Download
+## Android
 
 Currently available for free on the Google [Play Store](https://play.google.com/store/apps/details?id=com.robertculliton.moonlight)
 
+## iOS
 
+If there is interest in a version for iphone, please let me know at: [mailto](mailto:support@moonlightapp.zendesk.com)
 
