@@ -20,5 +20,5 @@ Currently available for free on the [Google Play Store](https://play.google.com/
 
 ## iOS
 
-If there is interest in a version for iphone, please let me know at: [support@moonlightapp.zendesk.com](mailto:support@moonlightapp.zendesk.com)
+If there is interest in an iphone version, please let me know at: [support@moonlightapp.zendesk.com](mailto:support@moonlightapp.zendesk.com)
 
