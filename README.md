@@ -16,9 +16,9 @@ To learn more about the interactions of sleep position, heart rate, and oxygen s
 
 ## Android
 
-Currently available for free on the Google [Play Store](https://play.google.com/store/apps/details?id=com.robertculliton.moonlight)
+Currently available for free on the [Google Play Store](https://play.google.com/store/apps/details?id=com.robertculliton.moonlight)
 
 ## iOS
 
-If there is interest in a version for iphone, please let me know at: [mailto](mailto:support@moonlightapp.zendesk.com)
+If there is interest in a version for iphone, please let me know at: [support@moonlightapp.zendesk.com](mailto:support@moonlightapp.zendesk.com)
 
